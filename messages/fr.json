@@ -1,0 +1,509 @@
+{
+  "common": {
+    "meta": {
+      "title": "MSTANSHOP — L'élégance afro-moderne, sublimée",
+      "description": "Boutique en ligne premium — vêtements afro & classiques, bijoux, accessoires, tissus pagne et sacs."
+    },
+    "actions": {
+      "cancel": "Annuler",
+      "save": "Enregistrer",
+      "back": "Retour",
+      "loading": "Chargement…",
+      "seeMore": "Voir plus",
+      "continue": "Continuer",
+      "retry": "Réessayer"
+    },
+    "imagePlaceholder": "PHOTO PRODUIT"
+  },
+  "header": {
+    "openMenu": "Ouvrir le menu",
+    "categoryFilter": "Filtrer par catégorie",
+    "allCategories": "Toutes catégories",
+    "categoryPlaceholder": "Catégorie",
+    "searchPlaceholder": "Rechercher un produit…",
+    "searchLabel": "Rechercher un produit",
+    "search": "Rechercher",
+    "language": "Langue",
+    "chooseLanguage": "Choisir la langue",
+    "french": "Français",
+    "english": "English",
+    "myAccount": "Mon compte",
+    "login": "Se connecter",
+    "myProfile": "Mon profil",
+    "myOrders": "Mes commandes",
+    "logout": "Déconnexion",
+    "cart": "Panier, {count, plural, =0 {aucun article} one {# article} other {# articles}}",
+    "announcements": {
+      "back2school": "Profitez de notre offre Back2School et gagnez jusqu'à 20% sur vos achats 🎒",
+      "freeShipping": "Livraison offerte dès 50 000 FCFA d'achat 🚚",
+      "newArrivals": "Nouveautés chaque semaine — découvrez la collection 🆕",
+      "goToMessage": "Message {number}"
+    }
+  },
+  "cart": {
+    "drawerTitle": "Votre panier ({count})",
+    "emptyTitle": "Votre panier est vide",
+    "emptyDescription": "Découvrez notre collection pour trouver votre bonheur.",
+    "emptyCta": "Visiter la boutique",
+    "total": "Total",
+    "viewCart": "Voir le panier",
+    "continueShopping": "Continuer mes achats",
+    "proceedToCheckout": "Passer à la commande",
+    "decreaseQuantity": "Diminuer la quantité",
+    "increaseQuantity": "Augmenter la quantité",
+    "removeItem": "Retirer du panier",
+    "addedToCart": "Produit ajouté au panier"
+  },
+  "footer": {
+    "tagline": "Boutique premium célébrant l'artisanat textile africain à travers un design contemporain et épuré.",
+    "stayInformed": "Restez informée",
+    "stayInformedBody": "Nous vous tiendrons au courant de nos nouveautés.",
+    "newsletterPlaceholder": "Numéro de téléphone ou e-mail",
+    "newsletterLabel": "Numéro de téléphone ou e-mail pour la newsletter",
+    "subscribe": "S'inscrire",
+    "subscribedTitle": "Merci !",
+    "subscribed": "Votre inscription à la newsletter est confirmée.",
+    "shop": "Boutique",
+    "wholeCollection": "Toute la collection",
+    "help": "Aide",
+    "faq": "Questions fréquentes",
+    "shippingReturns": "Livraison & retours",
+    "trackOrder": "Suivre ma commande",
+    "legal": "Légal",
+    "legalNotice": "Mentions légales",
+    "termsOfSale": "Conditions générales de vente",
+    "privacyPolicy": "Politique de confidentialité",
+    "returnPolicy": "Politique de retours",
+    "followUs": "Suivez-nous",
+    "copyright": "© {year} MSTANSHOP. Tous droits réservés."
+  },
+  "validation": {
+    "firstNameRequired": "Le prénom est requis.",
+    "lastNameRequired": "Le nom est requis.",
+    "emailRequired": "L'adresse e-mail est requise.",
+    "emailInvalid": "Adresse e-mail invalide.",
+    "passwordRequired": "Le mot de passe est requis.",
+    "passwordMinLength": "Le mot de passe doit contenir au moins 8 caractères.",
+    "passwordUppercase": "Le mot de passe doit contenir une majuscule.",
+    "passwordLowercase": "Le mot de passe doit contenir une minuscule.",
+    "passwordDigit": "Le mot de passe doit contenir un chiffre.",
+    "passwordSpecialChar": "Le mot de passe doit contenir un caractère spécial (@$!%*?&#^()_+=-).",
+    "streetRequired": "L'adresse est requise.",
+    "cityRequired": "La ville est requise.",
+    "countryRequired": "Le pays est requis.",
+    "phoneRequired": "Le téléphone est requis.",
+    "phoneInvalid": "Numéro de téléphone invalide pour ce pays.",
+    "whatsappInvalid": "Numéro WhatsApp invalide pour ce pays."
+  },
+  "apiErrors": {
+    "invalid_credentials": "Adresse e-mail ou mot de passe incorrect.",
+    "email_taken": "Un compte existe déjà avec cette adresse e-mail.",
+    "out_of_stock": "Ce produit n'est plus disponible dans la quantité demandée.",
+    "not_found": "Cet élément n'existe pas ou n'est plus disponible.",
+    "network_error": "Impossible de contacter le serveur. Vérifiez votre connexion.",
+    "unauthorized": "Votre session a expiré. Veuillez vous reconnecter.",
+    "unknown": "Une erreur est survenue. Veuillez réessayer."
+  },
+  "products": {
+    "resultsCount": "{count, plural, =0 {Aucun article} one {# article} other {# articles}}",
+    "sortOptions": {
+      "newest": "Nouveautés",
+      "price-asc": "Prix croissant",
+      "price-desc": "Prix décroissant"
+    },
+    "filtersButton": "Filtres",
+    "filtersTitle": "Filtres",
+    "searchPlaceholder": "Affiner la recherche…",
+    "searchAriaLabel": "Affiner la recherche parmi ces produits",
+    "searchSubmitLabel": "Rechercher",
+    "categoryLabel": "Catégorie",
+    "priceLabel": "Prix",
+    "priceRangeAria": "Fourchette de prix",
+    "colorLabel": "Couleur",
+    "sortLabel": "Trier par",
+    "sortAria": "Trier les produits",
+    "loadMore": "Charger plus",
+    "noResultsTitle": "Aucun produit trouvé",
+    "noResultsDescription": "Essayez d'ajuster vos filtres ou votre recherche.",
+    "notFound": "Ce produit est introuvable.",
+    "quantity": "Quantité",
+    "decreaseQuantity": "Diminuer la quantité",
+    "increaseQuantity": "Augmenter la quantité",
+    "addToCart": "Ajouter au panier",
+    "buy": "Acheter",
+    "descriptionMaterials": "Description & matières",
+    "deliveryReturns": "Livraison & retours",
+    "deliveryEstimate": "Livraison estimée sous 3 à 5 jours ouvrés partout en France.",
+    "relatedTitle": "Vous aimerez aussi",
+    "sizeLabel": "Taille",
+    "colorLabelWithName": "Couleur — {name}",
+    "stock": {
+      "outOfStock": "Rupture de stock",
+      "lastOne": "Plus qu'1 en stock",
+      "low": "Plus que {count} en stock",
+      "inStock": "En stock"
+    },
+    "reviews": {
+      "title": "Avis clients",
+      "loginPromptLink": "Connectez-vous",
+      "loginPromptSuffix": "pour laisser un avis sur ce produit.",
+      "leaveReview": "Laisser un avis",
+      "ratingLabel": "Note",
+      "starAria": "{count, plural, one {# étoile} other {# étoiles}}",
+      "commentPlaceholder": "Partagez votre expérience avec ce produit… (facultatif)",
+      "submit": "Publier l'avis",
+      "submitting": "Envoi…",
+      "thankYou": "Merci pour votre avis !",
+      "seeMore": "Voir plus d'avis",
+      "noReviews": "Aucun avis pour le moment.",
+      "deleteAria": "Supprimer cet avis",
+      "deleteTitle": "Supprimer cet avis ?",
+      "deleteDescription": "Cet avis sera définitivement supprimé.",
+      "ratingRequired": "Merci de choisir une note.",
+      "commentMaxLength": "2000 caractères maximum."
+    },
+    "share": {
+      "button": "Partager",
+      "dialogTitle": "Partager ce produit",
+      "loading": "Chargement…",
+      "nativeShare": "Partager",
+      "copy": "Copier",
+      "copied": "Copié",
+      "email": "E-mail"
+    },
+    "gallery": {
+      "previous": "Image précédente",
+      "next": "Image suivante",
+      "viewImage": "Voir l'image {number}",
+      "zoomLabel": "{productName} — zoom au survol"
+    }
+  },
+  "checkout": {
+    "backToCart": "Retour au panier",
+    "emailInvalid": "Adresse email invalide.",
+    "continueDialog": {
+      "title": "Comment souhaitez-vous continuer ?",
+      "description": "Connectez-vous pour retrouver votre historique de commandes, ou passez votre commande sans créer de compte.",
+      "login": "Se connecter",
+      "guest": "Continuer en tant qu'invité"
+    },
+    "emptyCart": {
+      "title": "Votre panier est vide",
+      "description": "Ajoutez des articles à votre panier avant de passer commande.",
+      "cta": "Visiter la boutique"
+    },
+    "guestEmailLabel": "Email (facultatif)",
+    "guestEmailPlaceholder": "vous@exemple.com",
+    "guestEmailHint": "Recevez la confirmation par email en plus du SMS/WhatsApp.",
+    "continueButton": "Continuer",
+    "backToShipping": "Retour à la livraison",
+    "continueToPayment": "Continuer vers le paiement",
+    "backToPayment": "Retour au mode de livraison",
+    "paymentPending": {
+      "title": "Vérifiez votre téléphone",
+      "body": "Un prompt de paiement a été envoyé au <phone></phone>. Confirmez-le sur votre téléphone pour valider la commande <reference></reference>.",
+      "timeoutNote": "Toujours en attente de confirmation. Vérifiez que vous avez bien validé le prompt sur votre téléphone — nous continuons de vérifier automatiquement."
+    },
+    "paymentFailed": {
+      "title": "Paiement échoué",
+      "body": "Le paiement de la commande <reference></reference> a été refusé ou a expiré. Vos articles sont toujours dans votre panier."
+    },
+    "success": {
+      "title": "Merci pour votre commande !",
+      "body": "Votre commande <reference></reference> a bien été enregistrée.",
+      "codNote": "Vous payerez en espèces à la livraison.",
+      "pickupNote": "Vous payerez en espèces lors de la récupération en boutique.",
+      "onlineNote": "Vous recevrez un e-mail de confirmation sous peu.",
+      "ctaGuest": "Continuer mes achats",
+      "ctaAccount": "Voir mes commandes"
+    },
+    "address": {
+      "title": "Adresse de livraison",
+      "subtitle": "Les livraisons sont à la charge du client. Hors Douala, les frais de livraison démarrent à partir de 1 500 FCFA.",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "country": "Pays",
+      "city": "Ville",
+      "street": "Adresse",
+      "phone": "Téléphone",
+      "whatsapp": "Numéro WhatsApp (facultatif)",
+      "phonePlaceholder": "655 123 456",
+      "chooseCountry": "Choisir un pays",
+      "searchCountry": "Rechercher un pays…",
+      "noCountryFound": "Aucun pays trouvé."
+    },
+    "shipping": {
+      "title": "Mode de livraison",
+      "ariaLabel": "Mode de livraison",
+      "pickup": {
+        "label": "Récupération en boutique",
+        "description": "Boutique D14 centre commercial de saligny, Bonamoussadi Douala"
+      },
+      "delivery": {
+        "label": "Livraison à domicile",
+        "description": "Nous livrons chez vous / Nous expédions vers votre ville"
+      },
+      "free": "+0 FCFA"
+    },
+    "payment": {
+      "title": "Paiement",
+      "ariaLabel": "Mode de paiement",
+      "methods": {
+        "cod": "Paiement à la livraison",
+        "pickup": "Paiement à la récupération en boutique",
+        "mobile": "OM / MoMo"
+      },
+      "mobileNumberLabel": "Numéro Mobile Money",
+      "mobileNumberPlaceholder": "655 123 456",
+      "codNote": "Vous payerez en espèces directement au livreur à la réception de votre commande.",
+      "pickupNote": "Vous payerez en espèces directement en boutique lors de la récupération de votre commande.",
+      "mobileMoneyInvalid": "Numéro Mobile Money invalide pour ce pays.",
+      "instructions": {
+        "title": "Comment ça marche",
+        "step1": "Entrez le numéro de téléphone (Orange ou MTN) avec lequel vous souhaitez payer dans le champ ci-dessus.",
+        "step2": "Entrez le montant que vous souhaitez payer (en cas de paiement anticipé). Par défaut, le montant est le montant total de la commande. Le montant maximum pour les paiements en ligne est de 500 000 XAF.",
+        "step3": "Si vous souhaitez laisser un commentaire, vous pouvez le faire dans le champ ci-dessous.",
+        "step4": "Vérifiez que tout est correct et cliquez sur le bouton « Valider la commande ».",
+        "step5": "Un message de confirmation sera envoyé à votre numéro de téléphone pour le paiement. Entrez votre code secret pour valider votre paiement.",
+        "step6": "Si vous n'avez pas reçu de message, composez #150# pour Orange ou *126# pour MTN pour confirmer votre paiement."
+      }
+    },
+    "summary": {
+      "title": "Résumé de la commande",
+      "subtotal": "Sous-total",
+      "discount": "Réduction",
+      "shipping": "Livraison",
+      "shippingInfoAria": "À propos des frais de livraison",
+      "shippingInfoTooltip": "Le montant de la livraison dépendra des informations de livraison qui seront renseignées.",
+      "offered": "Offerte",
+      "total": "Total",
+      "promoCodeLabel": "Code promo",
+      "promoCodePlaceholder": "SOLDES10",
+      "verify": "Vérifier",
+      "verifying": "Vérification…",
+      "promoApplied": "Code appliqué — réduction de {amount}",
+      "submit": "Valider la commande",
+      "submitting": "Validation en cours…"
+    },
+    "trustBadges": {
+      "securePaymentTitle": "Paiement",
+      "securePaymentSubtitle": "sécurisé",
+      "questionTitle": "Une question sur un produit ?",
+      "questionSubtitle": "Écrivez-nous"
+    },
+    "stepper": {
+      "delivery": "Livraison",
+      "shippingMethod": "Mode de livraison",
+      "paymentMethod": "Mode de paiement",
+      "confirmation": "Confirmation"
+    }
+  },
+  "account": {
+    "title": "Mon compte",
+    "nav": {
+      "profile": "Mon profil",
+      "orders": "Mes commandes"
+    },
+    "navAria": "Navigation du compte",
+    "logout": "Déconnexion",
+    "errorTitle": "Impossible d'afficher votre compte",
+    "errorDescription": "Une erreur est survenue lors du chargement de vos informations.",
+    "orders": {
+      "title": "Historique des commandes",
+      "emptyTitle": "Aucune commande pour le moment",
+      "emptyDescription": "Vos commandes apparaîtront ici une fois passées.",
+      "emptyCta": "Visiter la boutique",
+      "cancelButton": "Annuler ma commande",
+      "cancelDialogTitle": "Annuler cette commande ?",
+      "cancelDialogDescription": "La commande #{reference} sera annulée. Cette action est définitive.",
+      "cancelConfirm": "Annuler la commande",
+      "cancelPending": "Annulation…",
+      "cancelled": "Commande annulée.",
+      "detail": {
+        "title": "Commande #{reference}",
+        "quantity": "Quantité {count}",
+        "subtotal": "Sous-total",
+        "discount": "Réduction",
+        "total": "Total",
+        "shippingAddress": "Adresse de livraison",
+        "loading": "Chargement…"
+      }
+    },
+    "profile": {
+      "title": "Mon profil",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "email": "E-mail",
+      "phone": "Téléphone",
+      "changePassword": "Changer le mot de passe",
+      "save": "Enregistrer les modifications",
+      "saving": "Enregistrement…",
+      "updated": "Profil mis à jour avec succès.",
+      "updateFailed": "Impossible d'enregistrer les modifications."
+    },
+    "statuses": {
+      "EN_ATTENTE": "En attente",
+      "PAYEE": "Payée",
+      "EXPEDIEE": "Expédiée",
+      "LIVREE": "Livrée",
+      "ANNULEE": "Annulée",
+      "ECHEC_PAIEMENT": "Paiement échoué"
+    }
+  },
+  "auth": {
+    "tabs": {
+      "login": "Connexion",
+      "register": "Inscription"
+    },
+    "loggedOut": "Vous avez été déconnecté(e).",
+    "restrictedAccess": "Accès réservé",
+    "login": {
+      "email": "Adresse e-mail",
+      "password": "Mot de passe",
+      "forgotPassword": "Mot de passe oublié ?",
+      "submit": "Se connecter",
+      "submitting": "Connexion…"
+    },
+    "register": {
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "email": "Adresse e-mail",
+      "password": "Mot de passe",
+      "submit": "Créer mon compte",
+      "submitting": "Création du compte…"
+    },
+    "passwordRules": {
+      "minLength": "Au moins 8 caractères",
+      "uppercase": "Une majuscule",
+      "lowercase": "Une minuscule",
+      "digit": "Un chiffre",
+      "special": "Un caractère spécial (@$!%*?&#^()_+=-)"
+    }
+  },
+  "legal": {
+    "disclaimer": "Document indicatif — à faire valider par un conseil juridique avant mise en production.",
+    "linkFaq": "FAQ",
+    "linkReturnPolicy": "politique de retours",
+    "linkPrivacyPolicy": "politique de confidentialité",
+    "cgv": {
+      "title": "Conditions générales de vente",
+      "metaTitle": "Conditions générales de vente — MSTANSHOP",
+      "scopeTitle": "Champ d'application",
+      "scopeBody": "Les présentes conditions régissent toute commande passée sur MSTANSHOP entre un client et la boutique, à l'exclusion de toute autre condition.",
+      "orderTitle": "Commande",
+      "orderBody": "Toute commande passée sur le site vaut acceptation des prix et descriptions des produits disponibles à la vente. Une confirmation est envoyée à l'adresse indiquée lors de la commande.",
+      "pricingTitle": "Prix & paiement",
+      "pricingBody": "Les prix sont indiqués en francs CFA (XAF), toutes taxes comprises. Le paiement s'effectue par Mobile Money (Orange Money, MTN Mobile Money) ou à la livraison, selon les options proposées au moment du paiement.",
+      "deliveryTitle": "Livraison",
+      "deliveryBodyBefore": "Les délais de livraison indicatifs sont précisés dans notre",
+      "deliveryBodyAfter": ". Un retard de livraison ne peut donner lieu à annulation de la commande sauf dépassement manifestement anormal.",
+      "withdrawalTitle": "Droit de rétractation & retours",
+      "withdrawalBodyBefore": "Conformément à la réglementation en vigueur, le client dispose d'un délai pour exercer son droit de rétractation. Les modalités complètes sont détaillées dans notre",
+      "withdrawalBodyAfter": "."
+    },
+    "confidentialite": {
+      "title": "Politique de confidentialité",
+      "metaTitle": "Politique de confidentialité — MSTANSHOP",
+      "collectedTitle": "Données collectées",
+      "collectedBody": "Lors d'une commande ou de la création d'un compte, nous collectons les informations nécessaires au traitement de votre commande : identité, coordonnées, adresse de livraison et historique de commandes.",
+      "useTitle": "Utilisation des données",
+      "useItem1": "Traitement et suivi des commandes",
+      "useItem2": "Communication liée au service client",
+      "useItem3": "Envoi d'offres si vous êtes inscrit·e à la newsletter",
+      "retentionTitle": "Conservation & sécurité",
+      "retentionBody": "Vos données sont conservées pour la durée nécessaire aux finalités décrites ci-dessus et protégées par des mesures de sécurité appropriées.",
+      "rightsTitle": "Vos droits",
+      "rightsBody": "Vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Pour exercer ces droits, contactez-nous à contact@mstanshop.fr."
+    },
+    "mentionsLegales": {
+      "title": "Mentions légales",
+      "metaTitle": "Mentions légales — MSTANSHOP",
+      "publisherTitle": "Éditeur du site",
+      "publisherBody": "MSTANSHOP — boutique en ligne de vêtements, bijoux et accessoires. Contact : contact@mstanshop.fr — +33 1 84 60 22 10.",
+      "hostingTitle": "Hébergement",
+      "hostingBody": "Le site est hébergé par un prestataire tiers dont les coordonnées complètes seront communiquées sur demande.",
+      "ipTitle": "Propriété intellectuelle",
+      "ipBody": "L'ensemble des contenus présents sur ce site (textes, images, logos, mise en page) est la propriété de MSTANSHOP, sauf mention contraire, et ne peut être reproduit sans autorisation préalable.",
+      "dataTitle": "Données personnelles",
+      "dataBodyBefore": "Le traitement des données personnelles collectées sur ce site est détaillé dans notre",
+      "dataBodyAfter": "."
+    },
+    "retours": {
+      "title": "Livraison & retours",
+      "metaTitle": "Livraison & retours — MSTANSHOP",
+      "timeTitle": "Délais de livraison",
+      "timeBody": "Comptez généralement 48h pour Douala et 3 à 5 jours ouvrés pour le reste du pays.",
+      "conditionsTitle": "Conditions de retour",
+      "conditionsBody": "Vous disposez de 48h après réception de votre commande pour signaler un article qui ne correspond pas à votre attente. L'article doit être retourné dans son état d'origine, non porté et avec ses étiquettes.",
+      "howTitle": "Comment retourner un article",
+      "howItem1": "Contactez-nous à contact@mstanshop.fr en indiquant votre numéro de commande",
+      "howItem2": "Nous vous confirmons la marche à suivre et l'adresse de retour",
+      "howItem3": "L'article est contrôlé à réception avant validation du remboursement",
+      "refundTitle": "Remboursement",
+      "refundBody": "Le remboursement est effectué sur le même moyen de paiement utilisé lors de la commande, après contrôle de l'article retourné."
+    }
+  },
+  "faq": {
+    "title": "Questions fréquentes",
+    "eyebrow": "Aide",
+    "metaDescription": "Livraison, paiement, commandes et retours : toutes les réponses à vos questions.",
+    "sections": {
+      "orderPayment": {
+        "title": "Commande & paiement",
+        "items": {
+          "howToPay": { "question": "Comment payer ma commande ?", "answer": "Vous pouvez payer par Mobile Money (Orange Money ou MTN Mobile Money) au moment de la commande, ou choisir le paiement à la livraison." },
+          "cancelOrder": { "question": "Puis-je annuler ou modifier ma commande ?", "answer": "Tant que votre commande est \"En attente\" ou \"Payée\", vous pouvez l'annuler depuis la page \"Mes commandes\" de votre compte." },
+          "promoNotWorking": { "question": "Un code promo ne fonctionne pas, que faire ?", "answer": "Vérifiez qu'il n'est pas expiré et qu'il s'applique bien aux articles de votre panier. Contactez-nous si le problème persiste." }
+        }
+      },
+      "shipping": {
+        "title": "Livraison",
+        "items": {
+          "deliveryTime": { "question": "Quels sont les délais de livraison ?", "answer": "Comptez généralement 48h pour Douala et 3 à 5 jours ouvrés pour le reste du pays." },
+          "trackOrder": { "question": "Comment suivre ma commande ?", "answer": "Rendez-vous dans votre compte, rubrique \"Mes commandes\", pour voir le statut de chaque commande en temps réel." },
+          "shipAbroad": { "question": "Livrez-vous en dehors du Cameroun ?", "answer": "Pour le moment, nos livraisons sont assurées sur le territoire camerounais. Écrivez-nous pour toute demande spécifique." }
+        }
+      },
+      "returns": {
+        "title": "Retours & échanges",
+        "items": {
+          "canReturn": { "question": "Puis-je retourner un article ?", "answer": "Contactez-nous dans les 48h suivant la réception si un article ne correspond pas à votre attente." },
+          "howRefund": { "question": "Comment fonctionne un remboursement ?", "answer": "Une fois l'article retourné et contrôlé, le remboursement est effectué sur le même moyen de paiement utilisé à la commande. Voir notre politique de retours pour le détail des délais." }
+        }
+      }
+    }
+  },
+  "home": {
+    "exploreByCategory": "Explorer par catégorie",
+    "featuredSelection": "Sélection du moment",
+    "seeAll": "Voir tout →",
+    "seeMore": "Voir plus →",
+    "newCollection": "Nouvelle collection",
+    "heroTitle": "L'élégance afro-moderne, sublimée.",
+    "heroBody": "Pièces façonnées à la main, entre héritage textile africain et coupe contemporaine épurée.",
+    "discoverCollection": "Découvrir la Collection",
+    "visitShop": "Visiter la Boutique",
+    "collectionLabel": "Collection",
+    "season": "Été 2026",
+    "heroImageLabel": "Visuel Héros — Boutique",
+    "shopImageLabel": "Visuel Boutique"
+  },
+  "errors": {
+    "notFoundTitle": "Page introuvable",
+    "notFoundDescription": "La page que vous recherchez n'existe pas ou n'est plus disponible.",
+    "backHome": "Retour à l'accueil",
+    "genericTitle": "Une erreur est survenue",
+    "genericDescription": "Nous n'avons pas pu charger cette page. Vous pouvez réessayer.",
+    "retry": "Réessayer",
+    "authTitle": "Une erreur est survenue",
+    "authDescription": "Impossible d'afficher cette page pour le moment.",
+    "productsTitle": "Impossible d'afficher la boutique",
+    "productsDescription": "Une erreur est survenue lors du chargement des produits.",
+    "productDetailTitle": "Impossible d'afficher ce produit",
+    "productDetailDescription": "Une erreur est survenue lors du chargement de cette fiche produit.",
+    "cartTitle": "Impossible d'afficher votre panier",
+    "cartDescription": "Une erreur est survenue lors du chargement de votre panier.",
+    "checkoutTitle": "Impossible d'afficher la commande",
+    "checkoutDescription": "Une erreur est survenue lors du passage de votre commande."
+  }
+}

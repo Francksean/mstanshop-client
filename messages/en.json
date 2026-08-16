@@ -1,0 +1,509 @@
+{
+  "common": {
+    "meta": {
+      "title": "MSTANSHOP — Afro-modern elegance, refined",
+      "description": "Premium online store — Afro & classic clothing, jewelry, accessories, pagne fabrics and bags."
+    },
+    "actions": {
+      "cancel": "Cancel",
+      "save": "Save",
+      "back": "Back",
+      "loading": "Loading…",
+      "seeMore": "See more",
+      "continue": "Continue",
+      "retry": "Retry"
+    },
+    "imagePlaceholder": "PRODUCT PHOTO"
+  },
+  "header": {
+    "openMenu": "Open menu",
+    "categoryFilter": "Filter by category",
+    "allCategories": "All categories",
+    "categoryPlaceholder": "Category",
+    "searchPlaceholder": "Search for a product…",
+    "searchLabel": "Search for a product",
+    "search": "Search",
+    "language": "Language",
+    "chooseLanguage": "Choose language",
+    "french": "Français",
+    "english": "English",
+    "myAccount": "My account",
+    "login": "Sign in",
+    "myProfile": "My profile",
+    "myOrders": "My orders",
+    "logout": "Sign out",
+    "cart": "Cart, {count, plural, =0 {no items} one {# item} other {# items}}",
+    "announcements": {
+      "back2school": "Enjoy our Back2School offer and save up to 20% on your purchases 🎒",
+      "freeShipping": "Free shipping from 50,000 FCFA of purchase 🚚",
+      "newArrivals": "New arrivals every week — discover the collection 🆕",
+      "goToMessage": "Message {number}"
+    }
+  },
+  "cart": {
+    "drawerTitle": "Your cart ({count})",
+    "emptyTitle": "Your cart is empty",
+    "emptyDescription": "Discover our collection to find what you love.",
+    "emptyCta": "Visit the shop",
+    "total": "Total",
+    "viewCart": "View cart",
+    "continueShopping": "Continue shopping",
+    "proceedToCheckout": "Proceed to checkout",
+    "decreaseQuantity": "Decrease quantity",
+    "increaseQuantity": "Increase quantity",
+    "removeItem": "Remove from cart",
+    "addedToCart": "Item added to cart"
+  },
+  "footer": {
+    "tagline": "Premium boutique celebrating African textile craftsmanship through contemporary, refined design.",
+    "stayInformed": "Stay informed",
+    "stayInformedBody": "We'll keep you posted on our latest arrivals.",
+    "newsletterPlaceholder": "Phone number or email",
+    "newsletterLabel": "Phone number or email for the newsletter",
+    "subscribe": "Subscribe",
+    "subscribedTitle": "Thank you!",
+    "subscribed": "Your newsletter subscription is confirmed.",
+    "shop": "Shop",
+    "wholeCollection": "Whole collection",
+    "help": "Help",
+    "faq": "Frequently asked questions",
+    "shippingReturns": "Shipping & returns",
+    "trackOrder": "Track my order",
+    "legal": "Legal",
+    "legalNotice": "Legal notice",
+    "termsOfSale": "Terms of sale",
+    "privacyPolicy": "Privacy policy",
+    "returnPolicy": "Return policy",
+    "followUs": "Follow us",
+    "copyright": "© {year} MSTANSHOP. All rights reserved."
+  },
+  "validation": {
+    "firstNameRequired": "First name is required.",
+    "lastNameRequired": "Last name is required.",
+    "emailRequired": "Email address is required.",
+    "emailInvalid": "Invalid email address.",
+    "passwordRequired": "Password is required.",
+    "passwordMinLength": "Password must be at least 8 characters.",
+    "passwordUppercase": "Password must contain an uppercase letter.",
+    "passwordLowercase": "Password must contain a lowercase letter.",
+    "passwordDigit": "Password must contain a digit.",
+    "passwordSpecialChar": "Password must contain a special character (@$!%*?&#^()_+=-).",
+    "streetRequired": "Address is required.",
+    "cityRequired": "City is required.",
+    "countryRequired": "Country is required.",
+    "phoneRequired": "Phone number is required.",
+    "phoneInvalid": "Invalid phone number for this country.",
+    "whatsappInvalid": "Invalid WhatsApp number for this country."
+  },
+  "apiErrors": {
+    "invalid_credentials": "Incorrect email address or password.",
+    "email_taken": "An account already exists with this email address.",
+    "out_of_stock": "This product is no longer available in the requested quantity.",
+    "not_found": "This item no longer exists or is no longer available.",
+    "network_error": "Could not reach the server. Check your connection.",
+    "unauthorized": "Your session has expired. Please sign in again.",
+    "unknown": "Something went wrong. Please try again."
+  },
+  "products": {
+    "resultsCount": "{count, plural, =0 {No items} one {# item} other {# items}}",
+    "sortOptions": {
+      "newest": "Newest",
+      "price-asc": "Price: low to high",
+      "price-desc": "Price: high to low"
+    },
+    "filtersButton": "Filters",
+    "filtersTitle": "Filters",
+    "searchPlaceholder": "Refine your search…",
+    "searchAriaLabel": "Refine your search within these products",
+    "searchSubmitLabel": "Search",
+    "categoryLabel": "Category",
+    "priceLabel": "Price",
+    "priceRangeAria": "Price range",
+    "colorLabel": "Color",
+    "sortLabel": "Sort by",
+    "sortAria": "Sort products",
+    "loadMore": "Load more",
+    "noResultsTitle": "No products found",
+    "noResultsDescription": "Try adjusting your filters or your search.",
+    "notFound": "This product could not be found.",
+    "quantity": "Quantity",
+    "decreaseQuantity": "Decrease quantity",
+    "increaseQuantity": "Increase quantity",
+    "addToCart": "Add to cart",
+    "buy": "Buy",
+    "descriptionMaterials": "Description & materials",
+    "deliveryReturns": "Shipping & returns",
+    "deliveryEstimate": "Estimated delivery within 3 to 5 business days across France.",
+    "relatedTitle": "You may also like",
+    "sizeLabel": "Size",
+    "colorLabelWithName": "Color — {name}",
+    "stock": {
+      "outOfStock": "Out of stock",
+      "lastOne": "Only 1 left in stock",
+      "low": "Only {count} left in stock",
+      "inStock": "In stock"
+    },
+    "reviews": {
+      "title": "Customer reviews",
+      "loginPromptLink": "Sign in",
+      "loginPromptSuffix": "to leave a review on this product.",
+      "leaveReview": "Leave a review",
+      "ratingLabel": "Rating",
+      "starAria": "{count, plural, one {# star} other {# stars}}",
+      "commentPlaceholder": "Share your experience with this product… (optional)",
+      "submit": "Post review",
+      "submitting": "Sending…",
+      "thankYou": "Thanks for your review!",
+      "seeMore": "See more reviews",
+      "noReviews": "No reviews yet.",
+      "deleteAria": "Delete this review",
+      "deleteTitle": "Delete this review?",
+      "deleteDescription": "This review will be permanently deleted.",
+      "ratingRequired": "Please choose a rating.",
+      "commentMaxLength": "2000 characters maximum."
+    },
+    "share": {
+      "button": "Share",
+      "dialogTitle": "Share this product",
+      "loading": "Loading…",
+      "nativeShare": "Share",
+      "copy": "Copy",
+      "copied": "Copied",
+      "email": "Email"
+    },
+    "gallery": {
+      "previous": "Previous image",
+      "next": "Next image",
+      "viewImage": "View image {number}",
+      "zoomLabel": "{productName} — zoom on hover"
+    }
+  },
+  "checkout": {
+    "backToCart": "Back to cart",
+    "emailInvalid": "Invalid email address.",
+    "continueDialog": {
+      "title": "How would you like to continue?",
+      "description": "Sign in to access your order history, or place your order without creating an account.",
+      "login": "Sign in",
+      "guest": "Continue as a guest"
+    },
+    "emptyCart": {
+      "title": "Your cart is empty",
+      "description": "Add items to your cart before placing an order.",
+      "cta": "Visit the shop"
+    },
+    "guestEmailLabel": "Email (optional)",
+    "guestEmailPlaceholder": "you@example.com",
+    "guestEmailHint": "Get the confirmation by email in addition to SMS/WhatsApp.",
+    "continueButton": "Continue",
+    "backToShipping": "Back to delivery",
+    "continueToPayment": "Continue to payment",
+    "backToPayment": "Back to shipping method",
+    "paymentPending": {
+      "title": "Check your phone",
+      "body": "A payment prompt has been sent to <phone></phone>. Confirm it on your phone to validate order <reference></reference>.",
+      "timeoutNote": "Still waiting for confirmation. Make sure you've approved the prompt on your phone — we keep checking automatically."
+    },
+    "paymentFailed": {
+      "title": "Payment failed",
+      "body": "Payment for order <reference></reference> was declined or has expired. Your items are still in your cart."
+    },
+    "success": {
+      "title": "Thank you for your order!",
+      "body": "Your order <reference></reference> has been placed.",
+      "codNote": "You will pay in cash on delivery.",
+      "pickupNote": "You will pay in cash when picking up in store.",
+      "onlineNote": "You will receive a confirmation email shortly.",
+      "ctaGuest": "Continue shopping",
+      "ctaAccount": "View my orders"
+    },
+    "address": {
+      "title": "Shipping address",
+      "subtitle": "Delivery costs are the customer's responsibility. Outside Douala, shipping fees start from 1,500 FCFA.",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "country": "Country",
+      "city": "City",
+      "street": "Address",
+      "phone": "Phone",
+      "whatsapp": "WhatsApp number (optional)",
+      "phonePlaceholder": "655 123 456",
+      "chooseCountry": "Choose a country",
+      "searchCountry": "Search for a country…",
+      "noCountryFound": "No country found."
+    },
+    "shipping": {
+      "title": "Shipping method",
+      "ariaLabel": "Shipping method",
+      "pickup": {
+        "label": "In-store pickup",
+        "description": "D14 shop, Saligny shopping center, Bonamoussadi Douala"
+      },
+      "delivery": {
+        "label": "Home delivery",
+        "description": "We deliver to your home / We ship to your city"
+      },
+      "free": "+0 FCFA"
+    },
+    "payment": {
+      "title": "Payment",
+      "ariaLabel": "Payment method",
+      "methods": {
+        "cod": "Cash on delivery",
+        "pickup": "Payment on pickup in store",
+        "mobile": "OM / MoMo"
+      },
+      "mobileNumberLabel": "Mobile Money number",
+      "mobileNumberPlaceholder": "655 123 456",
+      "codNote": "You will pay in cash directly to the delivery person upon receiving your order.",
+      "pickupNote": "You will pay in cash directly in store when picking up your order.",
+      "mobileMoneyInvalid": "Invalid Mobile Money number for this country.",
+      "instructions": {
+        "title": "How it works",
+        "step1": "Enter the phone number (Orange or MTN) you want to pay with in the field above.",
+        "step2": "Enter the amount you want to pay (for advance payment). By default, the amount is the order's total. The maximum amount for online payments is 500,000 XAF.",
+        "step3": "If you'd like to leave a comment, you can do so in the field below.",
+        "step4": "Check that everything is correct and click the \"Validate order\" button.",
+        "step5": "A confirmation message will be sent to your phone number for payment. Enter your secret code to validate your payment.",
+        "step6": "If you haven't received a message, dial #150# for Orange or *126# for MTN to confirm your payment."
+      }
+    },
+    "summary": {
+      "title": "Order summary",
+      "subtotal": "Subtotal",
+      "discount": "Discount",
+      "shipping": "Shipping",
+      "shippingInfoAria": "About shipping costs",
+      "shippingInfoTooltip": "The shipping amount will depend on the delivery details you provide.",
+      "offered": "Free",
+      "total": "Total",
+      "promoCodeLabel": "Promo code",
+      "promoCodePlaceholder": "SOLDES10",
+      "verify": "Verify",
+      "verifying": "Verifying…",
+      "promoApplied": "Code applied — discount of {amount}",
+      "submit": "Place order",
+      "submitting": "Placing order…"
+    },
+    "trustBadges": {
+      "securePaymentTitle": "Payment",
+      "securePaymentSubtitle": "secure",
+      "questionTitle": "A question about a product?",
+      "questionSubtitle": "Write to us"
+    },
+    "stepper": {
+      "delivery": "Delivery",
+      "shippingMethod": "Shipping method",
+      "paymentMethod": "Payment method",
+      "confirmation": "Confirmation"
+    }
+  },
+  "account": {
+    "title": "My account",
+    "nav": {
+      "profile": "My profile",
+      "orders": "My orders"
+    },
+    "navAria": "Account navigation",
+    "logout": "Sign out",
+    "errorTitle": "Unable to display your account",
+    "errorDescription": "An error occurred while loading your information.",
+    "orders": {
+      "title": "Order history",
+      "emptyTitle": "No orders yet",
+      "emptyDescription": "Your orders will appear here once placed.",
+      "emptyCta": "Visit the shop",
+      "cancelButton": "Cancel my order",
+      "cancelDialogTitle": "Cancel this order?",
+      "cancelDialogDescription": "Order #{reference} will be cancelled. This action is final.",
+      "cancelConfirm": "Cancel order",
+      "cancelPending": "Cancelling…",
+      "cancelled": "Order cancelled.",
+      "detail": {
+        "title": "Order #{reference}",
+        "quantity": "Quantity {count}",
+        "subtotal": "Subtotal",
+        "discount": "Discount",
+        "total": "Total",
+        "shippingAddress": "Shipping address",
+        "loading": "Loading…"
+      }
+    },
+    "profile": {
+      "title": "My profile",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "email": "Email",
+      "phone": "Phone",
+      "changePassword": "Change password",
+      "save": "Save changes",
+      "saving": "Saving…",
+      "updated": "Profile updated successfully.",
+      "updateFailed": "Could not save your changes."
+    },
+    "statuses": {
+      "EN_ATTENTE": "Pending",
+      "PAYEE": "Paid",
+      "EXPEDIEE": "Shipped",
+      "LIVREE": "Delivered",
+      "ANNULEE": "Cancelled",
+      "ECHEC_PAIEMENT": "Payment failed"
+    }
+  },
+  "auth": {
+    "tabs": {
+      "login": "Sign in",
+      "register": "Sign up"
+    },
+    "loggedOut": "You have been signed out.",
+    "restrictedAccess": "Restricted access",
+    "login": {
+      "email": "Email address",
+      "password": "Password",
+      "forgotPassword": "Forgot your password?",
+      "submit": "Sign in",
+      "submitting": "Signing in…"
+    },
+    "register": {
+      "firstName": "First name",
+      "lastName": "Last name",
+      "email": "Email address",
+      "password": "Password",
+      "submit": "Create my account",
+      "submitting": "Creating account…"
+    },
+    "passwordRules": {
+      "minLength": "At least 8 characters",
+      "uppercase": "An uppercase letter",
+      "lowercase": "A lowercase letter",
+      "digit": "A digit",
+      "special": "A special character (@$!%*?&#^()_+=-)"
+    }
+  },
+  "legal": {
+    "disclaimer": "Sample document — to be reviewed by legal counsel before going into production.",
+    "linkFaq": "FAQ",
+    "linkReturnPolicy": "return policy",
+    "linkPrivacyPolicy": "privacy policy",
+    "cgv": {
+      "title": "Terms of sale",
+      "metaTitle": "Terms of sale — MSTANSHOP",
+      "scopeTitle": "Scope",
+      "scopeBody": "These terms govern any order placed on MSTANSHOP between a customer and the shop, to the exclusion of any other terms.",
+      "orderTitle": "Order",
+      "orderBody": "Any order placed on the site constitutes acceptance of the prices and descriptions of the products available for sale. A confirmation is sent to the address provided when ordering.",
+      "pricingTitle": "Pricing & payment",
+      "pricingBody": "Prices are shown in CFA francs (XAF), all taxes included. Payment is made by Mobile Money (Orange Money, MTN Mobile Money) or on delivery, depending on the options offered at checkout.",
+      "deliveryTitle": "Delivery",
+      "deliveryBodyBefore": "Estimated delivery times are detailed in our",
+      "deliveryBodyAfter": ". A delivery delay cannot give rise to order cancellation unless it is manifestly excessive.",
+      "withdrawalTitle": "Right of withdrawal & returns",
+      "withdrawalBodyBefore": "In accordance with applicable regulations, the customer has a period during which they may exercise their right of withdrawal. Full details are set out in our",
+      "withdrawalBodyAfter": "."
+    },
+    "confidentialite": {
+      "title": "Privacy policy",
+      "metaTitle": "Privacy policy — MSTANSHOP",
+      "collectedTitle": "Data collected",
+      "collectedBody": "When placing an order or creating an account, we collect the information necessary to process your order: identity, contact details, shipping address and order history.",
+      "useTitle": "Use of data",
+      "useItem1": "Processing and tracking orders",
+      "useItem2": "Communication related to customer service",
+      "useItem3": "Sending offers if you are subscribed to the newsletter",
+      "retentionTitle": "Retention & security",
+      "retentionBody": "Your data is kept for as long as necessary for the purposes described above and is protected by appropriate security measures.",
+      "rightsTitle": "Your rights",
+      "rightsBody": "You have the right to access, correct and delete your data. To exercise these rights, contact us at contact@mstanshop.fr."
+    },
+    "mentionsLegales": {
+      "title": "Legal notice",
+      "metaTitle": "Legal notice — MSTANSHOP",
+      "publisherTitle": "Site publisher",
+      "publisherBody": "MSTANSHOP — online store for clothing, jewelry and accessories. Contact: contact@mstanshop.fr — +33 1 84 60 22 10.",
+      "hostingTitle": "Hosting",
+      "hostingBody": "The site is hosted by a third-party provider whose full details will be provided on request.",
+      "ipTitle": "Intellectual property",
+      "ipBody": "All content on this site (text, images, logos, layout) is the property of MSTANSHOP, unless otherwise stated, and may not be reproduced without prior authorization.",
+      "dataTitle": "Personal data",
+      "dataBodyBefore": "The processing of personal data collected on this site is detailed in our",
+      "dataBodyAfter": "."
+    },
+    "retours": {
+      "title": "Shipping & returns",
+      "metaTitle": "Shipping & returns — MSTANSHOP",
+      "timeTitle": "Delivery times",
+      "timeBody": "Generally allow 48h for Douala and 3 to 5 business days for the rest of the country.",
+      "conditionsTitle": "Return conditions",
+      "conditionsBody": "You have 48h after receiving your order to report an item that doesn't meet your expectations. The item must be returned in its original condition, unworn and with its tags.",
+      "howTitle": "How to return an item",
+      "howItem1": "Contact us at contact@mstanshop.fr with your order number",
+      "howItem2": "We'll confirm the process and the return address",
+      "howItem3": "The item is inspected on receipt before the refund is approved",
+      "refundTitle": "Refund",
+      "refundBody": "The refund is issued to the same payment method used when ordering, after inspection of the returned item."
+    }
+  },
+  "faq": {
+    "title": "Frequently asked questions",
+    "eyebrow": "Help",
+    "metaDescription": "Delivery, payment, orders and returns: all the answers to your questions.",
+    "sections": {
+      "orderPayment": {
+        "title": "Order & payment",
+        "items": {
+          "howToPay": { "question": "How do I pay for my order?", "answer": "You can pay by Mobile Money (Orange Money or MTN Mobile Money) when ordering, or choose cash on delivery." },
+          "cancelOrder": { "question": "Can I cancel or change my order?", "answer": "As long as your order is \"Pending\" or \"Paid\", you can cancel it from the \"My orders\" page of your account." },
+          "promoNotWorking": { "question": "A promo code isn't working, what should I do?", "answer": "Check that it hasn't expired and that it applies to the items in your cart. Contact us if the problem persists." }
+        }
+      },
+      "shipping": {
+        "title": "Delivery",
+        "items": {
+          "deliveryTime": { "question": "What are the delivery times?", "answer": "Generally allow 48h for Douala and 3 to 5 business days for the rest of the country." },
+          "trackOrder": { "question": "How can I track my order?", "answer": "Go to your account, \"My orders\" section, to see the status of each order in real time." },
+          "shipAbroad": { "question": "Do you deliver outside Cameroon?", "answer": "For now, our deliveries are only within Cameroon. Write to us for any specific request." }
+        }
+      },
+      "returns": {
+        "title": "Returns & exchanges",
+        "items": {
+          "canReturn": { "question": "Can I return an item?", "answer": "Contact us within 48h of receipt if an item doesn't meet your expectations." },
+          "howRefund": { "question": "How does a refund work?", "answer": "Once the item is returned and inspected, the refund is issued to the same payment method used for the order. See our return policy for the full timeline." }
+        }
+      }
+    }
+  },
+  "home": {
+    "exploreByCategory": "Explore by category",
+    "featuredSelection": "Featured selection",
+    "seeAll": "See all →",
+    "seeMore": "See more →",
+    "newCollection": "New collection",
+    "heroTitle": "Afro-modern elegance, refined.",
+    "heroBody": "Pieces crafted by hand, blending African textile heritage with clean, contemporary cuts.",
+    "discoverCollection": "Discover the Collection",
+    "visitShop": "Visit the Shop",
+    "collectionLabel": "Collection",
+    "season": "Summer 2026",
+    "heroImageLabel": "Hero visual — Shop",
+    "shopImageLabel": "Shop visual"
+  },
+  "errors": {
+    "notFoundTitle": "Page not found",
+    "notFoundDescription": "The page you are looking for does not exist or is no longer available.",
+    "backHome": "Back to home",
+    "genericTitle": "Something went wrong",
+    "genericDescription": "We couldn't load this page. You can try again.",
+    "retry": "Retry",
+    "authTitle": "Something went wrong",
+    "authDescription": "Unable to display this page at the moment.",
+    "productsTitle": "Unable to display the shop",
+    "productsDescription": "An error occurred while loading the products.",
+    "productDetailTitle": "Unable to display this product",
+    "productDetailDescription": "An error occurred while loading this product page.",
+    "cartTitle": "Unable to display your cart",
+    "cartDescription": "An error occurred while loading your cart.",
+    "checkoutTitle": "Unable to display checkout",
+    "checkoutDescription": "An error occurred while placing your order."
+  }
+}

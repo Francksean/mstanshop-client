@@ -1,0 +1,13 @@
+"use client"
+
+import { useTranslations } from "next-intl"
+import { RetryFallback } from "@/components/custom/RetryFallback"
+
+export default function ProductDetailError({ reset }: { error: Error & { digest?: string }; reset: () => void }) {
+  const t = useTranslations("errors")
+  return (
+    <div className="mx-auto max-w-7xl px-4 md:px-8">
+      <RetryFallback title={t("productDetailTitle")} description={t("productDetailDescription")} onRetry={reset} />
+    </div>
+  )
+}
