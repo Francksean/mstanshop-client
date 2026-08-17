@@ -135,7 +135,7 @@ export function CheckoutMobileSteps({
               <Button
                 type="button"
                 size="lg"
-                className="h-14 w-full gap-2 text-body"
+                className="h-14 w-full text-white gap-2 text-body"
                 onClick={onContinueToPayment}
               >
                 {t("continueToPayment")}

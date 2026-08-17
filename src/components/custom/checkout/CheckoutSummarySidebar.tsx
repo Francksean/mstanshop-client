@@ -68,18 +68,17 @@ export function CheckoutSummarySidebar({
               <Tag className="size-4 text-ink/50" />
               {t("summary.promoCodeLabel")}
             </FieldLabel>
-            <div className="flex-col flex-nowrap gap-2">
+            <div className="flex flex-col gap-3">
               <Input
                 id="promoCode"
                 value={promoCode}
                 onChange={(e) => onPromoCodeChange(e.target.value)}
                 placeholder={t("summary.promoCodePlaceholder")}
-                className="h-11 min-w-0 flex-1"
+                className="h-11 min-w-0"
               />
               <Button
                 type="button"
-                variant="outline"
-                className="h-11 shrink-0"
+                className="h-11 w-full border-transparent bg-gold text-white hover:bg-gold-hover"
                 onClick={onCheckPromo}
                 disabled={!promoCode.trim() || isCheckingPromo}
               >

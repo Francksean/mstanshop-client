@@ -112,7 +112,7 @@ export function CheckoutDesktopSteps({
             <Button
               type="button"
               size="lg"
-              className="w-full gap-2 sm:w-auto"
+              className="w-full text-white gap-2 sm:w-auto"
               onClick={onContinueToPayment}
             >
               {t("continueToPayment")}
