@@ -14,9 +14,9 @@ export function OrdersChart({ data }: OrdersChartProps) {
       <CardHeader>
         <CardTitle>Commandes des 7 derniers jours</CardTitle>
       </CardHeader>
-      <CardContent className="h-64">
+      <CardContent className="h-52 sm:h-64">
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data}>
+          <BarChart data={data} margin={{ left: -20 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
             <XAxis dataKey="label" tick={{ fill: "var(--ink)", fontSize: 12 }} axisLine={false} tickLine={false} />
             <YAxis allowDecimals={false} tick={{ fill: "var(--ink)", fontSize: 12 }} axisLine={false} tickLine={false} />
@@ -38,7 +38,7 @@ export function OrdersChartShimmer() {
       <CardHeader>
         <CardTitle>Commandes des 7 derniers jours</CardTitle>
       </CardHeader>
-      <CardContent className="h-64">
+      <CardContent className="h-52 sm:h-64">
         <Skeleton className="h-full w-full" />
       </CardContent>
     </Card>

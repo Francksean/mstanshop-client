@@ -228,6 +228,10 @@
       "street": "Adresse",
       "phone": "Téléphone",
       "whatsapp": "Numéro WhatsApp (facultatif)",
+      "firstNamePlaceholder": "Jean",
+      "lastNamePlaceholder": "Dupont",
+      "cityPlaceholder": "Douala",
+      "streetPlaceholder": "Rue, quartier, point de repère…",
       "phonePlaceholder": "655 123 456",
       "chooseCountry": "Choisir un pays",
       "searchCountry": "Rechercher un pays…",
@@ -370,6 +374,7 @@
       "backToLogin": "Retour à la connexion"
     },
     "login": {
+      "welcomeMessage": "Contente de vous revoir ! Connectez-vous pour retrouver vos commandes et vos favoris.",
       "email": "Adresse e-mail",
       "password": "Mot de passe",
       "forgotPassword": "Mot de passe oublié ?",

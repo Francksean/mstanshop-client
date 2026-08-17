@@ -4,10 +4,21 @@ import { Controller, useWatch, type Control } from "react-hook-form"
 import { z } from "zod"
 import { isValidPhoneNumber, type CountryCode } from "libphonenumber-js"
 import { useTranslations } from "next-intl"
+import { User, Globe, MapPin, Home, Phone, MessageCircle } from "lucide-react"
 import { Field, FieldLabel, FieldError } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { CountryCombobox } from "@/components/custom/CountryCombobox"
 import { DEFAULT_COUNTRY_CODE, getCountryByCode } from "@/lib/countries"
+
+function RequiredFieldLabel({ icon: Icon, children, htmlFor }: { icon: React.ElementType; children: React.ReactNode; htmlFor: string }) {
+  return (
+    <FieldLabel htmlFor={htmlFor} className="items-center gap-1.5">
+      <Icon className="size-4 text-ink/50" />
+      {children}
+      <span className="text-sangria">*</span>
+    </FieldLabel>
+  )
+}
 
 /** Pass `useTranslations("validation")` from the calling page. */
 type Translate = (key: string) => string
@@ -80,8 +91,8 @@ export function AddressForm({ control }: AddressFormProps) {
           control={control}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
-              <FieldLabel htmlFor={field.name}>{t("firstName")}</FieldLabel>
-              <Input {...field} id={field.name} aria-invalid={fieldState.invalid} className="h-10" />
+              <RequiredFieldLabel icon={User} htmlFor={field.name}>{t("firstName")}</RequiredFieldLabel>
+              <Input {...field} id={field.name} placeholder={t("firstNamePlaceholder")} aria-invalid={fieldState.invalid} className="h-10" />
               {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
             </Field>
           )}
@@ -92,8 +103,8 @@ export function AddressForm({ control }: AddressFormProps) {
           control={control}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
-              <FieldLabel htmlFor={field.name}>{t("lastName")}</FieldLabel>
-              <Input {...field} id={field.name} aria-invalid={fieldState.invalid} className="h-10" />
+              <RequiredFieldLabel icon={User} htmlFor={field.name}>{t("lastName")}</RequiredFieldLabel>
+              <Input {...field} id={field.name} placeholder={t("lastNamePlaceholder")} aria-invalid={fieldState.invalid} className="h-10" />
               {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
             </Field>
           )}
@@ -106,7 +117,7 @@ export function AddressForm({ control }: AddressFormProps) {
           control={control}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
-              <FieldLabel htmlFor={field.name}>{t("country")}</FieldLabel>
+              <RequiredFieldLabel icon={Globe} htmlFor={field.name}>{t("country")}</RequiredFieldLabel>
               <CountryCombobox
                 id={field.name}
                 value={field.value}
@@ -123,8 +134,8 @@ export function AddressForm({ control }: AddressFormProps) {
           control={control}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
-              <FieldLabel htmlFor={field.name}>{t("city")}</FieldLabel>
-              <Input {...field} id={field.name} aria-invalid={fieldState.invalid} className="h-10" />
+              <RequiredFieldLabel icon={MapPin} htmlFor={field.name}>{t("city")}</RequiredFieldLabel>
+              <Input {...field} id={field.name} placeholder={t("cityPlaceholder")} aria-invalid={fieldState.invalid} className="h-10" />
               {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
             </Field>
           )}
@@ -136,8 +147,8 @@ export function AddressForm({ control }: AddressFormProps) {
         control={control}
         render={({ field, fieldState }) => (
           <Field data-invalid={fieldState.invalid}>
-            <FieldLabel htmlFor={field.name}>{t("street")}</FieldLabel>
-            <Input {...field} id={field.name} aria-invalid={fieldState.invalid} className="h-10" />
+            <RequiredFieldLabel icon={Home} htmlFor={field.name}>{t("street")}</RequiredFieldLabel>
+            <Input {...field} id={field.name} placeholder={t("streetPlaceholder")} aria-invalid={fieldState.invalid} className="h-10" />
             {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
           </Field>
         )}
@@ -148,7 +159,7 @@ export function AddressForm({ control }: AddressFormProps) {
         control={control}
         render={({ field, fieldState }) => (
           <Field data-invalid={fieldState.invalid}>
-            <FieldLabel htmlFor={field.name}>{t("phone")}</FieldLabel>
+            <RequiredFieldLabel icon={Phone} htmlFor={field.name}>{t("phone")}</RequiredFieldLabel>
             <div className="flex items-center gap-2">
               <span className="flex h-10 shrink-0 items-center gap-1.5 rounded-md border border-input bg-muted px-2.5 text-body text-ink/70">
                 <span aria-hidden>{flag}</span>
@@ -174,7 +185,10 @@ export function AddressForm({ control }: AddressFormProps) {
         control={control}
         render={({ field, fieldState }) => (
           <Field data-invalid={fieldState.invalid}>
-            <FieldLabel htmlFor={field.name}>{t("whatsapp")}</FieldLabel>
+            <FieldLabel htmlFor={field.name} className="items-center gap-1.5">
+              <MessageCircle className="size-4 text-ink/50" />
+              {t("whatsapp")}
+            </FieldLabel>
             <div className="flex items-center gap-2">
               <span className="flex h-10 shrink-0 items-center gap-1.5 rounded-md border border-input bg-muted px-2.5 text-body text-ink/70">
                 <span aria-hidden>{flag}</span>

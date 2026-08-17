@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Field, FieldLabel, FieldError } from "@/components/ui/field"
 import { AuthTabs } from "@/components/custom/AuthTabs"
+import { PasswordInput } from "@/components/custom/PasswordInput"
 import { useAuth } from "@/hooks/useAuth"
 import { normalizeError } from "@/lib/api-error"
 import { startGoogleOAuth } from "@/lib/oauth"
@@ -52,6 +53,7 @@ function LoginForm({ redirect }: { redirect: string | null }) {
   return (
     <div className="rounded-md bg-card p-8">
       <AuthTabs />
+      <p className="mb-6 text-body text-ink/70">{t("welcomeMessage")}</p>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
         <Controller
           name="email"
@@ -59,7 +61,7 @@ function LoginForm({ redirect }: { redirect: string | null }) {
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
               <FieldLabel htmlFor={field.name}>{t("email")}</FieldLabel>
-              <Input {...field} id={field.name} type="email" aria-invalid={fieldState.invalid} />
+              <Input {...field} id={field.name} type="email" aria-invalid={fieldState.invalid} className="h-12" />
               {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
             </Field>
           )}
@@ -71,7 +73,7 @@ function LoginForm({ redirect }: { redirect: string | null }) {
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
               <FieldLabel htmlFor={field.name}>{t("password")}</FieldLabel>
-              <Input {...field} id={field.name} type="password" aria-invalid={fieldState.invalid} />
+              <PasswordInput {...field} id={field.name} aria-invalid={fieldState.invalid} className="h-12" />
               {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
             </Field>
           )}

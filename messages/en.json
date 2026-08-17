@@ -228,6 +228,10 @@
       "street": "Address",
       "phone": "Phone",
       "whatsapp": "WhatsApp number (optional)",
+      "firstNamePlaceholder": "John",
+      "lastNamePlaceholder": "Doe",
+      "cityPlaceholder": "Douala",
+      "streetPlaceholder": "Street, neighborhood, landmark…",
       "phonePlaceholder": "655 123 456",
       "chooseCountry": "Choose a country",
       "searchCountry": "Search for a country…",
@@ -370,6 +374,7 @@
       "backToLogin": "Back to sign in"
     },
     "login": {
+      "welcomeMessage": "Welcome back! Sign in to pick up right where you left off.",
       "email": "Email address",
       "password": "Password",
       "forgotPassword": "Forgot your password?",

@@ -4,7 +4,7 @@ import { Controller, useWatch, type Control } from "react-hook-form"
 import { z } from "zod"
 import { isValidPhoneNumber, type CountryCode } from "libphonenumber-js"
 import { useTranslations } from "next-intl"
-import { Store, Truck } from "lucide-react"
+import { Store, Truck, Phone } from "lucide-react"
 import { Field, FieldLabel, FieldError } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { MobileMoneyInstructions } from "./MobileMoneyInstructions"
@@ -116,7 +116,11 @@ export function PaymentForm({ control, dialCode, flag, shippingMethod }: Payment
             control={control}
             render={({ field, fieldState }) => (
               <Field data-invalid={fieldState.invalid}>
-                <FieldLabel htmlFor={field.name}>{t("mobileNumberLabel")}</FieldLabel>
+                <FieldLabel htmlFor={field.name} className="items-center gap-1.5">
+                  <Phone className="size-4 text-ink/50" />
+                  {t("mobileNumberLabel")}
+                  <span className="text-sangria">*</span>
+                </FieldLabel>
                 <div className="flex items-center gap-2">
                   <span className="flex h-10 shrink-0 items-center gap-1.5 rounded-md border border-input bg-muted px-2.5 text-body text-ink/70">
                     {flag && <span aria-hidden>{flag}</span>}

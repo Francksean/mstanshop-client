@@ -19,11 +19,11 @@ const ACCENT_CLASS: Record<NonNullable<KpiCardProps["accent"]>, string> = {
 export function KpiCard({ label, value, icon: Icon, accent = "gold" }: KpiCardProps) {
   return (
     <Card size="sm">
-      <CardContent className="flex items-center gap-3">
+      <CardContent className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-3">
         <div className={cn("flex size-9 shrink-0 items-center justify-center rounded-full", ACCENT_CLASS[accent])}>
           <Icon className="size-4" />
         </div>
-        <div className="flex flex-col">
+        <div className="flex min-w-0 flex-col">
           <span className="text-small text-ink/60">{label}</span>
           <span className="text-body font-semibold text-ink">{value}</span>
         </div>
@@ -35,7 +35,7 @@ export function KpiCard({ label, value, icon: Icon, accent = "gold" }: KpiCardPr
 export function KpiCardShimmer() {
   return (
     <Card size="sm">
-      <CardContent className="flex items-center gap-3">
+      <CardContent className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-3">
         <Skeleton className="size-9 shrink-0 rounded-full" />
         <div className="flex flex-1 flex-col gap-2">
           <Skeleton className="h-3 w-20" />

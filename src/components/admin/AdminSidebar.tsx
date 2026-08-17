@@ -32,7 +32,7 @@ function NavLinks({ collapsed, onNavigate }: { collapsed?: boolean; onNavigate?:
   const pathname = usePathname()
 
   return (
-    <nav aria-label="Navigation admin" className="flex flex-col gap-0.5 px-2">
+    <nav aria-label="Navigation admin" className="flex flex-col gap-1 px-3">
       {NAV_LINKS.map((link) => {
         const isActive = pathname.startsWith(link.href)
         const Icon = link.icon
@@ -43,11 +43,11 @@ function NavLinks({ collapsed, onNavigate }: { collapsed?: boolean; onNavigate?:
             onClick={onNavigate}
             aria-current={isActive ? "page" : undefined}
             className={cn(
-              "flex items-center gap-3 rounded-md px-3 py-1.5 text-small transition-colors",
+              "flex items-center gap-3.5 rounded-md px-3.5 py-3 text-body font-medium transition-colors",
               isActive ? "bg-sangria/10 text-sangria" : "text-ink/70 hover:bg-gold-light/40 hover:text-ink"
             )}
           >
-            <Icon className="size-4 shrink-0" />
+            <Icon className="size-5 shrink-0" />
             {!collapsed && <span>{link.label}</span>}
           </Link>
         )
@@ -66,16 +66,16 @@ export function AdminSidebar() {
     <>
       <aside
         className={cn(
-          "hidden shrink-0 flex-col border-r border-black/10 bg-cream py-3 transition-[width] md:flex",
-          collapsed ? "w-[72px]" : "w-64"
+          "hidden shrink-0 flex-col border-r border-black/10 bg-cream py-4 transition-[width] md:flex",
+          collapsed ? "w-20" : "w-72"
         )}
       >
-        <div className={cn("flex h-9 items-center px-4 pb-3", collapsed ? "justify-center" : "justify-between")}>
+        <div className={cn("flex h-10 items-center px-4 pb-4", collapsed ? "justify-center" : "justify-between")}>
           {!collapsed && (
-            <span className="text-body font-bold tracking-tight text-ink">MSTANSHOP</span>
+            <span className="text-h3 font-bold tracking-tight text-ink">MSTANSHOP</span>
           )}
-          <Button variant="ghost" size="icon-xs" onClick={toggleCollapsed} aria-label="Réduire le menu">
-            {collapsed ? <PanelLeftOpen className="size-3.5" /> : <PanelLeftClose className="size-3.5" />}
+          <Button variant="ghost" size="icon" onClick={toggleCollapsed} aria-label="Réduire le menu">
+            {collapsed ? <PanelLeftOpen className="size-4" /> : <PanelLeftClose className="size-4" />}
           </Button>
         </div>
         <NavLinks collapsed={collapsed} />
