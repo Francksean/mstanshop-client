@@ -14,6 +14,7 @@ export function useAuth() {
   const error = useAuthStore((s) => s.error)
   const storeLogin = useAuthStore((s) => s.login)
   const storeRegister = useAuthStore((s) => s.register)
+  const storeLoginWithOAuth = useAuthStore((s) => s.loginWithOAuth)
   const storeLogout = useAuthStore((s) => s.logout)
 
   async function login(payload: LoginPayload, redirectTo?: string) {
@@ -25,6 +26,12 @@ export function useAuth() {
   async function register(payload: RegisterPayload, redirectTo?: string) {
     await storeRegister(payload)
     router.push(redirectTo || "/account/profile")
+  }
+
+  async function loginWithOAuth(accessToken: string, refreshToken: string, redirectTo?: string) {
+    await storeLoginWithOAuth(accessToken, refreshToken)
+    const loggedInUser = useAuthStore.getState().user
+    router.push(redirectTo || (loggedInUser?.role === "ROLE_ADMIN" ? "/admin/dashboard" : "/account/profile"))
   }
 
   function logout() {
@@ -40,6 +47,7 @@ export function useAuth() {
     isAuthenticated: Boolean(user),
     login,
     register,
+    loginWithOAuth,
     logout,
   }
 }

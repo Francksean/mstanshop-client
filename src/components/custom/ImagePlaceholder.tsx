@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils"
 
 interface ImagePlaceholderProps {
   label?: string
-  aspectRatio?: "square" | "portrait" | "wide"
+  aspectRatio?: "square" | "portrait" | "wide" | "4-3"
   className?: string
 }
 
@@ -13,6 +13,7 @@ const ASPECT_CLASSES: Record<NonNullable<ImagePlaceholderProps["aspectRatio"]>, 
   square: "aspect-square",
   portrait: "aspect-[3/4]",
   wide: "aspect-[16/9]",
+  "4-3": "aspect-[4/3]",
 }
 
 export function ImagePlaceholder({
@@ -26,7 +27,7 @@ export function ImagePlaceholder({
   return (
     <div
       className={cn(
-        "relative flex items-center justify-center overflow-hidden rounded-md border border-gold/25 bg-gradient-to-br from-cream via-gold-light/40 to-cream",
+        "flex items-center justify-center overflow-hidden rounded-md border border-gold/25 bg-gradient-to-br from-cream via-gold-light/40 to-cream",
         ASPECT_CLASSES[aspectRatio],
         className
       )}
@@ -38,9 +39,6 @@ export function ImagePlaceholder({
         aria-hidden="true"
       >
         M
-      </span>
-      <span className="absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full border border-gold/30 bg-cream/80 px-3 py-1 text-small tracking-wide text-ink/50 uppercase">
-        {resolvedLabel}
       </span>
     </div>
   )

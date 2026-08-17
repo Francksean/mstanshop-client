@@ -40,8 +40,6 @@ export default async function CgvPage() {
         </a>
         {tCgv("withdrawalBodyAfter")}
       </p>
-
-      <p className="mt-8 text-small! text-ink/40!">{t("disclaimer")}</p>
     </>
   )
 }

@@ -107,16 +107,16 @@ export function Footer() {
             {t("trackOrder")}
           </Link>
           <a
-            href="mailto:contact@mstanshop.fr"
+            href="mailto:contact@mstanshop.com"
             className="flex items-center gap-2 text-body text-cream/80 hover:text-gold"
           >
-            <Mail className="h-4 w-4" /> contact@mstanshop.fr
+            <Mail className="h-4 w-4" /> contact@mstanshop.com
           </a>
           <a
-            href="tel:+33184602210"
+            href="tel:+237650763576"
             className="flex items-center gap-2 text-body text-cream/80 hover:text-gold"
           >
-            <Phone className="h-4 w-4" /> +33 1 84 60 22 10
+            <Phone className="h-4 w-4" /> +237 650 763 576
           </a>
         </div>
 
@@ -139,10 +139,10 @@ export function Footer() {
             {t("followUs")}
           </span>
           <a
-            href="https://instagram.com"
+            href="https://instagram.com/mstanshops"
             className="flex items-center gap-2 text-body text-cream/80 hover:text-gold"
           >
-            <AtSign className="h-4 w-4" /> Instagram
+            <AtSign className="h-4 w-4" /> mstanshops
           </a>
           <a
             href="https://facebook.com"

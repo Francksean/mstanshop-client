@@ -31,8 +31,6 @@ export default async function MentionsLegalesPage() {
         </a>
         {tm("dataBodyAfter")}
       </p>
-
-      <p className="mt-8 text-small! text-ink/40!">{t("disclaimer")}</p>
     </>
   )
 }

@@ -33,7 +33,7 @@ export function CategoryShowcaseSection({ category, products }: CategoryShowcase
           {t("seeMore")}
         </Link>
       </div>
-      <ProductGrid products={products} columns="2-3" />
+      <ProductGrid products={products} columns="2-3" scrollOnMobile />
     </section>
   )
 }

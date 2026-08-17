@@ -276,6 +276,7 @@
       "shippingInfoAria": "About shipping costs",
       "shippingInfoTooltip": "The shipping amount will depend on the delivery details you provide.",
       "offered": "Free",
+      "notYetCalculated": "Not yet calculated",
       "total": "Total",
       "promoCodeLabel": "Promo code",
       "promoCodePlaceholder": "SOLDES10",
@@ -357,6 +358,14 @@
     },
     "loggedOut": "You have been signed out.",
     "restrictedAccess": "Restricted access",
+    "or": "or",
+    "continueWithGoogle": "Continue with Google",
+    "oauthCallback": {
+      "connecting": "Signing you in…",
+      "missingTokens": "Google sign-in failed: missing information.",
+      "failed": "Google sign-in failed. Please try again.",
+      "backToLogin": "Back to sign in"
+    },
     "login": {
       "email": "Email address",
       "password": "Password",
@@ -381,7 +390,6 @@
     }
   },
   "legal": {
-    "disclaimer": "Sample document — to be reviewed by legal counsel before going into production.",
     "linkFaq": "FAQ",
     "linkReturnPolicy": "return policy",
     "linkPrivacyPolicy": "privacy policy",
@@ -413,13 +421,13 @@
       "retentionTitle": "Retention & security",
       "retentionBody": "Your data is kept for as long as necessary for the purposes described above and is protected by appropriate security measures.",
       "rightsTitle": "Your rights",
-      "rightsBody": "You have the right to access, correct and delete your data. To exercise these rights, contact us at contact@mstanshop.fr."
+      "rightsBody": "You have the right to access, correct and delete your data. To exercise these rights, contact us at contact@mstanshop.com."
     },
     "mentionsLegales": {
       "title": "Legal notice",
       "metaTitle": "Legal notice — MSTANSHOP",
       "publisherTitle": "Site publisher",
-      "publisherBody": "MSTANSHOP — online store for clothing, jewelry and accessories. Contact: contact@mstanshop.fr — +33 1 84 60 22 10.",
+      "publisherBody": "MSTANSHOP — online store for clothing, jewelry and accessories. Contact: contact@mstanshop.com — +237 650 763 576.",
       "hostingTitle": "Hosting",
       "hostingBody": "The site is hosted by a third-party provider whose full details will be provided on request.",
       "ipTitle": "Intellectual property",
@@ -436,7 +444,7 @@
       "conditionsTitle": "Return conditions",
       "conditionsBody": "You have 48h after receiving your order to report an item that doesn't meet your expectations. The item must be returned in its original condition, unworn and with its tags.",
       "howTitle": "How to return an item",
-      "howItem1": "Contact us at contact@mstanshop.fr with your order number",
+      "howItem1": "Contact us at contact@mstanshop.com with your order number",
       "howItem2": "We'll confirm the process and the return address",
       "howItem3": "The item is inspected on receipt before the refund is approved",
       "refundTitle": "Refund",

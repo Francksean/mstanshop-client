@@ -60,6 +60,22 @@ export function Header() {
     router.refresh()
   }
 
+  const searchBarProps = {
+    value: query,
+    onChange: setQuery,
+    onSubmit: handleSearch,
+    placeholder: t("searchPlaceholder"),
+    searchAriaLabel: t("searchLabel"),
+    submitLabel: t("search"),
+    categories,
+    category,
+    onCategoryChange: setCategory,
+    allCategoriesValue: ALL_CATEGORIES,
+    allCategoriesLabel: t("allCategories"),
+    categoryPlaceholder: t("categoryPlaceholder"),
+    categoryAriaLabel: t("categoryFilter"),
+  }
+
   return (
     <header
       className={cn(
@@ -76,23 +92,11 @@ export function Header() {
           MSTANSHOP
         </Link>
 
-        <SearchBar
-          value={query}
-          onChange={setQuery}
-          onSubmit={handleSearch}
-          placeholder={t("searchPlaceholder")}
-          searchAriaLabel={t("searchLabel")}
-          submitLabel={t("search")}
-          categories={categories}
-          category={category}
-          onCategoryChange={setCategory}
-          allCategoriesValue={ALL_CATEGORIES}
-          allCategoriesLabel={t("allCategories")}
-          categoryPlaceholder={t("categoryPlaceholder")}
-          categoryAriaLabel={t("categoryFilter")}
-        />
+        <div className="hidden min-w-0 flex-1 md:flex">
+          <SearchBar {...searchBarProps} />
+        </div>
 
-        <div className="flex shrink-0 items-center gap-1">
+        <div className="ml-auto flex shrink-0 items-center gap-1 md:ml-0">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="sm" aria-label={t("chooseLanguage")} className="gap-1.5 px-2">
@@ -170,6 +174,10 @@ export function Header() {
             )}
           </Button>
         </div>
+      </div>
+
+      <div className="border-t border-black/10 px-4 pt-3 pb-3 md:hidden">
+        <SearchBar {...searchBarProps} />
       </div>
     </header>
   )

@@ -150,7 +150,7 @@ export function ShareButton({ productId }: ShareButtonProps) {
                 readOnly
                 value={share.url}
                 onFocus={(e) => e.currentTarget.select()}
-                className="flex-1 truncate bg-transparent text-body text-ink outline-none"
+                className="min-w-0 flex-1 truncate bg-transparent text-body text-ink outline-none"
               />
               <Button size="sm" className={cn("shrink-0 gap-1.5", copied && "bg-delivered")} onClick={handleCopyLink}>
                 {copied ? (

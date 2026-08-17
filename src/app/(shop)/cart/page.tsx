@@ -18,7 +18,7 @@ export default function CartPage() {
     return (
       <div className="mx-auto max-w-7xl px-4 py-8 md:px-8">
         <EmptyState title={t("emptyTitle")} description={t("emptyDescription")} ctaLabel={t("emptyCta")} ctaHref="/products" />
-        <TrustBadges variant="inline" className="mt-12" />
+        <TrustBadges variant="inline" align="start" className="mt-12" />
         <SuggestedProducts className="mt-16 border-t border-black/10 pt-10" />
       </div>
     )
@@ -36,6 +36,7 @@ export default function CartPage() {
         <div className="md:sticky md:top-24 md:self-start">
           <OrderSummaryCard
             subtotal={subtotal}
+            shippingPending
             action={
               <div className="mt-2 flex flex-col gap-2">
                 <Button asChild size="lg">
@@ -50,7 +51,7 @@ export default function CartPage() {
         </div>
       </div>
 
-      <TrustBadges variant="inline" className="mt-12 border-t border-black/10 pt-10" />
+      <TrustBadges variant="inline" align="start" className="mt-12 border-t border-black/10 pt-10" />
       <SuggestedProducts className="mt-16 border-t border-black/10 pt-10" />
     </div>
   )

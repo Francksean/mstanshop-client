@@ -1,4 +1,5 @@
 import { apiClient } from "@/lib/api-client"
+import { uploadToR2 } from "./uploads.service"
 import type { CategoryPromotionRequest, CategoryRequest, CategoryResponse } from "@/types"
 
 export async function createCategory(payload: CategoryRequest): Promise<CategoryResponse> {
@@ -19,11 +20,9 @@ export async function deleteCategory(id: string): Promise<void> {
 }
 
 async function uploadCategoryImage(id: string, kind: "banner" | "thumbnail", file: File): Promise<void> {
-  const formData = new FormData()
-  formData.append("file", file)
-  await apiClient.post(`/admin/categories/${id}/${kind}`, formData, {
-    headers: { "Content-Type": "multipart/form-data" },
-  })
+  const scope = kind === "banner" ? "CATEGORY_BANNER" : "CATEGORY_THUMBNAIL"
+  const { objectKey } = await uploadToR2(scope, id, file)
+  await apiClient.post(`/admin/categories/${id}/${kind}/confirm`, { objectKey })
 }
 
 export function uploadCategoryBanner(id: string, file: File): Promise<void> {

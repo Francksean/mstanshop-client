@@ -14,11 +14,13 @@ import { Field, FieldLabel, FieldError } from "@/components/ui/field"
 import { AuthTabs } from "@/components/custom/AuthTabs"
 import { useAuth } from "@/hooks/useAuth"
 import { normalizeError } from "@/lib/api-error"
+import { startGoogleOAuth } from "@/lib/oauth"
 
 type LoginValues = { email: string; password: string }
 
 function LoginForm({ redirect }: { redirect: string | null }) {
   const t = useTranslations("auth.login")
+  const tAuth = useTranslations("auth")
   const tValidation = useTranslations("validation")
   const tApiErrors = useTranslations("apiErrors")
   const { login } = useAuth()
@@ -90,6 +92,24 @@ function LoginForm({ redirect }: { redirect: string | null }) {
 
         <Button type="submit" size="lg" disabled={isSubmitting}>
           {isSubmitting ? t("submitting") : t("submit")}
+        </Button>
+
+        <div className="flex items-center gap-3 text-small text-ink/40">
+          <span className="h-px flex-1 bg-black/10" />
+          {tAuth("or")}
+          <span className="h-px flex-1 bg-black/10" />
+        </div>
+
+        <Button
+          type="button"
+          variant="outline"
+          size="lg"
+          className="gap-2"
+          onClick={() => startGoogleOAuth(redirect)}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/auth/google.jpg" alt="" className="h-5 w-5 rounded-full object-cover" />
+          {tAuth("continueWithGoogle")}
         </Button>
       </form>
     </div>

@@ -28,7 +28,7 @@ export default async function LandingPage() {
     .filter((showcase) => showcase.products.length > 0)
 
   return (
-    <div className="flex flex-col gap-16 pb-16 md:gap-20">
+    <div className="flex flex-col gap-10 pb-16 md:gap-20">
       <Hero />
 
       <SectionDivider />
@@ -50,11 +50,11 @@ export default async function LandingPage() {
             {t("seeAll")}
           </Link>
         </div>
-        <ProductGrid products={featuredProducts} columns="2-3" />
+        <ProductGrid products={featuredProducts} columns="2-3" scrollOnMobile />
       </SectionReveal>
 
       {showcases.map(({ category, products }) => (
-        <div key={category.id} className="flex flex-col gap-16 md:gap-20">
+        <div key={category.id} className="flex flex-col gap-10 md:gap-20">
           <SectionDivider />
           <SectionReveal>
             <CategoryShowcaseSection category={category} products={products} />

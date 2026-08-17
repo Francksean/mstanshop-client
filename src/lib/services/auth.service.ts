@@ -40,6 +40,16 @@ export async function register(payload: RegisterPayload): Promise<AuthResult> {
   return { user, token: data.accessToken, refreshToken: data.refreshToken }
 }
 
+/**
+ * Completes an OAuth2 login (e.g. Google) after the backend's redirect flow hands the
+ * tokens back to the frontend as URL query params — there's no login/register request
+ * body here, just tokens to resolve into a profile the same way password auth does.
+ */
+export async function completeOAuthLogin(accessToken: string, refreshToken: string): Promise<AuthResult> {
+  const user = await fetchProfileAsUser(accessToken)
+  return { user, token: accessToken, refreshToken }
+}
+
 export async function logout(): Promise<void> {
   await apiClient.post("/auth/logout")
 }

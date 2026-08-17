@@ -14,10 +14,12 @@ interface TrustBadge {
 
 interface TrustBadgesProps {
   variant?: "band" | "inline"
+  /** "start" stacks each badge (icon above text) and left-aligns the list — used where badges sit in a narrow single column. */
+  align?: "center" | "start"
   className?: string
 }
 
-export function TrustBadges({ variant = "band", className }: TrustBadgesProps) {
+export function TrustBadges({ variant = "band", align = "center", className }: TrustBadgesProps) {
   const t = useTranslations("checkout.trustBadges")
 
   const badges: TrustBadge[] = [
@@ -39,17 +41,21 @@ export function TrustBadges({ variant = "band", className }: TrustBadgesProps) {
     )
 
     const key = `${badge.title}-${badge.subtitle}`
+    const itemClass = cn(
+      "flex gap-3",
+      align === "start" ? "flex-col items-start" : "items-center"
+    )
 
     return badge.href ? (
       <Link
         key={key}
         href={badge.href}
-        className="flex items-center gap-3 rounded-md transition-colors hover:text-sangria focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sangria"
+        className={cn(itemClass, "rounded-md transition-colors hover:text-sangria focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sangria")}
       >
         {content}
       </Link>
     ) : (
-      <div key={key} className="flex items-center gap-3">
+      <div key={key} className={itemClass}>
         {content}
       </div>
     )
@@ -66,6 +72,15 @@ export function TrustBadges({ variant = "band", className }: TrustBadgesProps) {
   }
 
   return (
-    <div className={cn("flex flex-wrap items-center justify-center gap-x-8 gap-y-4", className)}>{items}</div>
+    <div
+      className={cn(
+        align === "start"
+          ? "flex flex-col items-start gap-6"
+          : "flex flex-wrap items-center justify-center gap-x-8 gap-y-4",
+        className
+      )}
+    >
+      {items}
+    </div>
   )
 }

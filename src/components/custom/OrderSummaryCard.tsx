@@ -60,7 +60,9 @@ export function OrderSummaryCard({
               </Tooltip>
             )}
           </span>
-          <span>{shipping === 0 ? t("offered") : formatPrice(shipping, locale)}</span>
+          <span>
+            {shippingPending ? t("notYetCalculated") : shipping === 0 ? t("offered") : formatPrice(shipping, locale)}
+          </span>
         </div>
       </div>
       {promoCodeSlot}

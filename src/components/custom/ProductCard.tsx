@@ -42,7 +42,7 @@ export function ProductCard({ product }: { product: Product }) {
             className="aspect-[4/3] w-full rounded-md object-cover transition-colors group-hover:brightness-95"
           />
         ) : (
-          <ImagePlaceholder aspectRatio="wide" className="transition-colors group-hover:bg-sangria/5" />
+          <ImagePlaceholder aspectRatio="4-3" className="transition-colors group-hover:bg-sangria/5" />
         )}
         <div className="flex flex-1 flex-col gap-1">
           <h3 className="font-heading text-body font-medium text-ink">{product.name}</h3>

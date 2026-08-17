@@ -34,6 +34,7 @@ interface AuthState {
   isAdmin: boolean
   login: (payload: LoginPayload) => Promise<void>
   register: (payload: RegisterPayload) => Promise<void>
+  loginWithOAuth: (accessToken: string, refreshToken: string) => Promise<void>
   logout: () => void
   setError: (message: string | null) => void
 }
@@ -89,6 +90,33 @@ export const useAuthStore = create<AuthState>()(
           useCartStore.getState().reset()
         } catch (error) {
           const message = error instanceof Error ? error.message : "Inscription impossible."
+          set({ status: "error", error: message })
+          throw error
+        }
+      },
+
+      loginWithOAuth: async (accessToken, refreshToken) => {
+        set({ status: "loading", error: null })
+        try {
+          const { user, token, refreshToken: rt } = await authService.completeOAuthLogin(
+            accessToken,
+            refreshToken
+          )
+          setRoleCookie(user.role)
+          set({
+            user,
+            token,
+            refreshToken: rt,
+            status: "authenticated",
+            error: null,
+            isAdmin: user.role === "ROLE_ADMIN",
+          })
+          // The OAuth redirect flow has no request body to attach guest-cart items to
+          // (unlike login/register), so the local guest cart is intentionally left as-is
+          // rather than merged — see API_ADDS.md.
+          useCartStore.getState().reset()
+        } catch (error) {
+          const message = error instanceof Error ? error.message : "Connexion impossible."
           set({ status: "error", error: message })
           throw error
         }

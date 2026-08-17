@@ -56,7 +56,7 @@
   },
   "footer": {
     "tagline": "Boutique premium célébrant l'artisanat textile africain à travers un design contemporain et épuré.",
-    "stayInformed": "Restez informée",
+    "stayInformed": "Restez informé(e)",
     "stayInformedBody": "Nous vous tiendrons au courant de nos nouveautés.",
     "newsletterPlaceholder": "Numéro de téléphone ou e-mail",
     "newsletterLabel": "Numéro de téléphone ou e-mail pour la newsletter",
@@ -276,6 +276,7 @@
       "shippingInfoAria": "À propos des frais de livraison",
       "shippingInfoTooltip": "Le montant de la livraison dépendra des informations de livraison qui seront renseignées.",
       "offered": "Offerte",
+      "notYetCalculated": "Pas encore calculée",
       "total": "Total",
       "promoCodeLabel": "Code promo",
       "promoCodePlaceholder": "SOLDES10",
@@ -357,6 +358,14 @@
     },
     "loggedOut": "Vous avez été déconnecté(e).",
     "restrictedAccess": "Accès réservé",
+    "or": "ou",
+    "continueWithGoogle": "Continuer avec Google",
+    "oauthCallback": {
+      "connecting": "Connexion en cours…",
+      "missingTokens": "La connexion avec Google a échoué : informations manquantes.",
+      "failed": "La connexion avec Google a échoué. Veuillez réessayer.",
+      "backToLogin": "Retour à la connexion"
+    },
     "login": {
       "email": "Adresse e-mail",
       "password": "Mot de passe",
@@ -381,7 +390,6 @@
     }
   },
   "legal": {
-    "disclaimer": "Document indicatif — à faire valider par un conseil juridique avant mise en production.",
     "linkFaq": "FAQ",
     "linkReturnPolicy": "politique de retours",
     "linkPrivacyPolicy": "politique de confidentialité",
@@ -413,13 +421,13 @@
       "retentionTitle": "Conservation & sécurité",
       "retentionBody": "Vos données sont conservées pour la durée nécessaire aux finalités décrites ci-dessus et protégées par des mesures de sécurité appropriées.",
       "rightsTitle": "Vos droits",
-      "rightsBody": "Vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Pour exercer ces droits, contactez-nous à contact@mstanshop.fr."
+      "rightsBody": "Vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Pour exercer ces droits, contactez-nous à contact@mstanshop.com."
     },
     "mentionsLegales": {
       "title": "Mentions légales",
       "metaTitle": "Mentions légales — MSTANSHOP",
       "publisherTitle": "Éditeur du site",
-      "publisherBody": "MSTANSHOP — boutique en ligne de vêtements, bijoux et accessoires. Contact : contact@mstanshop.fr — +33 1 84 60 22 10.",
+      "publisherBody": "MSTANSHOP — boutique en ligne de vêtements, bijoux et accessoires. Contact : contact@mstanshop.com — +237 650 763 576.",
       "hostingTitle": "Hébergement",
       "hostingBody": "Le site est hébergé par un prestataire tiers dont les coordonnées complètes seront communiquées sur demande.",
       "ipTitle": "Propriété intellectuelle",
@@ -436,7 +444,7 @@
       "conditionsTitle": "Conditions de retour",
       "conditionsBody": "Vous disposez de 48h après réception de votre commande pour signaler un article qui ne correspond pas à votre attente. L'article doit être retourné dans son état d'origine, non porté et avec ses étiquettes.",
       "howTitle": "Comment retourner un article",
-      "howItem1": "Contactez-nous à contact@mstanshop.fr en indiquant votre numéro de commande",
+      "howItem1": "Contactez-nous à contact@mstanshop.com en indiquant votre numéro de commande",
       "howItem2": "Nous vous confirmons la marche à suivre et l'adresse de retour",
       "howItem3": "L'article est contrôlé à réception avant validation du remboursement",
       "refundTitle": "Remboursement",

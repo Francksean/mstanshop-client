@@ -7,7 +7,6 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function RetoursPage() {
-  const t = await getTranslations("legal")
   const tr = await getTranslations("legal.retours")
 
   return (
@@ -29,8 +28,6 @@ export default async function RetoursPage() {
 
       <h2>{tr("refundTitle")}</h2>
       <p>{tr("refundBody")}</p>
-
-      <p className="mt-8 text-small! text-ink/40!">{t("disclaimer")}</p>
     </>
   )
 }

@@ -430,17 +430,18 @@ export default function CheckoutPage() {
             promoCodeSlot={
               <Field>
                 <FieldLabel htmlFor="promoCode">{t("summary.promoCodeLabel")}</FieldLabel>
-                <div className="flex gap-2">
+                <div className="flex flex-nowrap gap-2">
                   <Input
                     id="promoCode"
                     value={promoCode}
                     onChange={(e) => handlePromoCodeChange(e.target.value)}
                     placeholder={t("summary.promoCodePlaceholder")}
-                    className="flex-1"
+                    className="h-11 min-w-0 flex-1"
                   />
                   <Button
                     type="button"
                     variant="outline"
+                    className="h-11 shrink-0"
                     onClick={handleCheckPromo}
                     disabled={!promoCode.trim() || isCheckingPromo}
                   >
