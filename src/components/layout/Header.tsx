@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { useLocale, useTranslations } from "next-intl"
 import { Check, Globe, LogOut, Menu, Package, ShoppingBag, User } from "lucide-react"
@@ -88,8 +89,9 @@ export function Header() {
           <Menu className="h-5 w-5" />
         </Button>
 
-        <Link href="/" className="shrink-0 font-heading text-h2 font-semibold tracking-tight text-ink">
-          MSTANSHOP
+        <Link href="/" className="flex shrink-0 items-center gap-2">
+          <Image src="/logo.png" alt="" width={32} height={32} className="size-8" priority />
+          <span className="font-heading text-h2 font-semibold tracking-tight text-ink">MSTANSHOP</span>
         </Link>
 
         <div className="hidden min-w-0 flex-1 md:flex">
