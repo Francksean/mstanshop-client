@@ -38,7 +38,7 @@ export function CountryCombobox({ id, value, onChange, invalid }: CountryCombobo
           role="combobox"
           aria-expanded={open}
           aria-invalid={invalid}
-          className="w-full justify-between font-normal"
+          className="h-10 w-full justify-between font-normal"
         >
           {selected ? (
             <span className="flex items-center gap-2">

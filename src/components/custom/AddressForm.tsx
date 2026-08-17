@@ -81,7 +81,7 @@ export function AddressForm({ control }: AddressFormProps) {
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
               <FieldLabel htmlFor={field.name}>{t("firstName")}</FieldLabel>
-              <Input {...field} id={field.name} aria-invalid={fieldState.invalid} />
+              <Input {...field} id={field.name} aria-invalid={fieldState.invalid} className="h-10" />
               {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
             </Field>
           )}
@@ -93,7 +93,7 @@ export function AddressForm({ control }: AddressFormProps) {
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
               <FieldLabel htmlFor={field.name}>{t("lastName")}</FieldLabel>
-              <Input {...field} id={field.name} aria-invalid={fieldState.invalid} />
+              <Input {...field} id={field.name} aria-invalid={fieldState.invalid} className="h-10" />
               {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
             </Field>
           )}
@@ -124,7 +124,7 @@ export function AddressForm({ control }: AddressFormProps) {
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
               <FieldLabel htmlFor={field.name}>{t("city")}</FieldLabel>
-              <Input {...field} id={field.name} aria-invalid={fieldState.invalid} />
+              <Input {...field} id={field.name} aria-invalid={fieldState.invalid} className="h-10" />
               {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
             </Field>
           )}
@@ -137,7 +137,7 @@ export function AddressForm({ control }: AddressFormProps) {
         render={({ field, fieldState }) => (
           <Field data-invalid={fieldState.invalid}>
             <FieldLabel htmlFor={field.name}>{t("street")}</FieldLabel>
-            <Input {...field} id={field.name} aria-invalid={fieldState.invalid} />
+            <Input {...field} id={field.name} aria-invalid={fieldState.invalid} className="h-10" />
             {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
           </Field>
         )}
@@ -150,7 +150,7 @@ export function AddressForm({ control }: AddressFormProps) {
           <Field data-invalid={fieldState.invalid}>
             <FieldLabel htmlFor={field.name}>{t("phone")}</FieldLabel>
             <div className="flex items-center gap-2">
-              <span className="flex h-9 shrink-0 items-center gap-1.5 rounded-md border border-input bg-muted px-2.5 text-body text-ink/70">
+              <span className="flex h-10 shrink-0 items-center gap-1.5 rounded-md border border-input bg-muted px-2.5 text-body text-ink/70">
                 <span aria-hidden>{flag}</span>
                 {dialCode}
               </span>
@@ -161,7 +161,7 @@ export function AddressForm({ control }: AddressFormProps) {
                 inputMode="tel"
                 placeholder={t("phonePlaceholder")}
                 aria-invalid={fieldState.invalid}
-                className="flex-1"
+                className="h-10 flex-1"
               />
             </div>
             {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
@@ -176,7 +176,7 @@ export function AddressForm({ control }: AddressFormProps) {
           <Field data-invalid={fieldState.invalid}>
             <FieldLabel htmlFor={field.name}>{t("whatsapp")}</FieldLabel>
             <div className="flex items-center gap-2">
-              <span className="flex h-9 shrink-0 items-center gap-1.5 rounded-md border border-input bg-muted px-2.5 text-body text-ink/70">
+              <span className="flex h-10 shrink-0 items-center gap-1.5 rounded-md border border-input bg-muted px-2.5 text-body text-ink/70">
                 <span aria-hidden>{flag}</span>
                 {dialCode}
               </span>
@@ -187,7 +187,7 @@ export function AddressForm({ control }: AddressFormProps) {
                 inputMode="tel"
                 placeholder={t("phonePlaceholder")}
                 aria-invalid={fieldState.invalid}
-                className="flex-1"
+                className="h-10 flex-1"
               />
             </div>
             {fieldState.invalid && <FieldError errors={[fieldState.error]} />}

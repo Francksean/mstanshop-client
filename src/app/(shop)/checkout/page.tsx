@@ -8,15 +8,16 @@ import { toast } from "sonner"
 import Link from "next/link"
 import { parsePhoneNumberFromString, type CountryCode } from "libphonenumber-js"
 import { useLocale, useTranslations } from "next-intl"
-import { ArrowLeft, ArrowRight, Loader2, TriangleAlert } from "lucide-react"
+import { ArrowLeft, ArrowRight, Check, Loader2, TriangleAlert } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Field, FieldLabel } from "@/components/ui/field"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { CheckoutStepper } from "@/components/custom/CheckoutStepper"
 import { TrustBadges } from "@/components/custom/TrustBadges"
 import { AddressForm, createAddressSchema, type AddressFormValues } from "@/components/custom/AddressForm"
-import { PaymentForm, createPaymentSchema, type PaymentFormValues } from "@/components/custom/PaymentForm"
+import { PaymentForm, createPaymentSchema, isPaymentMethodAvailable, type PaymentFormValues } from "@/components/custom/PaymentForm"
 import { ShippingMethodForm, SHIPPING_COSTS, type ShippingMethod } from "@/components/custom/ShippingMethodForm"
 import { OrderSummaryCard } from "@/components/custom/OrderSummaryCard"
 import { EmptyState } from "@/components/custom/EmptyState"
@@ -26,7 +27,7 @@ import { createGuestOrder, createOrder, getPaymentStatus } from "@/lib/services/
 import { getPromoPreview } from "@/lib/services/cart.service"
 import { normalizeError } from "@/lib/api-error"
 import { getCountryByCode, DEFAULT_COUNTRY_CODE } from "@/lib/countries"
-import { formatPrice } from "@/lib/utils"
+import { cn, formatPrice } from "@/lib/utils"
 import type { Order, PromoPreview } from "@/types"
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -40,10 +41,31 @@ const POLL_TIMEOUT_MS = 3 * 60 * 1000
 
 type PaymentPhase = "pending" | "success" | "failed" | "timeout"
 
+function AccordionStepLabel({ n, currentStep, label }: { n: number; currentStep: number; label: string }) {
+  const isDone = n < currentStep
+  const isActive = n === currentStep
+  return (
+    <span className="flex items-center gap-3">
+      <span
+        className={cn(
+          "flex h-6 w-6 shrink-0 items-center justify-center rounded-full border text-[11px] font-medium",
+          isDone && "border-sangria text-sangria",
+          isActive && "border-sangria bg-sangria text-white",
+          !isDone && !isActive && "border-black/20 text-ink/40"
+        )}
+      >
+        {isDone ? <Check className="h-3.5 w-3.5" /> : n}
+      </span>
+      <span className={isActive ? "font-medium text-ink" : "text-ink/70"}>{label}</span>
+    </span>
+  )
+}
+
 export default function CheckoutPage() {
   const router = useRouter()
   const locale = useLocale()
   const t = useTranslations("checkout")
+  const tStepper = useTranslations("checkout.stepper")
   const tCommon = useTranslations("common.actions")
   const tValidation = useTranslations("validation")
   const tApiErrors = useTranslations("apiErrors")
@@ -82,6 +104,17 @@ export default function CheckoutPage() {
   })
   const selectedCountry = getCountryByCode(addressCountryCode)
   const dialCode = selectedCountry?.dialCode ?? ""
+
+  // A previously-selected payment method can become unavailable when the customer goes
+  // back and switches shipping method (e.g. picked "cash on delivery" then switched to
+  // in-store pickup) — fall back to the always-available Mobile Money option.
+  useEffect(() => {
+    const current = paymentForm.getValues("method")
+    if (!isPaymentMethodAvailable(current, shippingMethod)) {
+      paymentForm.setValue("method", "MOBILE_PAYMENT")
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [shippingMethod])
 
   // Poll the real payment status while an order sits EN_ATTENTE — the endpoint re-checks
   // CamPay directly, so it's reliable even if the webhook never lands.
@@ -335,12 +368,81 @@ export default function CheckoutPage() {
         {t("backToCart")}
       </Link>
 
-      <div className="mt-4">
+      <div className="mt-4 hidden md:block">
         <CheckoutStepper currentStep={step} />
       </div>
 
+      <div className="mt-4 md:hidden">
+        <Accordion
+          type="single"
+          value={String(step)}
+          onValueChange={(v) => {
+            const n = Number(v)
+            if (v && n <= step) setStep(n)
+          }}
+        >
+          <AccordionItem value="1">
+            <AccordionTrigger>
+              <AccordionStepLabel n={1} currentStep={step} label={tStepper("delivery")} />
+            </AccordionTrigger>
+            <AccordionContent>
+              <form onSubmit={addressForm.handleSubmit(goToShippingMethod)} className="flex flex-col gap-6">
+                <AddressForm control={addressForm.control} />
+                {guestMode && (
+                  <Field>
+                    <FieldLabel htmlFor="guestEmailMobile">{t("guestEmailLabel")}</FieldLabel>
+                    <Input
+                      id="guestEmailMobile"
+                      type="email"
+                      value={guestEmail}
+                      onChange={(e) => setGuestEmail(e.target.value)}
+                      placeholder={t("guestEmailPlaceholder")}
+                      className="h-10"
+                    />
+                    <p className="text-small text-ink/50">{t("guestEmailHint")}</p>
+                  </Field>
+                )}
+                <Button type="submit" size="lg" className="h-14 w-full gap-2 text-body">
+                  {t("continueButton")}
+                  <ArrowRight className="size-4" />
+                </Button>
+              </form>
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem value="2" disabled={step < 2}>
+            <AccordionTrigger>
+              <AccordionStepLabel n={2} currentStep={step} label={tStepper("shippingMethod")} />
+            </AccordionTrigger>
+            <AccordionContent>
+              <div className="flex flex-col gap-6">
+                <ShippingMethodForm value={shippingMethod} onChange={setShippingMethod} />
+                <Button type="button" size="lg" className="h-14 w-full gap-2 text-body" onClick={() => setStep(3)}>
+                  {t("continueToPayment")}
+                  <ArrowRight className="size-4" />
+                </Button>
+              </div>
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem value="3" disabled={step < 3}>
+            <AccordionTrigger>
+              <AccordionStepLabel n={3} currentStep={step} label={tStepper("paymentMethod")} />
+            </AccordionTrigger>
+            <AccordionContent>
+              <PaymentForm
+                control={paymentForm.control}
+                dialCode={dialCode}
+                flag={selectedCountry?.flag}
+                shippingMethod={shippingMethod}
+              />
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      </div>
+
       <div className="mt-8 grid grid-cols-1 gap-12 md:grid-cols-[1fr_360px]">
-        <div className="flex flex-col gap-8">
+        <div className="hidden flex-col gap-8 md:flex">
           {step === 1 && (
             <form onSubmit={addressForm.handleSubmit(goToShippingMethod)} className="flex flex-col gap-8">
               <AddressForm control={addressForm.control} />
@@ -393,7 +495,12 @@ export default function CheckoutPage() {
 
           {step === 3 && (
             <div className="flex flex-col gap-8">
-              <PaymentForm control={paymentForm.control} dialCode={dialCode} flag={selectedCountry?.flag} />
+              <PaymentForm
+                control={paymentForm.control}
+                dialCode={dialCode}
+                flag={selectedCountry?.flag}
+                shippingMethod={shippingMethod}
+              />
               <Button
                 type="button"
                 variant="outline"
