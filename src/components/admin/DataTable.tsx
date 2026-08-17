@@ -23,6 +23,14 @@ export interface DataTableColumn<T> {
   className?: string
   /** When set, the column header becomes clickable and rows are sorted client-side by this accessor. */
   sortAccessor?: (row: T) => string | number
+  /** Marks the row's leading visual (thumbnail/avatar) on the mobile card — shown beside the title, not as a label:value line. */
+  mobileVisual?: boolean
+  /** Marks the row's title on the mobile card (larger, bold, no label). Falls back to the first column when none is marked. */
+  mobileTitle?: boolean
+  /** Marks the row's actions (buttons/menu) — pinned to the top-right of the mobile card. */
+  mobileAction?: boolean
+  /** Drops this column from the mobile card entirely (e.g. a slug that's redundant with the title). */
+  hideOnMobile?: boolean
 }
 
 interface DataTablePagination {
@@ -107,6 +115,13 @@ export function DataTable<T>({
     })
   }
 
+  const visualCol = columns.find((c) => c.mobileVisual)
+  const titleCol = columns.find((c) => c.mobileTitle) ?? columns[0]
+  const actionCol = columns.find((c) => c.mobileAction)
+  const cardCols = columns.filter(
+    (c) => c !== visualCol && c !== titleCol && c !== actionCol && !c.hideOnMobile
+  )
+
   return (
     <div className="flex flex-col gap-2">
       {search && (
@@ -116,73 +131,125 @@ export function DataTable<T>({
             value={localSearch}
             onChange={(e) => setLocalSearch(e.target.value)}
             placeholder={search.placeholder ?? "Rechercher…"}
-            className="h-8 pl-8"
+            className="h-10 pl-8 sm:h-8"
           />
         </div>
       )}
 
-      <div className="flex flex-col gap-2 rounded-md border border-black/10">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              {columns.map((col) => {
-                const isSortable = Boolean(col.sortAccessor)
-                const isActive = sort?.key === col.key
-                return (
-                  <TableHead key={col.key} className={col.className}>
-                    {isSortable ? (
-                      <button
-                        type="button"
-                        onClick={() => toggleSort(col.key)}
-                        className="inline-flex items-center gap-1 hover:text-ink"
-                      >
-                        {col.header}
-                        {isActive ? (
-                          sort?.direction === "asc" ? (
-                            <ChevronUp className="size-3.5" />
-                          ) : (
-                            <ChevronDown className="size-3.5" />
-                          )
-                        ) : (
-                          <ChevronsUpDown className="size-3.5 opacity-40" />
-                        )}
-                      </button>
-                    ) : (
-                      col.header
-                    )}
-                  </TableHead>
-                )
-              })}
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {isLoading &&
-              Array.from({ length: 5 }).map((_, i) => (
-                <TableRow key={`shimmer-${i}`}>
-                  {columns.map((col) => (
-                    <TableCell key={col.key}>
-                      <Skeleton className="h-5 w-full max-w-32" />
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))}
+      {/* Mobile: a stack of touch-friendly cards — the raw <table> below is unusable at this width. */}
+      <div className="flex flex-col gap-2 md:hidden">
+        {isLoading &&
+          Array.from({ length: 4 }).map((_, i) => (
+            <div key={`shimmer-${i}`} className="flex flex-col gap-3 rounded-md border border-black/10 p-4">
+              <Skeleton className="h-5 w-2/3" />
+              <Skeleton className="h-4 w-1/2" />
+              <Skeleton className="h-4 w-1/3" />
+            </div>
+          ))}
 
-            {!isLoading &&
-              sortedRows.map((row) => (
-                <TableRow
-                  key={rowKey(row)}
-                  onClick={onRowClick ? () => onRowClick(row) : undefined}
-                  className={cn(onRowClick && "cursor-pointer")}
-                >
-                  {columns.map((col) => (
-                    <TableCell key={col.key} className={col.className}>
-                      {col.render(row)}
-                    </TableCell>
+        {!isLoading &&
+          sortedRows.map((row) => (
+            <div
+              key={rowKey(row)}
+              onClick={onRowClick ? () => onRowClick(row) : undefined}
+              className={cn(
+                "flex flex-col gap-3 rounded-md border border-black/10 p-4",
+                onRowClick && "cursor-pointer active:bg-cream/60"
+              )}
+            >
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex min-w-0 items-center gap-3">
+                  {visualCol && <div className="shrink-0">{visualCol.render(row)}</div>}
+                  <div className="min-w-0 text-body font-medium text-ink">{titleCol.render(row)}</div>
+                </div>
+                {actionCol && (
+                  <div className="shrink-0" onClick={(e) => e.stopPropagation()}>
+                    {actionCol.render(row)}
+                  </div>
+                )}
+              </div>
+
+              {cardCols.length > 0 && (
+                <div className="flex flex-col gap-1.5 border-t border-black/5 pt-3">
+                  {cardCols.map((col) => (
+                    <div key={col.key} className="flex items-center justify-between gap-3 text-small">
+                      <span className="shrink-0 text-ink/50">{col.header}</span>
+                      <span className="min-w-0 text-right text-ink">{col.render(row)}</span>
+                    </div>
                   ))}
-                </TableRow>
-              ))}
-          </TableBody>
-        </Table>
+                </div>
+              )}
+            </div>
+          ))}
+
+        {showEmpty && <EmptyState title={emptyTitle} description={emptyDescription} />}
+      </div>
+
+      {/* Desktop: the real table. */}
+      <div className="hidden flex-col gap-2 rounded-md border border-black/10 md:flex">
+        <div className="overflow-x-auto">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                {columns.map((col) => {
+                  const isSortable = Boolean(col.sortAccessor)
+                  const isActive = sort?.key === col.key
+                  return (
+                    <TableHead key={col.key} className={col.className}>
+                      {isSortable ? (
+                        <button
+                          type="button"
+                          onClick={() => toggleSort(col.key)}
+                          className="inline-flex items-center gap-1 hover:text-ink"
+                        >
+                          {col.header}
+                          {isActive ? (
+                            sort?.direction === "asc" ? (
+                              <ChevronUp className="size-3.5" />
+                            ) : (
+                              <ChevronDown className="size-3.5" />
+                            )
+                          ) : (
+                            <ChevronsUpDown className="size-3.5 opacity-40" />
+                          )}
+                        </button>
+                      ) : (
+                        col.header
+                      )}
+                    </TableHead>
+                  )
+                })}
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {isLoading &&
+                Array.from({ length: 5 }).map((_, i) => (
+                  <TableRow key={`shimmer-${i}`}>
+                    {columns.map((col) => (
+                      <TableCell key={col.key}>
+                        <Skeleton className="h-5 w-full max-w-32" />
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))}
+
+              {!isLoading &&
+                sortedRows.map((row) => (
+                  <TableRow
+                    key={rowKey(row)}
+                    onClick={onRowClick ? () => onRowClick(row) : undefined}
+                    className={cn(onRowClick && "cursor-pointer")}
+                  >
+                    {columns.map((col) => (
+                      <TableCell key={col.key} className={col.className}>
+                        {col.render(row)}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))}
+            </TableBody>
+          </Table>
+        </div>
 
         {showEmpty && (
           <div className="py-6">
@@ -245,6 +312,39 @@ export function DataTable<T>({
           </div>
         )}
       </div>
+
+      {/* Pagination also needs to be reachable on mobile — the desktop block above is hidden there. */}
+      {pagination && (pagination.totalPages > 1 || pagination.onPageSizeChange) && (
+        <div className="flex flex-wrap items-center justify-between gap-3 rounded-md border border-black/10 px-3 py-2 md:hidden">
+          <span className="text-small text-ink/60">
+            Page {pagination.zeroIndexed ? pagination.page + 1 : pagination.page} / {pagination.totalPages}
+          </span>
+          <div className="flex gap-2">
+            <Button
+              variant="outline"
+              size="icon-sm"
+              disabled={pagination.zeroIndexed ? pagination.page <= 0 : pagination.page <= 1}
+              onClick={() => pagination.onPageChange(pagination.page - 1)}
+              aria-label="Page précédente"
+            >
+              <ChevronLeft className="size-4" />
+            </Button>
+            <Button
+              variant="outline"
+              size="icon-sm"
+              disabled={
+                pagination.zeroIndexed
+                  ? pagination.page >= pagination.totalPages - 1
+                  : pagination.page >= pagination.totalPages
+              }
+              onClick={() => pagination.onPageChange(pagination.page + 1)}
+              aria-label="Page suivante"
+            >
+              <ChevronRight className="size-4" />
+            </Button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

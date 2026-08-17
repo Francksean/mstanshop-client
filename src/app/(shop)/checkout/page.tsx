@@ -27,6 +27,7 @@ import { createGuestOrder, createOrder, getPaymentStatus } from "@/lib/services/
 import { getPromoPreview } from "@/lib/services/cart.service"
 import { normalizeError } from "@/lib/api-error"
 import { getCountryByCode, DEFAULT_COUNTRY_CODE } from "@/lib/countries"
+import { startGoogleOAuth } from "@/lib/oauth"
 import { cn, formatPrice } from "@/lib/utils"
 import type { Order, PromoPreview } from "@/types"
 
@@ -166,6 +167,17 @@ export default function CheckoutPage() {
             <DialogFooter className="flex-col gap-2 sm:flex-col">
               <Button size="lg" className="w-full" onClick={() => router.push("/login?redirect=/checkout")}>
                 {t("continueDialog.login")}
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                size="lg"
+                className="w-full gap-2"
+                onClick={() => startGoogleOAuth("/checkout")}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/auth/google.jpg" alt="" className="h-5 w-5 rounded-full object-cover" />
+                {t("continueDialog.google")}
               </Button>
               <Button size="lg" variant="outline" className="w-full" onClick={() => setGuestMode(true)}>
                 {t("continueDialog.guest")}

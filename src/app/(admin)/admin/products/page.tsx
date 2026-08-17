@@ -80,6 +80,7 @@ export default function AdminProductsPage() {
       key: "thumbnail",
       header: "",
       className: "w-14",
+      mobileVisual: true,
       render: (p) =>
         p.images[0]?.url ? (
           // eslint-disable-next-line @next/next/no-img-element
@@ -95,6 +96,7 @@ export default function AdminProductsPage() {
     {
       key: "name",
       header: "Nom",
+      mobileTitle: true,
       sortAccessor: (p) => p.name.toLowerCase(),
       render: (p) => (
         <span className="flex items-center gap-2">
@@ -119,6 +121,7 @@ export default function AdminProductsPage() {
       key: "actions",
       header: "",
       className: "w-10 text-right",
+      mobileAction: true,
       render: (p) => (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

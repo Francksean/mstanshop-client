@@ -25,6 +25,7 @@ export default function AdminUsersPage() {
     {
       key: "email",
       header: "Email",
+      mobileTitle: true,
       sortAccessor: (u) => u.email.toLowerCase(),
       render: (u) => <span className="font-medium text-ink">{u.email}</span>,
     },

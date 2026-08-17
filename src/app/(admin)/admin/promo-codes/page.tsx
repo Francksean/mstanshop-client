@@ -56,6 +56,7 @@ export default function AdminPromoCodesPage() {
     {
       key: "code",
       header: "Code",
+      mobileTitle: true,
       sortAccessor: (p) => p.code,
       render: (p) => <span className="font-medium text-ink">{p.code}</span>,
     },
@@ -86,6 +87,7 @@ export default function AdminPromoCodesPage() {
       key: "actions",
       header: "Actions",
       className: "text-right",
+      mobileAction: true,
       render: (p) => (
         <div className="flex justify-end gap-2">
           <Button variant="ghost" size="icon-xs" aria-label="Modifier" onClick={() => openEdit(p)}>

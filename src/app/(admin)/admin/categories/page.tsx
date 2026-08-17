@@ -29,7 +29,13 @@ export default function AdminCategoriesPage() {
     useClientPagination(filteredItems)
 
   const columns: DataTableColumn<CategoryWithCount>[] = [
-    { key: "name", header: "Nom", sortAccessor: (c) => c.name.toLowerCase(), render: (c) => <span className="font-medium text-ink">{c.name}</span> },
+    {
+      key: "name",
+      header: "Nom",
+      mobileTitle: true,
+      sortAccessor: (c) => c.name.toLowerCase(),
+      render: (c) => <span className="font-medium text-ink">{c.name}</span>,
+    },
     { key: "slug", header: "Slug", render: (c) => <span className="text-ink/60">{c.slug}</span> },
     { key: "count", header: "Nb produits", sortAccessor: (c) => c.productCount, render: (c) => c.productCount },
     {
@@ -49,6 +55,7 @@ export default function AdminCategoriesPage() {
       key: "actions",
       header: "Actions",
       className: "text-right",
+      mobileAction: true,
       render: (c) => (
         <div className="flex justify-end gap-2">
           <Button

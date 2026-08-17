@@ -185,6 +185,7 @@
       "title": "How would you like to continue?",
       "description": "Sign in to access your order history, or place your order without creating an account.",
       "login": "Sign in",
+      "google": "Continue with Google",
       "guest": "Continue as a guest"
     },
     "emptyCart": {
@@ -289,6 +290,8 @@
     "trustBadges": {
       "securePaymentTitle": "Payment",
       "securePaymentSubtitle": "secure",
+      "authenticProductsTitle": "Authentic",
+      "authenticProductsSubtitle": "products",
       "questionTitle": "A question about a product?",
       "questionSubtitle": "Write to us"
     },

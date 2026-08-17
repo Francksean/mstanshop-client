@@ -55,6 +55,7 @@ export default function AdminSuppliersPage() {
     {
       key: "name",
       header: "Nom",
+      mobileTitle: true,
       sortAccessor: (s) => s.name,
       render: (s) => <span className="font-medium text-ink">{s.name}</span>,
     },
@@ -65,6 +66,7 @@ export default function AdminSuppliersPage() {
       key: "actions",
       header: "Actions",
       className: "text-right",
+      mobileAction: true,
       render: (s) => (
         <div className="flex justify-end gap-2">
           <Button variant="ghost" size="icon-xs" aria-label="Modifier" onClick={() => openEdit(s)}>

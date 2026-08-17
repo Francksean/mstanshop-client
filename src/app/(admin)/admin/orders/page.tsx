@@ -50,7 +50,12 @@ export default function AdminOrdersPage() {
   }
 
   const columns: DataTableColumn<OrderSummary>[] = [
-    { key: "reference", header: "N° commande", render: (o) => <span className="font-medium text-ink">#{o.reference}</span> },
+    {
+      key: "reference",
+      header: "N° commande",
+      mobileTitle: true,
+      render: (o) => <span className="font-medium text-ink">#{o.reference}</span>,
+    },
     {
       key: "customer",
       header: "Client",
@@ -67,6 +72,7 @@ export default function AdminOrdersPage() {
     {
       key: "status",
       header: "Statut",
+      mobileAction: true,
       render: (o) => <OrderStatusBadge status={o.status} />,
     },
   ]

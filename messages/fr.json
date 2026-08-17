@@ -34,9 +34,9 @@
     "logout": "Déconnexion",
     "cart": "Panier, {count, plural, =0 {aucun article} one {# article} other {# articles}}",
     "announcements": {
-      "back2school": "Profitez de notre offre Back2School et gagnez jusqu'à 20% sur vos achats 🎒",
-      "freeShipping": "Livraison offerte dès 50 000 FCFA d'achat 🚚",
-      "newArrivals": "Nouveautés chaque semaine — découvrez la collection 🆕",
+      "back2school": "Profitez de notre offre Back2School et gagnez jusqu'à 20% sur vos achats",
+      "freeShipping": "Livraison offerte dès 50 000 FCFA d'achat !",
+      "newArrivals": "Nouveautés chaque semaine — découvrez la collection",
       "goToMessage": "Message {number}"
     }
   },
@@ -185,6 +185,7 @@
       "title": "Comment souhaitez-vous continuer ?",
       "description": "Connectez-vous pour retrouver votre historique de commandes, ou passez votre commande sans créer de compte.",
       "login": "Se connecter",
+      "google": "Continuer avec Google",
       "guest": "Continuer en tant qu'invité"
     },
     "emptyCart": {
@@ -289,6 +290,8 @@
     "trustBadges": {
       "securePaymentTitle": "Paiement",
       "securePaymentSubtitle": "sécurisé",
+      "authenticProductsTitle": "Produits",
+      "authenticProductsSubtitle": "authentiques",
       "questionTitle": "Une question sur un produit ?",
       "questionSubtitle": "Écrivez-nous"
     },
