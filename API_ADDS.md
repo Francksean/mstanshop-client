@@ -64,3 +64,11 @@ frontend workaround has been removed — leave a one-line note on where it was r
 - Current workaround: None — catalog content is always displayed in whatever language the backend stores it in, regardless of the active UI locale. Same limitation applies to backend error messages passed through as-is (`data?.message`/`data?.error` in `src/lib/api-error.ts`) when no matching `apiErrors` translation key exists for the error `code`.
 - Suggested fix: Locale-aware fields on `Product`/`Category` responses (e.g. `name_fr`/`name_en`, or an `Accept-Language`-aware response), and consistent machine-readable `code`s on every error response so the frontend can always resolve a fully translated message instead of falling back to a raw backend string.
 - Status: OPEN
+
+## Sitemap: no real "last modified" timestamp for products
+- Date: 2026-08-18
+- Where: `src/app/sitemap.ts`, `src/lib/services/products.service.ts` (`mapProductResponse`)
+- Need: `sitemap.xml` should report each product URL's real last-modified date so search engines can prioritize re-crawling changed products, but `ProductResponse` (list/search, `GET /api/products`) has no `updatedAt`/`createdAt` field — `mapProductResponse` already defaults `createdAt` to `new Date().toISOString()` for the same reason.
+- Current workaround: `sitemap.ts` sets `lastModified: new Date()` (current time) for every product entry, which is meaningless — it never reflects actual product changes.
+- Suggested fix: Add `updatedAt` (and ideally `createdAt`) to `ProductResponse`/`ProductDetailResponse`.
+- Status: OPEN

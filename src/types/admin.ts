@@ -1,4 +1,4 @@
-import type { OrderStatus } from "./order"
+import type { OrderPaymentMethod, OrderStatus, PaymentStatus } from "./order"
 import type { ProductVariant } from "./product"
 import type { DiscountType } from "./promo"
 import type { UserRole } from "./user"
@@ -105,4 +105,51 @@ export interface LowStockItem {
   variantSize?: string
   currentStock: number
   threshold: number
+}
+
+export interface DashboardSummary {
+  revenue: number
+  orderCount: number
+  averageBasket: number
+  pendingOrders: number
+  lowStockCount: number
+  newNewsletterSubscribers: number
+}
+
+export interface RevenueTimeseriesPoint {
+  date: string
+  revenue: number
+  orderCount: number
+}
+
+export interface OrdersByStatusEntry {
+  status: OrderStatus
+  count: number
+}
+
+export interface PaymentBreakdownEntry {
+  method: OrderPaymentMethod
+  status: PaymentStatus
+  count: number
+  amount: number
+}
+
+export interface TopProductEntry {
+  productId: string
+  productName: string
+  quantitySold: number
+  revenue: number
+}
+
+export interface TopCategoryEntry {
+  categoryId: string
+  categoryName: string
+  quantitySold: number
+  revenue: number
+}
+
+export interface PromoUsageEntry {
+  code: string
+  usesCount: number
+  totalDiscount: number
 }

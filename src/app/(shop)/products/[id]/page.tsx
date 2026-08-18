@@ -145,7 +145,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
           <div className="mt-2 flex flex-col gap-3 sm:flex-row">
             <Button
               size="lg"
-              className="flex-1"
+              className="w-full sm:flex-1"
               disabled={isOutOfStock}
               onClick={handleAddToCart}
             >

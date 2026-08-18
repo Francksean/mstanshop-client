@@ -84,24 +84,26 @@ export function Header() {
         scrolled ? "border-gold/30 shadow-sm" : "border-black/10"
       )}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center gap-3 px-4 md:px-8">
+      <div className="mx-auto flex h-16 max-w-7xl items-center gap-2 px-4 md:gap-3 md:px-8">
         <Button variant="ghost" size="icon" aria-label={t("openMenu")} onClick={openMobileNav}>
           <Menu className="h-5 w-5" />
         </Button>
 
-        <Link href="/" className="flex shrink-0 items-center gap-2">
+        <Link href="/" aria-label="MSTANSHOP" className="flex shrink-0 items-center gap-2">
           <Image src="/logo.png" alt="" width={32} height={32} className="size-8" priority />
-          <span className="font-heading text-h2 font-semibold tracking-tight text-ink">MSTANSHOP</span>
+          <span className="hidden font-heading text-lg font-semibold tracking-tight text-ink sm:inline sm:text-h2">
+            MSTANSHOP
+          </span>
         </Link>
 
         <div className="hidden min-w-0 flex-1 md:flex">
           <SearchBar {...searchBarProps} />
         </div>
 
-        <div className="ml-auto flex shrink-0 items-center gap-1 md:ml-0">
+        <div className="ml-auto flex shrink-0 items-center gap-0.5 sm:gap-1 md:ml-0">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm" aria-label={t("chooseLanguage")} className="gap-1.5 px-2">
+              <Button variant="ghost" size="sm" aria-label={t("chooseLanguage")} className="gap-1.5 px-1.5 sm:px-2">
                 <Globe className="h-5 w-5" />
                 <span className="hidden sm:inline">{locale.toUpperCase()}</span>
               </Button>
@@ -123,7 +125,7 @@ export function Header() {
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" aria-label={t("myAccount")} className="gap-1.5 px-2">
+                <Button variant="ghost" size="sm" aria-label={t("myAccount")} className="gap-1.5 px-1.5 sm:px-2">
                   <User className="h-5 w-5" />
                   <span className="hidden sm:inline">{t("myAccount")}</span>
                 </Button>
@@ -153,7 +155,7 @@ export function Header() {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <Button variant="ghost" size="sm" aria-label={t("login")} className="gap-1.5 px-2" asChild>
+            <Button variant="ghost" size="sm" aria-label={t("login")} className="gap-1.5 px-1.5 sm:px-2" asChild>
               <Link href="/login">
                 <User className="h-5 w-5" />
                 <span className="hidden sm:inline">{t("myAccount")}</span>
