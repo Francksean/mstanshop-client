@@ -22,6 +22,7 @@ function mapProductResponse(dto: ProductResponse): Product {
     category: dto.categoryName,
     price: dto.price,
     compareAtPrice: dto.oldPrice ?? undefined,
+    purchasePrice: dto.purchasePrice,
     description: "",
     materials: "",
     careInstructions: "",
@@ -40,8 +41,13 @@ function mapProductResponse(dto: ProductResponse): Product {
 }
 
 function mapProductDetailResponse(dto: ProductDetailResponse): Product {
+  // Size-only variants (colorHex/colorName absent) don't contribute a color swatch.
   const colors = Array.from(
-    new Map(dto.variants.map((v) => [v.colorHex, { name: v.colorName ?? v.colorHex, hex: v.colorHex }])).values()
+    new Map(
+      dto.variants
+        .filter((v): v is typeof v & { colorHex: string } => Boolean(v.colorHex))
+        .map((v) => [v.colorHex, { name: v.colorName ?? v.colorHex, hex: v.colorHex }])
+    ).values()
   )
   const sizes = Array.from(new Set(dto.variants.map((v) => v.size).filter((s): s is string => Boolean(s))))
   return {
@@ -54,6 +60,7 @@ function mapProductDetailResponse(dto: ProductDetailResponse): Product {
     supplierName: dto.supplierName ?? undefined,
     price: dto.price,
     compareAtPrice: dto.oldPrice ?? undefined,
+    purchasePrice: dto.purchasePrice,
     description: dto.description ?? "",
     materials: "",
     careInstructions: "",

@@ -1,12 +1,17 @@
 "use client"
 
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 import { getCategories } from "@/lib/services/categories.service"
 import { getProducts } from "@/lib/services/products.service"
 import type { Category } from "@/types"
 
 export interface CategoryWithCount extends Category {
   productCount: number
+}
+
+export interface CategoryTreeGroup {
+  root: CategoryWithCount
+  children: CategoryWithCount[]
 }
 
 export function useAdminCategories() {
@@ -42,5 +47,13 @@ export function useAdminCategories() {
     refetch()
   }, [refetch])
 
-  return { items, isLoading, error, refetch }
+  const tree = useMemo<CategoryTreeGroup[]>(() => {
+    const roots = items.filter((c) => !c.parentId)
+    return roots.map((root) => ({
+      root,
+      children: items.filter((c) => c.parentId === root.id),
+    }))
+  }, [items])
+
+  return { items, tree, isLoading, error, refetch }
 }

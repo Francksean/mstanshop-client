@@ -1,24 +1,17 @@
 import { apiClient } from "@/lib/api-client"
-import type { ProductVariant } from "@/types"
-
-export interface VariantRequest {
-  colorName?: string
-  colorHex: string
-  size?: string
-  stock: number
-  active?: boolean
-}
+import type { ProductVariant, VariantCreateRequest, VariantRequest } from "@/types"
 
 export async function listVariants(productId: string): Promise<ProductVariant[]> {
   const { data } = await apiClient.get<ProductVariant[]>(`/admin/products/${productId}/variants`)
   return data
 }
 
+/** One row is created per entry in `payload.sizes`, all sharing the same initial stock. */
 export async function createVariant(
   productId: string,
-  payload: VariantRequest
-): Promise<ProductVariant> {
-  const { data } = await apiClient.post<ProductVariant>(
+  payload: VariantCreateRequest
+): Promise<ProductVariant[]> {
+  const { data } = await apiClient.post<ProductVariant[]>(
     `/admin/products/${productId}/variants`,
     payload
   )

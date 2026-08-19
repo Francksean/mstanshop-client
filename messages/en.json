@@ -34,9 +34,9 @@
     "logout": "Sign out",
     "cart": "Cart, {count, plural, =0 {no items} one {# item} other {# items}}",
     "announcements": {
-      "back2school": "Enjoy our Back2School offer and save up to 20% on your purchases 🎒",
-      "freeShipping": "Free shipping from 50,000 FCFA of purchase 🚚",
-      "newArrivals": "New arrivals every week — discover the collection 🆕",
+      "back2school": "Enjoy our Back2School offer and save up to 20% on your purchases",
+      "freeShipping": "Free shipping from 50,000 FCFA of purchase",
+      "newArrivals": "New arrivals every week — discover the collection",
       "goToMessage": "Message {number}"
     }
   },

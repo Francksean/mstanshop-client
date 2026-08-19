@@ -13,6 +13,9 @@ export interface Category {
   description?: string
   bannerUrl?: string | null
   thumbnailUrl?: string | null
+  /** Single-level hierarchy — a category with a parentId can't itself have children. */
+  parentId?: string | null
+  parentName?: string | null
   promoActive?: boolean
   promoDiscountType?: "PERCENTAGE" | "FIXED_AMOUNT"
   promoDiscountValue?: number
@@ -34,8 +37,9 @@ export interface ProductImage {
 
 export interface ProductVariant {
   id: string
+  /** Both absent for a size-only variant (no color declination) — never render a color swatch/name in that case. */
   colorName?: string
-  colorHex: string
+  colorHex?: string
   /** Free-form, e.g. "S", "M", "40" — empty string when this product has no notion of size. */
   size?: string
   stock: number
@@ -56,6 +60,8 @@ export interface Product {
   price: number
   /** Backend `oldPrice` — set only when a category promotion is active; `price` is already the discounted amount actually charged. */
   compareAtPrice?: number
+  /** Admin-only, informational, never subject to promotions — undefined when the viewer isn't an admin. */
+  purchasePrice?: number
   description: string
   materials: string
   careInstructions: string

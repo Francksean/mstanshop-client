@@ -1,11 +1,11 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { toast } from "sonner"
-import { Plus, MoreHorizontal, Eye, Pencil, Trash2 } from "lucide-react"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { Plus, MoreHorizontal, Eye, Trash2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { DataTable, type DataTableColumn } from "@/components/admin/DataTable"
-import { ProductFormDialog } from "@/components/admin/ProductFormDialog"
 import { DeleteConfirmDialog } from "@/components/admin/DeleteConfirmDialog"
 import { ProductDetailSheet } from "@/components/admin/ProductDetailSheet"
 import { CategoryMultiSelect } from "@/components/admin/CategoryMultiSelect"
@@ -17,16 +17,17 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { useAdminProducts } from "@/hooks/admin/useAdminProducts"
+import { useIsMobile } from "@/hooks/useIsMobile"
 import { deleteProduct } from "@/lib/services/admin/products.service"
-import { getProductById } from "@/lib/services/products.service"
 import { getCategories } from "@/lib/services/categories.service"
-import { normalizeError } from "@/lib/api-error"
 import { formatPrice, resolveMediaUrl } from "@/lib/utils"
 import { LOW_STOCK_THRESHOLD } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 import type { Category, Product } from "@/types"
 
 export default function AdminProductsPage() {
+  const router = useRouter()
+  const isMobile = useIsMobile()
   const {
     items,
     page,
@@ -44,9 +45,6 @@ export default function AdminProductsPage() {
     refetch,
   } = useAdminProducts()
   const [categories, setCategories] = useState<Category[]>([])
-  const [formOpen, setFormOpen] = useState(false)
-  const [editingProduct, setEditingProduct] = useState<Product | null>(null)
-  const [isLoadingEdit, setIsLoadingEdit] = useState(false)
   const [deletingProduct, setDeletingProduct] = useState<Product | null>(null)
   const [viewingProductId, setViewingProductId] = useState<string | null>(null)
 
@@ -54,24 +52,11 @@ export default function AdminProductsPage() {
     getCategories().then(setCategories)
   }, [])
 
-  function openCreate() {
-    setEditingProduct(null)
-    setFormOpen(true)
-  }
-
-  async function openEdit(product: Product) {
-    // The products list endpoint doesn't return `categoryId` (only the
-    // category name) — fetch the full detail so the form's category select
-    // has a real default value instead of falling back to empty.
-    setIsLoadingEdit(true)
-    try {
-      const detail = await getProductById(product.id)
-      setEditingProduct(detail ?? product)
-      setFormOpen(true)
-    } catch (err) {
-      toast.error(normalizeError(err).message)
-    } finally {
-      setIsLoadingEdit(false)
+  function openDetail(product: Product) {
+    if (isMobile) {
+      router.push(`/admin/products/${product.id}`)
+    } else {
+      setViewingProductId(product.id)
     }
   }
 
@@ -110,6 +95,21 @@ export default function AdminProductsPage() {
     { key: "category", header: "Catégorie", render: (p) => p.category },
     { key: "price", header: "Prix", sortAccessor: (p) => p.price, render: (p) => formatPrice(p.price) },
     {
+      key: "purchasePrice",
+      header: "Prix d'achat",
+      sortAccessor: (p) => p.purchasePrice ?? -1,
+      render: (p) => {
+        if (p.purchasePrice === undefined) return <span className="text-ink/40">—</span>
+        const margin = p.price > 0 ? Math.round(((p.price - p.purchasePrice) / p.price) * 100) : null
+        return (
+          <span className="flex flex-col">
+            {formatPrice(p.purchasePrice)}
+            {margin !== null && <span className="text-small text-ink/40">Marge {margin}%</span>}
+          </span>
+        )
+      },
+    },
+    {
       key: "stock",
       header: "Stock",
       sortAccessor: (p) => p.stock,
@@ -135,13 +135,9 @@ export default function AdminProductsPage() {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem onSelect={() => setViewingProductId(p.id)}>
+            <DropdownMenuItem onSelect={() => openDetail(p)}>
               <Eye className="size-4" />
-              Voir les détails
-            </DropdownMenuItem>
-            <DropdownMenuItem disabled={isLoadingEdit} onSelect={() => openEdit(p)}>
-              <Pencil className="size-4" />
-              Modifier
+              Voir / modifier
             </DropdownMenuItem>
             <DropdownMenuItem variant="destructive" onSelect={() => setDeletingProduct(p)}>
               <Trash2 className="size-4" />
@@ -157,9 +153,11 @@ export default function AdminProductsPage() {
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
         <h1 className="text-h2 text-ink">Produits</h1>
-        <Button onClick={openCreate}>
-          <Plus className="size-4" />
-          Ajouter
+        <Button asChild>
+          <Link href="/admin/products/new">
+            <Plus className="size-4" />
+            Ajouter
+          </Link>
         </Button>
       </div>
 
@@ -185,14 +183,7 @@ export default function AdminProductsPage() {
           onPageSizeChange: setPageSize,
         }}
         search={{ value: search, onChange: setSearch, placeholder: "Rechercher un produit…" }}
-        onRowClick={(p) => setViewingProductId(p.id)}
-      />
-
-      <ProductFormDialog
-        open={formOpen}
-        onOpenChange={setFormOpen}
-        product={editingProduct}
-        onSaved={refetch}
+        onRowClick={openDetail}
       />
 
       <DeleteConfirmDialog
@@ -212,6 +203,7 @@ export default function AdminProductsPage() {
         open={Boolean(viewingProductId)}
         onOpenChange={(open) => !open && setViewingProductId(null)}
         productId={viewingProductId}
+        onSaved={refetch}
       />
     </div>
   )

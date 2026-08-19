@@ -14,6 +14,8 @@ function mapCategoryResponse(dto: CategoryResponse): Category {
     description: dto.description,
     bannerUrl: dto.bannerUrl,
     thumbnailUrl: dto.thumbnailUrl,
+    parentId: dto.parentId,
+    parentName: dto.parentName,
     promoActive: dto.promoActive,
     promoDiscountType: dto.promoDiscountType,
     promoDiscountValue: dto.promoDiscountValue,

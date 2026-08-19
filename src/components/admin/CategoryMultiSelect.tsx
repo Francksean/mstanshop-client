@@ -41,6 +41,7 @@ export function CategoryMultiSelect({ categories, value, onChange }: CategoryMul
             <label
               key={c.id ?? c.slug}
               className="flex items-center gap-2 rounded-sm px-2 py-1.5 text-body text-ink hover:bg-muted"
+              style={c.parentId ? { paddingLeft: "1.5rem" } : undefined}
             >
               <Checkbox
                 checked={c.id ? value.includes(c.id) : false}
