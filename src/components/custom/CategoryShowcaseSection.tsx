@@ -27,15 +27,19 @@ export function CategoryShowcaseSection({ category, products }: CategoryShowcase
         )}
         <div className="mb-8 flex items-end justify-between">
           <h2 className="font-heading text-h1 text-ink">{category.name}</h2>
-          <Link
-            href={`/products?category=${category.slug}`}
-            className="text-body font-medium text-sangria underline decoration-gold underline-offset-4"
-          >
-            {t("seeMore")}
-          </Link>
         </div>
       </div>
-      <ProductGrid products={products} columns="2-3" scrollOnMobile />
+      <div className="px-4 md:mx-auto md:w-full md:max-w-7xl md:px-8">
+        <ProductGrid products={products.slice(0, 5)} columns="2-3" scrollOnMobile />
+      </div>
+      <div className="mx-auto w-full max-w-7xl px-4 md:px-8">
+        <Link
+          href={`/products?category=${category.slug}`}
+          className="inline-block text-body font-medium text-sangria underline decoration-gold underline-offset-4"
+        >
+          {t("seeMore")}
+        </Link>
+      </div>
     </section>
   )
 }

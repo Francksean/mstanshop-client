@@ -44,15 +44,19 @@ export default async function LandingPage() {
         <div className="mx-auto w-full max-w-7xl px-4 md:px-8">
           <div className="mb-8 flex items-end justify-between">
             <h2 className="font-heading text-h1 text-ink">{t("featuredSelection")}</h2>
-            <Link
-              href="/products"
-              className="text-body font-medium text-sangria underline decoration-gold underline-offset-4"
-            >
-              {t("seeAll")}
-            </Link>
           </div>
         </div>
-        <ProductGrid products={featuredProducts} columns="2-3" scrollOnMobile />
+        <div className="px-4 md:mx-auto md:w-full md:max-w-7xl md:px-8">
+          <ProductGrid products={featuredProducts.slice(0, 5)} columns="2-3" scrollOnMobile />
+        </div>
+        <div className="mx-auto w-full max-w-7xl px-4 md:px-8">
+          <Link
+            href="/products"
+            className="inline-block text-body font-medium text-sangria underline decoration-gold underline-offset-4"
+          >
+            {t("seeAll")}
+          </Link>
+        </div>
       </SectionReveal>
 
       {showcases.map(({ category, products }) => (
