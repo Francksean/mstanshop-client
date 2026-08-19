@@ -18,7 +18,6 @@ export default function AdminUsersPage() {
     setSearch,
     setPageSize,
     setPage,
-    refetch,
   } = useAdminUsers()
 
   const columns: DataTableColumn<AdminUserResponse>[] = [
@@ -38,7 +37,7 @@ export default function AdminUsersPage() {
     {
       key: "role",
       header: "Rôle",
-      render: (u) => <UserRoleSelect userId={u.id} role={u.role} onChanged={() => refetch()} />,
+      render: (u) => <UserRoleSelect role={u.role} />,
     },
     {
       key: "createdAt",

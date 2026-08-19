@@ -40,15 +40,17 @@ export default async function LandingPage() {
 
       <SectionDivider />
 
-      <SectionReveal className="mx-auto w-full max-w-7xl px-4 md:px-8">
-        <div className="mb-8 flex items-end justify-between">
-          <h2 className="font-heading text-h1 text-ink">{t("featuredSelection")}</h2>
-          <Link
-            href="/products"
-            className="text-body font-medium text-sangria underline decoration-gold underline-offset-4"
-          >
-            {t("seeAll")}
-          </Link>
+      <SectionReveal className="flex flex-col gap-6">
+        <div className="mx-auto w-full max-w-7xl px-4 md:px-8">
+          <div className="mb-8 flex items-end justify-between">
+            <h2 className="font-heading text-h1 text-ink">{t("featuredSelection")}</h2>
+            <Link
+              href="/products"
+              className="text-body font-medium text-sangria underline decoration-gold underline-offset-4"
+            >
+              {t("seeAll")}
+            </Link>
+          </div>
         </div>
         <ProductGrid products={featuredProducts} columns="2-3" scrollOnMobile />
       </SectionReveal>

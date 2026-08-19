@@ -30,6 +30,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
   const [colorHex, setColorHex] = useState<string | null>(null)
   const [size, setSize] = useState<string | null>(null)
   const [quantity, setQuantity] = useState(1)
+  const [expandedDescription, setExpandedDescription] = useState(false)
 
   if (isLoading) {
     return (
@@ -117,7 +118,25 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
             <ReviewStars rating={product.averageRating ?? 0} reviewCount={product.reviewCount} />
           )}
           <PriceTag price={product.price} compareAtPrice={product.compareAtPrice} size="lg" />
-          <p className="text-body text-ink/70">{product.description}</p>
+          <div className="flex flex-col gap-2">
+            <p
+              className={`text-body text-ink/70 ${
+                !expandedDescription ? "line-clamp-5" : ""
+              }`}
+            >
+              {product.description}
+            </p>
+            {(product.description?.split("\n").length ?? 0) > 5 && (
+              <Button
+                type="button"
+                variant="ghost"
+                className="w-fit p-0 h-auto text-sangria font-medium"
+                onClick={() => setExpandedDescription(!expandedDescription)}
+              >
+                {expandedDescription ? "Voir moins" : "Voir plus"}
+              </Button>
+            )}
+          </div>
 
           {hasColors && (
             <ColorSwatchPicker

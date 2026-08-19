@@ -22,7 +22,7 @@ export const SORT_OPTIONS: { value: SortOption; label: string }[] = [
 ]
 
 export const DEFAULT_PAGE_SIZE = 8
-export const MIN_PRICE = 20
-export const MAX_PRICE = 250
+export const MIN_PRICE = 0
+export const MAX_PRICE = 100000
 
 export const LOW_STOCK_THRESHOLD = 3

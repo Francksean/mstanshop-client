@@ -7,7 +7,6 @@ import { Plus, MoreHorizontal, Eye, Trash2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { DataTable, type DataTableColumn } from "@/components/admin/DataTable"
 import { DeleteConfirmDialog } from "@/components/admin/DeleteConfirmDialog"
-import { ProductDetailSheet } from "@/components/admin/ProductDetailSheet"
 import { CategoryMultiSelect } from "@/components/admin/CategoryMultiSelect"
 import { ImagePlaceholder } from "@/components/custom/ImagePlaceholder"
 import {
@@ -17,7 +16,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { useAdminProducts } from "@/hooks/admin/useAdminProducts"
-import { useIsMobile } from "@/hooks/useIsMobile"
 import { deleteProduct } from "@/lib/services/admin/products.service"
 import { getCategories } from "@/lib/services/categories.service"
 import { formatPrice, resolveMediaUrl } from "@/lib/utils"
@@ -27,7 +25,6 @@ import type { Category, Product } from "@/types"
 
 export default function AdminProductsPage() {
   const router = useRouter()
-  const isMobile = useIsMobile()
   const {
     items,
     page,
@@ -46,18 +43,13 @@ export default function AdminProductsPage() {
   } = useAdminProducts()
   const [categories, setCategories] = useState<Category[]>([])
   const [deletingProduct, setDeletingProduct] = useState<Product | null>(null)
-  const [viewingProductId, setViewingProductId] = useState<string | null>(null)
 
   useEffect(() => {
     getCategories().then(setCategories)
   }, [])
 
   function openDetail(product: Product) {
-    if (isMobile) {
-      router.push(`/admin/products/${product.id}`)
-    } else {
-      setViewingProductId(product.id)
-    }
+    router.push(`/admin/products/${product.id}`)
   }
 
   const columns: DataTableColumn<Product>[] = [
@@ -197,13 +189,6 @@ export default function AdminProductsPage() {
             refetch()
           }
         }}
-      />
-
-      <ProductDetailSheet
-        open={Boolean(viewingProductId)}
-        onOpenChange={(open) => !open && setViewingProductId(null)}
-        productId={viewingProductId}
-        onSaved={refetch}
       />
     </div>
   )

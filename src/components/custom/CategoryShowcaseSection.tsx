@@ -15,23 +15,25 @@ export function CategoryShowcaseSection({ category, products }: CategoryShowcase
   const t = useTranslations("home")
 
   return (
-    <section className="mx-auto w-full max-w-7xl px-4 md:px-8">
-      {category.bannerUrl && (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={resolveMediaUrl(category.bannerUrl)}
-          alt=""
-          className="mb-6 aspect-[16/5] w-full rounded-md object-cover"
-        />
-      )}
-      <div className="mb-8 flex items-end justify-between">
-        <h2 className="font-heading text-h1 text-ink">{category.name}</h2>
-        <Link
-          href={`/products?category=${category.slug}`}
-          className="text-body font-medium text-sangria underline decoration-gold underline-offset-4"
-        >
-          {t("seeMore")}
-        </Link>
+    <section className="flex flex-col gap-6">
+      <div className="mx-auto w-full max-w-7xl px-4 md:px-8">
+        {category.bannerUrl && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={resolveMediaUrl(category.bannerUrl)}
+            alt=""
+            className="mb-6 aspect-[16/5] w-full rounded-md object-cover"
+          />
+        )}
+        <div className="mb-8 flex items-end justify-between">
+          <h2 className="font-heading text-h1 text-ink">{category.name}</h2>
+          <Link
+            href={`/products?category=${category.slug}`}
+            className="text-body font-medium text-sangria underline decoration-gold underline-offset-4"
+          >
+            {t("seeMore")}
+          </Link>
+        </div>
       </div>
       <ProductGrid products={products} columns="2-3" scrollOnMobile />
     </section>

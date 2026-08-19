@@ -143,7 +143,7 @@ export function AdminSidebar() {
     <>
       <aside
         className={cn(
-          "hidden shrink-0 flex-col border-r border-black/10 bg-cream py-4 transition-[width] md:flex",
+          "hidden fixed left-0 top-0 h-screen shrink-0 flex-col border-r border-black/10 bg-cream py-4 transition-[width] md:flex",
           collapsed ? "w-20" : "w-72"
         )}
       >

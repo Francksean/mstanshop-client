@@ -3,9 +3,8 @@
 import { useLocale, useTranslations } from "next-intl"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Slider } from "@/components/ui/slider"
-import { FILTERABLE_COLORS, MAX_PRICE, MIN_PRICE } from "@/lib/constants"
-import { cn } from "@/lib/utils"
-import { formatPrice } from "@/lib/utils"
+import { MAX_PRICE, MIN_PRICE } from "@/lib/constants"
+import { cn, formatPrice } from "@/lib/utils"
 import type { Category } from "@/types"
 
 export interface FiltersState {
@@ -33,14 +32,6 @@ export function FiltersPanel({ filters, onChange, categories, className }: Filte
       categoryIds: isSelected
         ? filters.categoryIds.filter((c) => c !== id)
         : [...filters.categoryIds, id],
-    })
-  }
-
-  function toggleColor(name: string) {
-    const isSelected = filters.colors.includes(name)
-    onChange({
-      ...filters,
-      colors: isSelected ? filters.colors.filter((c) => c !== name) : [...filters.colors, name],
     })
   }
 
@@ -79,29 +70,6 @@ export function FiltersPanel({ filters, onChange, categories, className }: Filte
         </div>
       </div>
 
-      <div>
-        <h3 className="mb-4 text-small font-medium tracking-wide text-ink/60 uppercase">
-          {t("colorLabel")}
-        </h3>
-        <div className="flex gap-3">
-          {FILTERABLE_COLORS.map((color) => (
-            <button
-              key={color.name}
-              type="button"
-              aria-label={color.name}
-              aria-pressed={filters.colors.includes(color.name)}
-              onClick={() => toggleColor(color.name)}
-              className={cn(
-                "h-7 w-7 rounded-full border transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sangria",
-                filters.colors.includes(color.name)
-                  ? "ring-2 ring-sangria ring-offset-2"
-                  : "border-black/10"
-              )}
-              style={{ backgroundColor: color.hex }}
-            />
-          ))}
-        </div>
-      </div>
     </div>
   )
 }

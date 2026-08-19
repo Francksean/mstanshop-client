@@ -31,7 +31,7 @@ export function ProductGrid({
 
   const containerClass = scrollOnMobile
     ? cn(
-        "flex snap-x snap-mandatory overflow-x-auto pb-1 md:grid md:overflow-visible md:pb-0",
+        "flex snap-x snap-mandatory overflow-x-auto pb-1 px-4 md:px-0 md:grid md:overflow-visible md:pb-0",
         gapClass,
         gridClass
       )
