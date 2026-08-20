@@ -2,6 +2,7 @@ import { create } from "zustand"
 import { persist } from "zustand/middleware"
 import type { LoginPayload, RegisterPayload, User } from "@/types"
 import * as authService from "@/lib/services/auth.service"
+import { mergeGuestCartItems } from "@/lib/services/cart.service"
 import { useGuestCartStore } from "@/stores/useGuestCartStore"
 import { useCartStore } from "@/stores/useCartStore"
 
@@ -112,8 +113,17 @@ export const useAuthStore = create<AuthState>()(
             isAdmin: user.role === "ROLE_ADMIN",
           })
           // The OAuth redirect flow has no request body to attach guest-cart items to
-          // (unlike login/register), so the local guest cart is intentionally left as-is
-          // rather than merged — see API_ADDS.md.
+          // (unlike login/register), so the merge happens as a separate call once we
+          // have the token — see API_ADDS.md.
+          const cartItems = takeGuestCartItems()
+          if (cartItems) {
+            try {
+              await mergeGuestCartItems(cartItems)
+              useGuestCartStore.getState().clearCart()
+            } catch {
+              // Best-effort merge — a failure here shouldn't block the login itself.
+            }
+          }
           useCartStore.getState().reset()
         } catch (error) {
           const message = error instanceof Error ? error.message : "Connexion impossible."

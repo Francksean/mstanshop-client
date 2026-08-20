@@ -1,5 +1,5 @@
 import { apiClient } from "@/lib/api-client"
-import type { Cart, CartResponse, PromoPreview } from "@/types"
+import type { Cart, CartItemPayload, CartResponse, PromoPreview } from "@/types"
 
 function mapCartResponse(dto: CartResponse): Cart {
   return { id: dto.id, items: dto.items, subtotal: dto.subtotal }
@@ -36,4 +36,14 @@ export async function clearCart(): Promise<void> {
 export async function getPromoPreview(code: string): Promise<PromoPreview> {
   const { data } = await apiClient.get<PromoPreview>("/cart/promo-preview", { params: { code } })
   return data
+}
+
+/**
+ * Merges the guest cart into the authenticated user's cart after OAuth login — the OAuth
+ * redirect flow has no request body to attach cartItems to (unlike login/register), so this
+ * is called explicitly right after tokens are received. See API_ADDS.md.
+ */
+export async function mergeGuestCartItems(items: CartItemPayload[]): Promise<Cart> {
+  const { data } = await apiClient.post<CartResponse>("/cart/merge-guest-items", items)
+  return mapCartResponse(data)
 }

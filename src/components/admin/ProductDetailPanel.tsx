@@ -255,7 +255,7 @@ export function ProductDetailPanel({ productId, mode, onSaved }: ProductDetailPa
   ]
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-0">
       {mode === "sheet" ? (
         <SheetHeader className="border-b border-black/10">
           <SheetTitle>{product.name}</SheetTitle>
@@ -271,10 +271,15 @@ export function ProductDetailPanel({ productId, mode, onSaved }: ProductDetailPa
         </div>
       )}
 
-      <div className="flex flex-col gap-6 p-4 pt-0">
-        <ImageGallery productName={product.name} images={product.images} />
+      <div className="flex flex-col gap-0 lg:flex-row lg:gap-6 p-4 pt-0">
+        {/* Image gallery — left column, constrained width */}
+        <div className="flex-shrink-0 w-full lg:w-2/5 mb-6 lg:mb-0">
+          <ImageGallery productName={product.name} images={product.images} />
+        </div>
 
-        <div className="flex flex-col gap-4 rounded-lg bg-cream/60 p-4">
+        {/* Content — right column */}
+        <div className="flex-1 flex flex-col gap-6">
+          <div className="flex flex-col gap-4 rounded-lg bg-cream/60 p-4">
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
             <EditableField label="Nom" value={product.name} onSave={(v) => saveField({ name: v })} />
             <EditableSelectField
@@ -370,11 +375,6 @@ export function ProductDetailPanel({ productId, mode, onSaved }: ProductDetailPa
             />
           ))}
 
-          {variantRows.length > 0 && (
-            <Button type="button" onClick={saveVariants} disabled={isSavingVariants} className="self-start">
-              {isSavingVariants ? "Enregistrement…" : "Enregistrer les variantes"}
-            </Button>
-          )}
         </div>
 
         {variantRows.length === 0 && (
@@ -392,15 +392,27 @@ export function ProductDetailPanel({ productId, mode, onSaved }: ProductDetailPa
                 onAddFiles={(files) => setNewBaseFiles((f) => [...f, ...files])}
                 onRemoveNewFile={(idx) => setNewBaseFiles((f) => f.filter((_, i) => i !== idx))}
               />
-              {(removedBaseImageIds.length > 0 || newBaseFiles.length > 0) && (
-                <Button type="button" onClick={saveBaseImages} disabled={isSavingImages} className="self-start">
-                  {isSavingImages ? "Enregistrement…" : "Enregistrer les photos"}
-                </Button>
-              )}
             </div>
           </>
         )}
+        </div>
       </div>
+
+      {/* Action bar — sticky footer with save buttons */}
+      {mode === "page" && (variantRows.length > 0 || (variantRows.length === 0 && (removedBaseImageIds.length > 0 || newBaseFiles.length > 0))) && (
+        <div className="sticky bottom-0 border-t border-black/10 bg-white/95 backdrop-blur-sm p-4 flex flex-col sm:flex-row gap-3 justify-end">
+          {variantRows.length > 0 && (
+            <Button type="button" onClick={saveVariants} disabled={isSavingVariants} size="lg">
+              {isSavingVariants ? "Enregistrement variantes…" : "Enregistrer variantes"}
+            </Button>
+          )}
+          {variantRows.length === 0 && (removedBaseImageIds.length > 0 || newBaseFiles.length > 0) && (
+            <Button type="button" onClick={saveBaseImages} disabled={isSavingImages} size="lg">
+              {isSavingImages ? "Enregistrement photos…" : "Enregistrer photos"}
+            </Button>
+          )}
+        </div>
+      )}
     </div>
   )
 }

@@ -65,6 +65,14 @@ frontend workaround has been removed — leave a one-line note on where it was r
 - Suggested fix: Locale-aware fields on `Product`/`Category` responses (e.g. `name_fr`/`name_en`, or an `Accept-Language`-aware response), and consistent machine-readable `code`s on every error response so the frontend can always resolve a fully translated message instead of falling back to a raw backend string.
 - Status: OPEN
 
+## OAuth login: guest cart never merged into authenticated cart
+- Date: 2026-08-20
+- Where: `src/stores/useAuthStore.ts` (`loginWithOAuth`), `src/lib/services/cart.service.ts`, `src/app/(auth)/oauth/callback/page.tsx`
+- Need: `login`/`register` (`POST /auth/login`, `POST /auth/register`) accept a `cartItems` body field to merge the local guest cart server-side, but the Google OAuth2 flow redirects through the backend and hands tokens back via query params only — there's no request body to attach `cartItems` to, so the guest cart was silently abandoned after OAuth login.
+- Current workaround (now removed): Guest cart was left as-is in `useGuestCartStore`, never merged, with a comment noting the gap.
+- Fix: Backend added a dedicated `POST /api/cart/merge-guest-items` endpoint (Bearer-authenticated, reuses `CartService.mergeGuestItems()`) that the frontend calls explicitly right after receiving OAuth tokens. `src/lib/services/cart.service.ts` now exposes `mergeGuestCartItems(items)`, and `useAuthStore.loginWithOAuth()` calls it (best-effort — a merge failure doesn't block login) before clearing the guest cart.
+- Status: RESOLVED — workaround removed in `useAuthStore.ts` (`loginWithOAuth`) on 2026-08-20.
+
 ## Sitemap: no real "last modified" timestamp for products
 - Date: 2026-08-18
 - Where: `src/app/sitemap.ts`, `src/lib/services/products.service.ts` (`mapProductResponse`)

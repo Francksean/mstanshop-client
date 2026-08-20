@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useTranslations } from "next-intl"
-import { getProductById, getRelatedProducts } from "@/lib/services/products.service"
+import { getProductByIdOrSlug, getRelatedProducts } from "@/lib/services/products.service"
 import { normalizeError } from "@/lib/api-error"
 import type { Product } from "@/types"
 
@@ -26,7 +26,7 @@ export function useProduct(id: string): UseProductResult {
   useEffect(() => {
     let cancelled = false
 
-    getProductById(id)
+    getProductByIdOrSlug(id)
       .then(async (found) => {
         if (cancelled) return
         if (!found) {

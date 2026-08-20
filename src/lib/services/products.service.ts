@@ -117,6 +117,22 @@ export async function getProductById(id: string): Promise<Product | null> {
   return mapProductDetailResponse(data)
 }
 
+export async function getProductBySlug(slug: string): Promise<Product | null> {
+  const { data } = await apiClient.get<ProductDetailResponse>(`/products/by-slug/${slug}`)
+  return mapProductDetailResponse(data)
+}
+
+// Détecte si c'est un UUID ou un slug et récupère le produit
+export async function getProductByIdOrSlug(identifier: string): Promise<Product | null> {
+  // Pattern UUID v4: 8-4-4-4-12 hex digits
+  const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+
+  if (uuidPattern.test(identifier)) {
+    return getProductById(identifier)
+  }
+  return getProductBySlug(identifier)
+}
+
 export async function getProductShareInfo(id: string): Promise<ProductShareResponse> {
   const { data } = await apiClient.get<ProductShareResponse>(`/products/${id}/share`)
   return data
