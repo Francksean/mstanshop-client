@@ -31,6 +31,7 @@
     "login": "Sign in",
     "myProfile": "My profile",
     "myOrders": "My orders",
+    "adminDashboard": "Admin dashboard",
     "logout": "Sign out",
     "cart": "Cart, {count, plural, =0 {no items} one {# item} other {# items}}",
     "announcements": {
@@ -137,8 +138,14 @@
     "relatedTitle": "You may also like",
     "sizeLabel": "Size",
     "colorLabelWithName": "Color — {name}",
+    "readMore": "Read more",
+    "readLess": "Read less",
+    "selectVariantTitle": "Choose a variant",
+    "selectVariantDescription": "Select a color and size before adding this item to your cart.",
+    "selectVariantClose": "Got it",
     "stock": {
       "outOfStock": "Out of stock",
+      "selectVariant": "Select a variant",
       "lastOne": "Only 1 left in stock",
       "low": "Only {count} left in stock",
       "inStock": "In stock"
@@ -503,6 +510,13 @@
     "season": "Summer 2026",
     "heroImageLabel": "Hero visual — Shop",
     "shopImageLabel": "Shop visual"
+  },
+  "cookieConsent": {
+    "title": "We use cookies",
+    "description": "This site uses cookies to improve your experience, measure audience, and make shopping easier. You can accept or reject non-essential cookies.",
+    "acceptAll": "Accept all",
+    "reject": "Reject",
+    "learnMore": "Learn more"
   },
   "errors": {
     "notFoundTitle": "Page not found",

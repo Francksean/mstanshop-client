@@ -4,12 +4,12 @@ import { Check } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { cn } from "@/lib/utils"
 
-export function CheckoutStepper({ currentStep }: { currentStep: number }) {
+export function CheckoutStepper({ currentStep, className }: { currentStep: number; className?: string }) {
   const t = useTranslations("checkout.stepper")
   const steps = [t("delivery"), t("shippingMethod"), t("paymentMethod"), t("confirmation")]
 
   return (
-    <ol className="flex flex-wrap items-center gap-x-3 gap-y-2 text-small">
+    <ol className={cn("flex flex-wrap items-center gap-x-3 gap-y-2 text-small", className)}>
       {steps.map((label, index) => {
         const stepNumber = index + 1
         const isDone = stepNumber < currentStep

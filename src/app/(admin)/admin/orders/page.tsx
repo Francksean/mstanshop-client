@@ -4,6 +4,7 @@ import { useState } from "react"
 import { toast } from "sonner"
 import { DataTable, type DataTableColumn } from "@/components/admin/DataTable"
 import { OrderDetailsDialog } from "@/components/admin/OrderDetailsDialog"
+import { RefreshButton } from "@/components/admin/RefreshButton"
 import { OrderStatusBadge, STATUS_CONFIG } from "@/components/custom/OrderStatusBadge"
 import {
   Select,
@@ -79,7 +80,10 @@ export default function AdminOrdersPage() {
 
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-h2 text-ink">Commandes</h1>
+      <div className="flex items-center gap-2">
+        <h1 className="text-h2 text-ink">Commandes</h1>
+        <RefreshButton onRefresh={refetch} isLoading={isLoading} />
+      </div>
 
       {error && <p className="text-body text-sangria">{error}</p>}
 

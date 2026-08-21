@@ -2,6 +2,7 @@
 
 import { DataTable, type DataTableColumn } from "@/components/admin/DataTable"
 import { UserRoleSelect } from "@/components/admin/UserRoleSelect"
+import { RefreshButton } from "@/components/admin/RefreshButton"
 import { useAdminUsers } from "@/hooks/admin/useAdminUsers"
 import type { AdminUserResponse } from "@/types"
 
@@ -18,6 +19,7 @@ export default function AdminUsersPage() {
     setSearch,
     setPageSize,
     setPage,
+    refetch,
   } = useAdminUsers()
 
   const columns: DataTableColumn<AdminUserResponse>[] = [
@@ -50,7 +52,10 @@ export default function AdminUsersPage() {
 
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-h2 text-ink">Utilisateurs</h1>
+      <div className="flex items-center gap-2">
+        <h1 className="text-h2 text-ink">Utilisateurs</h1>
+        <RefreshButton onRefresh={refetch} isLoading={isLoading} />
+      </div>
 
       {error && <p className="text-body text-sangria">{error}</p>}
 

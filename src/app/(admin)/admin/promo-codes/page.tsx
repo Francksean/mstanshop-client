@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { DataTable, type DataTableColumn } from "@/components/admin/DataTable"
 import { PromoCodeFormDialog } from "@/components/admin/PromoCodeFormDialog"
 import { DeleteConfirmDialog } from "@/components/admin/DeleteConfirmDialog"
+import { RefreshButton } from "@/components/admin/RefreshButton"
 import { listPromoCodes, deletePromoCode } from "@/lib/services/admin/promo.service"
 import { normalizeError } from "@/lib/api-error"
 import { formatPrice } from "@/lib/utils"
@@ -104,7 +105,10 @@ export default function AdminPromoCodesPage() {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-h2 text-ink">Codes promo</h1>
+        <div className="flex items-center gap-2">
+          <h1 className="text-h2 text-ink">Codes promo</h1>
+          <RefreshButton onRefresh={refetch} isLoading={isLoading} />
+        </div>
         <Button onClick={openCreate}>
           <Plus className="size-4" />
           Ajouter

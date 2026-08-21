@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import {
   type DashboardDateRange,
   getDashboardLowStock,
@@ -34,6 +34,7 @@ export interface UseAdminDashboardResult {
   promoUsage: PromoUsageEntry[]
   isLoading: boolean
   error: string | null
+  refetch: () => void
 }
 
 const DEFAULT_RANGE_DAYS = 30
@@ -76,6 +77,7 @@ export function useAdminDashboard(range: DashboardDateRange): UseAdminDashboardR
   const [promoUsage, setPromoUsage] = useState<PromoUsageEntry[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [reloadKey, setReloadKey] = useState(0)
 
   useEffect(() => {
     let cancelled = false
@@ -130,7 +132,7 @@ export function useAdminDashboard(range: DashboardDateRange): UseAdminDashboardR
     // Depend on the primitive from/to values rather than `range` itself —
     // callers pass a new object each render, which would refetch on every render.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [range.from, range.to])
+  }, [range.from, range.to, reloadKey])
 
   return {
     summary,
@@ -143,5 +145,6 @@ export function useAdminDashboard(range: DashboardDateRange): UseAdminDashboardR
     promoUsage,
     isLoading,
     error,
+    refetch: useCallback(() => setReloadKey((k) => k + 1), []),
   }
 }

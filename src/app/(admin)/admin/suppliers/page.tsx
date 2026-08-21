@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { DataTable, type DataTableColumn } from "@/components/admin/DataTable"
 import { SupplierFormDialog } from "@/components/admin/SupplierFormDialog"
 import { DeleteConfirmDialog } from "@/components/admin/DeleteConfirmDialog"
+import { RefreshButton } from "@/components/admin/RefreshButton"
 import { listSuppliers, deleteSupplier } from "@/lib/services/admin/suppliers.service"
 import { normalizeError } from "@/lib/api-error"
 import { useClientPagination } from "@/hooks/useClientPagination"
@@ -83,7 +84,10 @@ export default function AdminSuppliersPage() {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-h2 text-ink">Fournisseurs</h1>
+        <div className="flex items-center gap-2">
+          <h1 className="text-h2 text-ink">Fournisseurs</h1>
+          <RefreshButton onRefresh={refetch} isLoading={isLoading} />
+        </div>
         <Button onClick={openCreate}>
           <Plus className="size-4" />
           Ajouter

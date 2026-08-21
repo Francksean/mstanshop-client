@@ -81,7 +81,7 @@ export function OrderDetailsDialog({
 
   return (
     <Dialog open={Boolean(order)} onOpenChange={(open) => !open && onOpenChange(false)}>
-      <DialogContent className="sm:max-w-lg">
+      <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-lg">
         {order && (
           <>
             <DialogHeader>

@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import type { Control } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import { ArrowRight, Mail } from "lucide-react";
@@ -59,6 +60,10 @@ export function CheckoutMobileSteps({
 }: CheckoutMobileStepsProps) {
   const t = useTranslations("checkout");
   const tStepper = useTranslations("checkout.stepper");
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [step]);
 
   return (
     <div className="mt-4 md:hidden">

@@ -88,7 +88,7 @@ export function ImageGallery({ productName, images = [] }: ImageGalleryProps) {
         )}
       </div>
       {hasMultiple && (
-        <div className="flex gap-3">
+        <div className="flex gap-3 overflow-x-auto pb-1 -mx-4 px-4 md:mx-0 md:px-0 md:overflow-visible md:flex-wrap">
           {images.map((image, i) => (
             <button
               key={image.id}

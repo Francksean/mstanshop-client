@@ -54,7 +54,7 @@ export function OrderDetailDialog({ orderId, onOpenChange }: OrderDetailDialogPr
 
   return (
     <Dialog open={Boolean(orderId)} onOpenChange={(open) => !open && onOpenChange(false)}>
-      <DialogContent className="sm:max-w-lg">
+      <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-lg">
         {isLoading && <p className="text-body text-ink/60">{tCommon("loading")}</p>}
         {error && <p className="text-body text-sangria">{error}</p>}
 

@@ -4,6 +4,13 @@ import { use, useState } from "react"
 import { notFound } from "next/navigation"
 import { useTranslations } from "next-intl"
 import { Button } from "@/components/ui/button"
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet"
 import { ImageGallery } from "@/components/custom/ImageGallery"
 import { SizePicker } from "@/components/custom/SizePicker"
 import { ColorSwatchPicker } from "@/components/custom/ColorSwatchPicker"
@@ -31,6 +38,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
   const [size, setSize] = useState<string | null>(null)
   const [quantity, setQuantity] = useState(1)
   const [expandedDescription, setExpandedDescription] = useState(false)
+  const [showVariantPrompt, setShowVariantPrompt] = useState(false)
 
   if (isLoading) {
     return (
@@ -88,6 +96,10 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
 
   function handleAddToCart() {
     if (!product) return
+    if (hasVariants && !isSelectionComplete) {
+      setShowVariantPrompt(true)
+      return
+    }
     addItem({
       productId: product.id,
       variantId: selectedVariant?.id,
@@ -101,10 +113,12 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
     })
   }
 
-  const isOutOfStock =
-    hasVariants
-      ? !isSelectionComplete || !selectedVariant || !selectedVariant.active || selectedVariant.stock === 0
-      : product.stock === 0
+  // Only treat the product as unavailable once we actually know — an incomplete
+  // variant selection isn't "out of stock", it just needs a choice first (see
+  // the select-variant drawer in handleAddToCart).
+  const isOutOfStock = hasVariants
+    ? isSelectionComplete && (!selectedVariant || !selectedVariant.active || selectedVariant.stock === 0)
+    : product.stock === 0
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 md:px-8">
@@ -126,14 +140,14 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
             >
               {product.description}
             </p>
-            {(product.description?.split("\n").length ?? 0) > 5 && (
+            {((product.description?.split("\n").length ?? 0) > 5 || (product.description?.length ?? 0) > 220) && (
               <Button
                 type="button"
                 variant="ghost"
                 className="w-fit p-0 h-auto text-sangria font-medium"
                 onClick={() => setExpandedDescription(!expandedDescription)}
               >
-                {expandedDescription ? "Voir moins" : "Voir plus"}
+                {expandedDescription ? t("readLess") : t("readMore")}
               </Button>
             )}
           </div>
@@ -159,7 +173,11 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
             <QuantityStepper value={quantity} max={Math.max(displayStock, 1)} onChange={setQuantity} />
           </div>
 
-          <StockBadge stock={displayStock} />
+          {hasVariants && !isSelectionComplete ? (
+            <span className="text-small text-ink/60">{t("stock.selectVariant")}</span>
+          ) : (
+            <StockBadge stock={displayStock} />
+          )}
 
           <div className="mt-2 flex flex-col gap-3 sm:flex-row">
             <Button
@@ -180,6 +198,43 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
       <ReviewSection productId={product.id} averageRating={product.averageRating} reviewCount={product.reviewCount} />
 
       <RelatedProducts products={relatedProducts} />
+
+      <Sheet open={showVariantPrompt} onOpenChange={setShowVariantPrompt}>
+        <SheetContent side="bottom" className="bg-background">
+          <SheetHeader>
+            <SheetTitle className="text-h2">{t("selectVariantTitle")}</SheetTitle>
+            <SheetDescription>{t("selectVariantDescription")}</SheetDescription>
+          </SheetHeader>
+          <div className="flex flex-col gap-4 px-4 pb-6">
+            {hasColors && (
+              <ColorSwatchPicker
+                colors={product.colors}
+                value={selectedColorHex}
+                onChange={(hex) => {
+                  setColorHex(hex)
+                  setSize(null)
+                }}
+              />
+            )}
+            {hasSizes && sizesForColor.length > 0 && (
+              <SizePicker
+                sizes={sizesForColor}
+                value={selectedSize}
+                onChange={setSize}
+                disabledSizes={disabledSizes}
+              />
+            )}
+            <Button
+              size="lg"
+              className="w-full"
+              disabled={!isSelectionComplete}
+              onClick={() => setShowVariantPrompt(false)}
+            >
+              {t("selectVariantClose")}
+            </Button>
+          </div>
+        </SheetContent>
+      </Sheet>
     </div>
   )
 }

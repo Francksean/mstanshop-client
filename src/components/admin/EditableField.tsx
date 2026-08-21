@@ -20,6 +20,8 @@ interface EditableFieldProps {
   /** When set, the field renders as plain read-only text (no pencil) with this note explaining why. */
   readOnlyHint?: string
   className?: string
+  /** Extra classes applied to the `<Textarea>` element itself (type="textarea" only). */
+  textareaClassName?: string
 }
 
 export function EditableField({
@@ -30,6 +32,7 @@ export function EditableField({
   displayValue,
   readOnlyHint,
   className,
+  textareaClassName,
 }: EditableFieldProps) {
   const [isEditing, setIsEditing] = useState(false)
   const [draft, setDraft] = useState(value)
@@ -97,7 +100,7 @@ export function EditableField({
               onBlur={commit}
               onKeyDown={handleKeyDown}
               disabled={isSaving}
-              className="flex-1"
+              className={cn("flex-1", textareaClassName)}
             />
           ) : (
             <Input
@@ -114,13 +117,13 @@ export function EditableField({
           {isSaving && <Loader2 className="size-4 shrink-0 animate-spin text-ink/40" />}
         </div>
       ) : (
-        <div className="group/field flex items-center gap-1.5">
+        <div className="flex items-center gap-1.5">
           <span className="text-body text-ink">{displayValue ?? value}</span>
           <button
             type="button"
             onClick={startEdit}
             aria-label={`Modifier ${label}`}
-            className="text-ink/30 opacity-0 transition-opacity hover:text-ink focus-visible:opacity-100 group-hover/field:opacity-100"
+            className="flex size-6 shrink-0 items-center justify-center rounded-full bg-sangria text-white transition-colors hover:bg-sangria/90"
           >
             <Pencil className="size-3.5" />
           </button>
@@ -194,13 +197,13 @@ export function EditableSelectField({
           {isSaving && <Loader2 className="size-4 shrink-0 animate-spin text-ink/40" />}
         </div>
       ) : (
-        <div className="group/field flex items-center gap-1.5">
+        <div className="flex items-center gap-1.5">
           <span className="text-body text-ink">{displayValue}</span>
           <button
             type="button"
             onClick={() => setIsEditing(true)}
             aria-label={`Modifier ${label}`}
-            className="text-ink/30 opacity-0 transition-opacity hover:text-ink focus-visible:opacity-100 group-hover/field:opacity-100"
+            className="flex size-6 shrink-0 items-center justify-center rounded-full bg-sangria text-white transition-colors hover:bg-sangria/90"
           >
             <Pencil className="size-3.5" />
           </button>

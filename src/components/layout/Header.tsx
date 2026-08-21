@@ -5,7 +5,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { useLocale, useTranslations } from "next-intl"
-import { Check, Globe, LogOut, Menu, Package, ShoppingBag, User } from "lucide-react"
+import { Check, Globe, LayoutDashboard, LogOut, Menu, Package, ShoppingBag, User } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -147,6 +147,14 @@ export function Header() {
                     {t("myOrders")}
                   </Link>
                 </DropdownMenuItem>
+                {user.role === "ROLE_ADMIN" && (
+                  <DropdownMenuItem asChild>
+                    <Link href="/admin/dashboard">
+                      <LayoutDashboard className="size-4" />
+                      {t("adminDashboard")}
+                    </Link>
+                  </DropdownMenuItem>
+                )}
                 <DropdownMenuSeparator />
                 <DropdownMenuItem variant="destructive" onSelect={() => logout()}>
                   <LogOut className="size-4" />

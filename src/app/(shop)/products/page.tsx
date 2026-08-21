@@ -1,9 +1,9 @@
 "use client";
 
-import { Suspense, useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { SlidersHorizontal } from "lucide-react";
+import { Loader2, SlidersHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -18,7 +18,6 @@ import {
 import { SearchBar } from "@/components/custom/SearchBar";
 import { SortDropdown } from "@/components/custom/SortDropdown";
 import { ProductGrid } from "@/components/custom/ProductGrid";
-import { Pagination } from "@/components/custom/Pagination";
 import { EmptyState } from "@/components/custom/EmptyState";
 import { TrustBadges } from "@/components/custom/TrustBadges";
 import { useProducts } from "@/hooks/useProducts";
@@ -48,14 +47,40 @@ function CatalogContent() {
     getCategories().then((data) => {
       setCategories(data);
       if (categorySlugParam) {
-        const match = data.find((c) => c.slug === categorySlugParam);
-        if (match?.id) {
-          setFilters((prev) => ({ ...prev, categoryIds: [match.id!] }));
+        const slugs = categorySlugParam.split(",");
+        const ids = data
+          .filter((c) => c.id && slugs.includes(c.slug))
+          .map((c) => c.id!);
+        if (ids.length) {
+          setFilters((prev) => ({ ...prev, categoryIds: ids }));
         }
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Keeps the URL in sync with the active filters/sort so the catalog state is
+  // shareable/bookmarkable. Skipped until categories load when a `?category=`
+  // slug is present, so it doesn't briefly wipe that param before it's resolved.
+  useEffect(() => {
+    if (categorySlugParam && categories.length === 0) return;
+
+    const params = new URLSearchParams();
+    if (searchParam) params.set("search", searchParam);
+    if (filters.categoryIds.length) {
+      const slugs = filters.categoryIds
+        .map((id) => categories.find((c) => c.id === id)?.slug)
+        .filter(Boolean);
+      if (slugs.length) params.set("category", slugs.join(","));
+    }
+    if (filters.minPrice !== MIN_PRICE) params.set("minPrice", String(filters.minPrice));
+    if (filters.maxPrice !== MAX_PRICE) params.set("maxPrice", String(filters.maxPrice));
+    if (sort !== "newest") params.set("sort", sort);
+
+    const qs = params.toString();
+    router.replace(`/products${qs ? `?${qs}` : ""}`, { scroll: false });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filters, sort, categories, categorySlugParam, searchParam]);
 
   const queryFilters = useMemo(
     () => ({
@@ -71,6 +96,23 @@ function CatalogContent() {
 
   const { items, page, total, hasMore, isLoading, fetchPage } =
     useProducts(queryFilters);
+
+  const sentinelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = sentinelRef.current;
+    if (!el || !hasMore) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !isLoading) {
+          fetchPage(page + 1, "append");
+        }
+      },
+      { rootMargin: "600px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [hasMore, isLoading, page, fetchPage]);
 
   function handleSearchSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -138,13 +180,13 @@ function CatalogContent() {
                 products={items}
                 isLoading={isLoading && items.length === 0}
               />
-              <Pagination
-                page={page}
-                total={total}
-                hasMore={hasMore}
-                isLoading={isLoading}
-                onPageChange={fetchPage}
-              />
+              {hasMore && (
+                <div ref={sentinelRef} className="flex justify-center py-8">
+                  {isLoading && items.length > 0 && (
+                    <Loader2 className="h-5 w-5 animate-spin text-ink/40" />
+                  )}
+                </div>
+              )}
             </>
           )}
         </div>

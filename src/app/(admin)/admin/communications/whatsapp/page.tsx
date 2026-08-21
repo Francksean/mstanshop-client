@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { DataTable, type DataTableColumn } from "@/components/admin/DataTable"
 import { WhatsAppTemplateFormDialog } from "@/components/admin/WhatsAppTemplateFormDialog"
 import { DeleteConfirmDialog } from "@/components/admin/DeleteConfirmDialog"
+import { RefreshButton } from "@/components/admin/RefreshButton"
 import { listWhatsAppTemplates, deleteWhatsAppTemplate } from "@/lib/services/admin/whatsapp-templates.service"
 import { normalizeError } from "@/lib/api-error"
 import { useClientPagination } from "@/hooks/useClientPagination"
@@ -113,7 +114,10 @@ export default function AdminWhatsAppTemplatesPage() {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-h2 text-ink">Templates WhatsApp</h1>
+        <div className="flex items-center gap-2">
+          <h1 className="text-h2 text-ink">Templates WhatsApp</h1>
+          <RefreshButton onRefresh={refetch} isLoading={isLoading} />
+        </div>
         <Button onClick={openCreate}>
           <Plus className="size-4" />
           Ajouter

@@ -31,6 +31,7 @@
     "login": "Se connecter",
     "myProfile": "Mon profil",
     "myOrders": "Mes commandes",
+    "adminDashboard": "Tableau de bord admin",
     "logout": "Déconnexion",
     "cart": "Panier, {count, plural, =0 {aucun article} one {# article} other {# articles}}",
     "announcements": {
@@ -137,11 +138,17 @@
     "relatedTitle": "Vous aimerez aussi",
     "sizeLabel": "Taille",
     "colorLabelWithName": "Couleur — {name}",
+    "readMore": "Lire plus",
+    "readLess": "Lire moins",
+    "selectVariantTitle": "Choisissez une variante",
+    "selectVariantDescription": "Sélectionnez une couleur et une taille avant d'ajouter cet article au panier.",
+    "selectVariantClose": "Compris",
     "stock": {
       "outOfStock": "Rupture de stock",
       "lastOne": "Plus qu'1 en stock",
       "low": "Plus que {count} en stock",
-      "inStock": "En stock"
+      "inStock": "En stock",
+      "selectVariant": "Sélectionnez une variante"
     },
     "reviews": {
       "title": "Avis clients",
@@ -503,6 +510,13 @@
     "season": "Été 2026",
     "heroImageLabel": "Visuel Héros — Boutique",
     "shopImageLabel": "Visuel Boutique"
+  },
+  "cookieConsent": {
+    "title": "Nous utilisons des cookies",
+    "description": "Ce site utilise des cookies pour améliorer votre expérience, mesurer l'audience et faciliter vos achats. Vous pouvez accepter ou refuser les cookies non essentiels.",
+    "acceptAll": "Tout accepter",
+    "reject": "Refuser",
+    "learnMore": "En savoir plus"
   },
   "errors": {
     "notFoundTitle": "Page introuvable",

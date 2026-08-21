@@ -13,6 +13,7 @@ import { ImageGallery } from "@/components/custom/ImageGallery"
 import { ReviewStars } from "@/components/custom/ReviewStars"
 import { EditableField, EditableSelectField } from "@/components/admin/EditableField"
 import { ImageBucket } from "@/components/admin/ImageBucket"
+import { RefreshButton } from "@/components/admin/RefreshButton"
 import {
   VariantRowEditor,
   isVariantRowInvalid,
@@ -268,6 +269,7 @@ export function ProductDetailPanel({ productId, mode, onSaved }: ProductDetailPa
             </Link>
           </Button>
           <h1 className="text-h2 text-ink">{product.name}</h1>
+          <RefreshButton onRefresh={refetchProduct} isLoading={isLoading} />
         </div>
       )}
 
@@ -346,6 +348,7 @@ export function ProductDetailPanel({ productId, mode, onSaved }: ProductDetailPa
           type="textarea"
           value={product.description}
           onSave={(v) => saveField({ description: v })}
+          textareaClassName="min-h-40"
         />
 
         <Separator />

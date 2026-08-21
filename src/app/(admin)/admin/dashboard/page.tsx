@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react"
 import { Clock, Euro, Mail, Receipt, ShoppingCart, TriangleAlert } from "lucide-react"
 import { KpiCard, KpiCardShimmer } from "@/components/admin/KpiCard"
+import { RefreshButton } from "@/components/admin/RefreshButton"
 import { RevenueChart, RevenueChartShimmer } from "@/components/admin/RevenueChart"
 import { OrdersByStatusChart, OrdersByStatusChartShimmer } from "@/components/admin/OrdersByStatusChart"
 import { DataTable, type DataTableColumn } from "@/components/admin/DataTable"
@@ -68,6 +69,7 @@ export default function AdminDashboardPage() {
     promoUsage,
     isLoading,
     error,
+    refetch,
   } = useAdminDashboard(range)
 
   const paymentColumns: DataTableColumn<PaymentBreakdownEntry>[] = [
@@ -139,7 +141,10 @@ export default function AdminDashboardPage() {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-h2 text-ink">Dashboard</h1>
+        <div className="flex items-center gap-2">
+          <h1 className="text-h2 text-ink">Dashboard</h1>
+          <RefreshButton onRefresh={refetch} isLoading={isLoading} />
+        </div>
 
         <div className="flex flex-wrap items-center gap-2">
           <Select value={preset} onValueChange={(v) => setPreset(v as RangePreset)}>

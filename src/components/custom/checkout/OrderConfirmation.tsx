@@ -1,7 +1,7 @@
 "use client"
 
 import { useTranslations } from "next-intl"
-import { Loader2, TriangleAlert } from "lucide-react"
+import { Check, Loader2, TriangleAlert } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { CheckoutStepper } from "@/components/custom/CheckoutStepper"
 import { OrderSummaryCard } from "@/components/custom/OrderSummaryCard"
@@ -19,6 +19,16 @@ interface OrderConfirmationProps {
   onContinue: () => void
 }
 
+function MobileConfirmationBadge() {
+  const t = useTranslations("checkout.stepper")
+  return (
+    <div className="mb-2 flex items-center justify-center gap-2 text-small font-medium text-sangria md:hidden">
+      <Check className="size-4" />
+      {t("confirmation")}
+    </div>
+  )
+}
+
 export function OrderConfirmation({ order, phase, shippingMethod, guestMode, onRetry, onContinue }: OrderConfirmationProps) {
   const t = useTranslations("checkout")
   const tCommon = useTranslations("common.actions")
@@ -26,7 +36,8 @@ export function OrderConfirmation({ order, phase, shippingMethod, guestMode, onR
   if (phase === "pending" || phase === "timeout") {
     return (
       <div className="mx-auto max-w-2xl px-4 py-16 text-center md:px-8">
-        <CheckoutStepper currentStep={4} />
+        <MobileConfirmationBadge />
+        <CheckoutStepper currentStep={4} className="hidden md:flex" />
         <Loader2 className="mx-auto mt-8 size-10 animate-spin text-sangria" />
         <h1 className="mt-6 text-h1 text-ink">{t("paymentPending.title")}</h1>
         <p className="mt-4 text-body text-ink/70">
@@ -47,7 +58,8 @@ export function OrderConfirmation({ order, phase, shippingMethod, guestMode, onR
   if (phase === "failed") {
     return (
       <div className="mx-auto max-w-2xl px-4 py-16 text-center md:px-8">
-        <CheckoutStepper currentStep={4} />
+        <MobileConfirmationBadge />
+        <CheckoutStepper currentStep={4} className="hidden md:flex" />
         <TriangleAlert className="mx-auto mt-8 size-10 text-sangria" />
         <h1 className="mt-6 text-h1 text-ink">{t("paymentFailed.title")}</h1>
         <p className="mt-4 text-body text-ink/70">
@@ -64,7 +76,8 @@ export function OrderConfirmation({ order, phase, shippingMethod, guestMode, onR
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-16 text-center md:px-8">
-      <CheckoutStepper currentStep={4} />
+      <MobileConfirmationBadge />
+      <CheckoutStepper currentStep={4} className="hidden md:flex" />
       <h1 className="mt-8 text-h1 text-ink">{t("success.title")}</h1>
       <p className="mt-4 text-body text-ink/70">
         {t.rich("success.body", {

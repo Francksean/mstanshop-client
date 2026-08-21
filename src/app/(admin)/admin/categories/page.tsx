@@ -10,6 +10,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { CategoryFormDialog } from "@/components/admin/CategoryFormDialog"
 import { CategoryPromotionDialog } from "@/components/admin/CategoryPromotionDialog"
 import { DeleteConfirmDialog } from "@/components/admin/DeleteConfirmDialog"
+import { RefreshButton } from "@/components/admin/RefreshButton"
 import { useAdminCategories, type CategoryTreeGroup, type CategoryWithCount } from "@/hooks/admin/useAdminCategories"
 import { deleteCategory } from "@/lib/services/admin/categories.service"
 
@@ -90,7 +91,10 @@ export default function AdminCategoriesPage() {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-h2 text-ink">Catégories</h1>
+        <div className="flex items-center gap-2">
+          <h1 className="text-h2 text-ink">Catégories</h1>
+          <RefreshButton onRefresh={refetch} isLoading={isLoading} />
+        </div>
         <Button onClick={openCreate}>
           <Plus className="size-4" />
           Ajouter
