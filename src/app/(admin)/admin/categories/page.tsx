@@ -130,7 +130,7 @@ export default function AdminCategoriesPage() {
                   <span className="flex flex-wrap items-center gap-2">
                     <span className="font-medium text-ink">{root.name}</span>
                     <span className="text-small text-ink/50">
-                      {root.productCount + children.reduce((sum, c) => sum + c.productCount, 0)} produits
+                      {root.productCount} produit{root.productCount > 1 ? "s" : ""}
                     </span>
                     <PromoBadge category={root} />
                   </span>

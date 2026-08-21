@@ -11,9 +11,10 @@ import { ArrowLeft, Plus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Field, FieldLabel, FieldError } from "@/components/ui/field"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Separator } from "@/components/ui/separator"
 import { ImageBucket } from "@/components/admin/ImageBucket"
+import { CategoryCombobox } from "@/components/admin/CategoryCombobox"
+import { SupplierCombobox } from "@/components/admin/SupplierCombobox"
 import {
   VariantRowEditor,
   isVariantRowInvalid,
@@ -170,18 +171,13 @@ export default function AdminNewProductPage() {
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
               <FieldLabel htmlFor={field.name}>Catégorie</FieldLabel>
-              <Select value={field.value} onValueChange={field.onChange}>
-                <SelectTrigger id={field.name} className="w-full">
-                  <SelectValue placeholder="Choisir une catégorie" />
-                </SelectTrigger>
-                <SelectContent>
-                  {categories.map((c) => (
-                    <SelectItem key={c.id ?? c.slug} value={c.id ?? c.slug}>
-                      {c.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <CategoryCombobox
+                id={field.name}
+                categories={categories}
+                value={field.value}
+                onChange={field.onChange}
+                invalid={fieldState.invalid}
+              />
               {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
             </Field>
           )}
@@ -193,19 +189,13 @@ export default function AdminNewProductPage() {
           render={({ field }) => (
             <Field>
               <FieldLabel htmlFor={field.name}>Fournisseur</FieldLabel>
-              <Select value={field.value} onValueChange={field.onChange}>
-                <SelectTrigger id={field.name} className="w-full">
-                  <SelectValue placeholder="Aucun fournisseur" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value={NO_SUPPLIER}>Aucun fournisseur</SelectItem>
-                  {suppliers.map((s) => (
-                    <SelectItem key={s.id} value={s.id}>
-                      {s.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <SupplierCombobox
+                id={field.name}
+                suppliers={suppliers}
+                value={field.value ?? NO_SUPPLIER}
+                onChange={field.onChange}
+                noneValue={NO_SUPPLIER}
+              />
             </Field>
           )}
         />

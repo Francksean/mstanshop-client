@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { getCategories } from "@/lib/services/categories.service"
-import { getProducts } from "@/lib/services/products.service"
 import type { Category } from "@/types"
 
 export interface CategoryWithCount extends Category {
@@ -23,18 +22,11 @@ export function useAdminCategories() {
     setIsLoading(true)
     setError(null)
     try {
-      const [categories, products] = await Promise.all([
-        getCategories(),
-        getProducts({ page: 1, limit: 1000 }),
-      ])
-      setItems(
-        categories.map((category) => ({
-          ...category,
-          productCount: products.items.filter(
-            (p) => p.category === category.slug || p.categoryId === category.id
-          ).length,
-        }))
-      )
+      // productCount now comes straight from the API (parent = sum of its
+      // subcategories' counts + its own direct products) — no more client-side
+      // approximation from a capped product fetch.
+      const categories = await getCategories()
+      setItems(categories.map((category) => ({ ...category, productCount: category.productCount ?? 0 })))
     } catch (err) {
       setError(err instanceof Error ? err.message : "Impossible de charger les catégories.")
     } finally {

@@ -290,6 +290,9 @@ export function ProductDetailPanel({ productId, mode, onSaved }: ProductDetailPa
               displayValue={product.category}
               options={categoryOptions}
               onSave={(v) => saveField({ categoryId: v })}
+              searchable
+              searchPlaceholder="Rechercher une catégorie…"
+              emptyText="Aucune catégorie trouvée."
             />
             <EditableSelectField
               label="Fournisseur"
@@ -297,6 +300,9 @@ export function ProductDetailPanel({ productId, mode, onSaved }: ProductDetailPa
               displayValue={product.supplierName ?? "Aucun fournisseur"}
               options={supplierOptions}
               onSave={(v) => saveField({ supplierId: v === NO_SUPPLIER ? undefined : v })}
+              searchable
+              searchPlaceholder="Rechercher un fournisseur…"
+              emptyText="Aucun fournisseur trouvé."
             />
             <EditableField
               label="Prix (FCFA)"

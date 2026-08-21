@@ -11,6 +11,7 @@ import { getFeaturedProducts, getProducts } from "@/lib/services/products.servic
 import { getCategories } from "@/lib/services/categories.service"
 
 const SHOWCASE_CATEGORY_COUNT = 3
+const GRID_SUBCATEGORY_COUNT = 5
 
 export default async function LandingPage() {
   const t = await getTranslations("home")
@@ -19,9 +20,18 @@ export default async function LandingPage() {
     getCategories(),
   ])
 
-  const showcaseCategories = categories.filter((c) => c.id).slice(0, SHOWCASE_CATEGORY_COUNT)
+  const parentCategories = categories.filter((c) => c.id && !c.parentId)
+  const subcategories = categories.filter((c) => c.id && c.parentId)
+  const gridSubcategories = subcategories.slice(0, GRID_SUBCATEGORY_COUNT)
+
+  // Showcase sections present parent categories — a parent's products include
+  // both items attached directly to it and items attached to any of its subcategories.
+  const showcaseCategories = parentCategories.slice(0, SHOWCASE_CATEGORY_COUNT)
   const showcaseResults = await Promise.all(
-    showcaseCategories.map((category) => getProducts({ categoryIds: [category.id!], limit: 4 }))
+    showcaseCategories.map((category) => {
+      const childIds = subcategories.filter((c) => c.parentId === category.id).map((c) => c.id!)
+      return getProducts({ categoryIds: [category.id!, ...childIds], limit: 4 })
+    })
   )
   const showcases = showcaseCategories
     .map((category, i) => ({ category, products: showcaseResults[i].items }))
@@ -35,7 +45,13 @@ export default async function LandingPage() {
 
       <SectionReveal className="mx-auto w-full max-w-7xl px-4 md:px-8">
         <h2 className="mb-8 font-heading text-h1 text-ink">{t("exploreByCategory")}</h2>
-        <CategoryGrid categories={categories} />
+        <CategoryGrid categories={gridSubcategories} />
+        <Link
+          href="/products"
+          className="mt-8 inline-block text-body font-medium text-sangria underline decoration-gold underline-offset-4"
+        >
+          {t("discoverOtherCategories")}
+        </Link>
       </SectionReveal>
 
       <SectionDivider />

@@ -16,6 +16,8 @@ export interface Category {
   /** Single-level hierarchy — a category with a parentId can't itself have children. */
   parentId?: string | null
   parentName?: string | null
+  /** For a parent: sum of its subcategories' counts + its own direct products. For a subcategory: its own direct products only. */
+  productCount?: number
   promoActive?: boolean
   promoDiscountType?: "PERCENTAGE" | "FIXED_AMOUNT"
   promoDiscountValue?: number

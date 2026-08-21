@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { Plus, MoreHorizontal, Eye, Trash2 } from "lucide-react"
+import { toast } from "sonner"
+import { Plus, MoreHorizontal, Eye, Copy, Trash2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { DataTable, type DataTableColumn } from "@/components/admin/DataTable"
 import { DeleteConfirmDialog } from "@/components/admin/DeleteConfirmDialog"
@@ -17,8 +18,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { useAdminProducts } from "@/hooks/admin/useAdminProducts"
-import { deleteProduct } from "@/lib/services/admin/products.service"
+import { deleteProduct, duplicateProduct } from "@/lib/services/admin/products.service"
 import { getCategories } from "@/lib/services/categories.service"
+import { normalizeError } from "@/lib/api-error"
 import { formatPrice, resolveMediaUrl } from "@/lib/utils"
 import { LOW_STOCK_THRESHOLD } from "@/lib/constants"
 import { cn } from "@/lib/utils"
@@ -44,6 +46,21 @@ export default function AdminProductsPage() {
   } = useAdminProducts()
   const [categories, setCategories] = useState<Category[]>([])
   const [deletingProduct, setDeletingProduct] = useState<Product | null>(null)
+  const [duplicatingId, setDuplicatingId] = useState<string | null>(null)
+
+  async function handleDuplicate(product: Product) {
+    setDuplicatingId(product.id)
+    try {
+      const duplicate = await duplicateProduct(product.id)
+      toast.success("Produit dupliqué — modifiez-le avant de le publier.")
+      refetch()
+      router.push(`/admin/products/${duplicate.id}`)
+    } catch (err) {
+      toast.error(normalizeError(err).message)
+    } finally {
+      setDuplicatingId(null)
+    }
+  }
 
   useEffect(() => {
     getCategories().then(setCategories)
@@ -131,6 +148,10 @@ export default function AdminProductsPage() {
             <DropdownMenuItem onSelect={() => openDetail(p)}>
               <Eye className="size-4" />
               Voir / modifier
+            </DropdownMenuItem>
+            <DropdownMenuItem disabled={duplicatingId === p.id} onSelect={() => handleDuplicate(p)}>
+              <Copy className="size-4" />
+              {duplicatingId === p.id ? "Duplication…" : "Dupliquer"}
             </DropdownMenuItem>
             <DropdownMenuItem variant="destructive" onSelect={() => setDeletingProduct(p)}>
               <Trash2 className="size-4" />

@@ -2,10 +2,20 @@
 
 import { useState } from "react"
 import { toast } from "sonner"
-import { Loader2, Pencil } from "lucide-react"
+import { Check, ChevronsUpDown, Loader2, Pencil } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { normalizeError } from "@/lib/api-error"
 import { cn } from "@/lib/utils"
 
@@ -141,6 +151,10 @@ interface EditableSelectFieldProps {
   onSave: (newValue: string) => Promise<void>
   placeholder?: string
   className?: string
+  /** Renders a searchable combobox instead of a plain dropdown — for longer option lists (categories, suppliers). */
+  searchable?: boolean
+  searchPlaceholder?: string
+  emptyText?: string
 }
 
 /** Same pencil-toggle UX as `EditableField`, for a dropdown value (category, supplier) instead of free text. */
@@ -152,6 +166,9 @@ export function EditableSelectField({
   onSave,
   placeholder,
   className,
+  searchable,
+  searchPlaceholder,
+  emptyText,
 }: EditableSelectFieldProps) {
   const [isEditing, setIsEditing] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
@@ -177,23 +194,50 @@ export function EditableSelectField({
       <span className="text-small text-ink/50">{label}</span>
       {isEditing ? (
         <div className="flex items-center gap-1.5">
-          <Select
-            value={value}
-            onValueChange={handleChange}
-            defaultOpen
-            onOpenChange={(open) => !open && !isSaving && setIsEditing(false)}
-          >
-            <SelectTrigger className="h-9 flex-1">
-              <SelectValue placeholder={placeholder} />
-            </SelectTrigger>
-            <SelectContent>
-              {options.map((o) => (
-                <SelectItem key={o.value} value={o.value}>
-                  {o.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          {searchable ? (
+            <Popover open onOpenChange={(open) => !open && !isSaving && setIsEditing(false)}>
+              <PopoverTrigger asChild>
+                <Button type="button" variant="outline" className="h-9 flex-1 justify-between font-normal">
+                  <span className="truncate">{options.find((o) => o.value === value)?.label ?? placeholder}</span>
+                  <ChevronsUpDown className="size-4 shrink-0 opacity-50" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-(--radix-popover-trigger-width) p-0" align="start">
+                <Command>
+                  <CommandInput placeholder={searchPlaceholder ?? "Rechercher…"} />
+                  <CommandList>
+                    <CommandEmpty>{emptyText ?? "Aucun résultat."}</CommandEmpty>
+                    <CommandGroup>
+                      {options.map((o) => (
+                        <CommandItem key={o.value} value={o.label} onSelect={() => handleChange(o.value)}>
+                          <Check className={cn("size-4", o.value === value ? "opacity-100" : "opacity-0")} />
+                          {o.label}
+                        </CommandItem>
+                      ))}
+                    </CommandGroup>
+                  </CommandList>
+                </Command>
+              </PopoverContent>
+            </Popover>
+          ) : (
+            <Select
+              value={value}
+              onValueChange={handleChange}
+              defaultOpen
+              onOpenChange={(open) => !open && !isSaving && setIsEditing(false)}
+            >
+              <SelectTrigger className="h-9 flex-1">
+                <SelectValue placeholder={placeholder} />
+              </SelectTrigger>
+              <SelectContent>
+                {options.map((o) => (
+                  <SelectItem key={o.value} value={o.value}>
+                    {o.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
           {isSaving && <Loader2 className="size-4 shrink-0 animate-spin text-ink/40" />}
         </div>
       ) : (

@@ -4,7 +4,12 @@ import { DataTable, type DataTableColumn } from "@/components/admin/DataTable"
 import { UserRoleSelect } from "@/components/admin/UserRoleSelect"
 import { RefreshButton } from "@/components/admin/RefreshButton"
 import { useAdminUsers } from "@/hooks/admin/useAdminUsers"
-import type { AdminUserResponse } from "@/types"
+import type { AdminUserResponse, AuthProvider } from "@/types"
+
+const AUTH_PROVIDER_LABELS: Record<AuthProvider, string> = {
+  LOCAL: "Email / mot de passe",
+  GOOGLE: "Google",
+}
 
 export default function AdminUsersPage() {
   const {
@@ -39,14 +44,25 @@ export default function AdminUsersPage() {
     {
       key: "role",
       header: "Rôle",
-      render: (u) => <UserRoleSelect role={u.role} />,
+      render: (u) => <UserRoleSelect role={u.roles[0] ?? "ROLE_USER"} />,
+    },
+    {
+      key: "authProvider",
+      header: "Mode de connexion",
+      render: (u) => AUTH_PROVIDER_LABELS[u.authProvider] ?? u.authProvider,
     },
     {
       key: "createdAt",
-      header: "Date d'inscription",
+      header: "Date et heure d'inscription",
       sortAccessor: (u) => new Date(u.createdAt).getTime(),
       render: (u) =>
-        new Date(u.createdAt).toLocaleDateString("fr-FR", { day: "2-digit", month: "short", year: "numeric" }),
+        new Date(u.createdAt).toLocaleString("fr-FR", {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
     },
   ]
 

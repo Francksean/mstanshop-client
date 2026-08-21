@@ -16,6 +16,7 @@ function mapCategoryResponse(dto: CategoryResponse): Category {
     thumbnailUrl: dto.thumbnailUrl,
     parentId: dto.parentId,
     parentName: dto.parentName,
+    productCount: dto.productCount,
     promoActive: dto.promoActive,
     promoDiscountType: dto.promoDiscountType,
     promoDiscountValue: dto.promoDiscountValue,
@@ -23,9 +24,16 @@ function mapCategoryResponse(dto: CategoryResponse): Category {
   }
 }
 
+// `GET /categories` only returns top-level categories, each carrying its
+// subcategories nested inside — the rest of the app treats categories as a
+// flat list distinguished by `parentId`, so flatten the tree here once.
+function flattenCategoryTree(dtos: CategoryResponse[]): Category[] {
+  return dtos.flatMap((dto) => [mapCategoryResponse(dto), ...(dto.subcategories ?? []).map(mapCategoryResponse)])
+}
+
 export async function getCategories(): Promise<Category[]> {
   const { data } = await apiClient.get<CategoryResponse[]>("/categories")
-  return data.map(mapCategoryResponse)
+  return flattenCategoryTree(data)
 }
 
 export async function getCategoryById(id: string): Promise<Category | null> {

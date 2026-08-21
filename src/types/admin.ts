@@ -1,7 +1,7 @@
 import type { OrderPaymentMethod, OrderStatus, PaymentStatus } from "./order"
 import type { ProductVariant } from "./product"
 import type { DiscountType } from "./promo"
-import type { UserRole } from "./user"
+import type { AuthProvider, UserRole } from "./user"
 
 /** Shape of `PUT .../variants/{id}` — updates one already-existing size/color row. */
 export interface VariantRequest {
@@ -96,6 +96,8 @@ export interface CategoryResponse {
   name: string
   slug: string
   description?: string
+  /** For a parent: sum of its subcategories' counts + its own direct products. For a subcategory: its own direct products only. */
+  productCount?: number
   bannerUrl?: string | null
   thumbnailUrl?: string | null
   /** Single-level hierarchy — a category with a parentId can't itself have children. */
@@ -105,6 +107,8 @@ export interface CategoryResponse {
   promoDiscountType?: DiscountType
   promoDiscountValue?: number
   promoEndsAt?: string | null
+  /** Populated on the top-level `GET /categories` listing; always `[]` on a subcategory. */
+  subcategories?: CategoryResponse[]
 }
 
 export interface CategoryPromotionRequest {
@@ -124,7 +128,11 @@ export interface AdminUserResponse {
   email: string
   firstName: string
   lastName: string
-  role: UserRole
+  enabled: boolean
+  deleted: boolean
+  /** How this account authenticates — local email/password vs. Google OAuth. */
+  authProvider: AuthProvider
+  roles: UserRole[]
   createdAt: string
 }
 

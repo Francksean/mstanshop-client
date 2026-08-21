@@ -7,6 +7,10 @@ import { MAX_PRICE, MIN_PRICE } from "@/lib/constants"
 import { cn, formatPrice } from "@/lib/utils"
 import type { Category } from "@/types"
 
+// The two range thumbs can't be closer than this — a 0-gap range (min === max)
+// isn't a meaningful filter.
+const PRICE_MIN_GAP = 1000
+
 export interface FiltersState {
   categoryIds: string[]
   minPrice: number
@@ -60,6 +64,7 @@ export function FiltersPanel({ filters, onChange, categories, className }: Filte
           min={MIN_PRICE}
           max={MAX_PRICE}
           step={5}
+          minStepsBetweenThumbs={PRICE_MIN_GAP / 5}
           value={[filters.minPrice, filters.maxPrice]}
           onValueChange={([min, max]) => onChange({ ...filters, minPrice: min, maxPrice: max })}
           aria-label={t("priceRangeAria")}

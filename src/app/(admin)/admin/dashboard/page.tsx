@@ -45,9 +45,14 @@ function computeRange(preset: RangePreset, customFrom: string, customTo: string)
     }
   }
   const days = Number(preset)
+  // Anchor "to" at the end of today and "from" at the start of its day —
+  // using `new Date()` (the current instant) as "to" made the range cut off
+  // partway through today instead of covering the full current day.
   const to = new Date()
+  to.setHours(23, 59, 59, 999)
   const from = new Date()
   from.setDate(from.getDate() - days)
+  from.setHours(0, 0, 0, 0)
   return { from: from.toISOString(), to: to.toISOString() }
 }
 
